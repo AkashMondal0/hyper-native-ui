@@ -1,8 +1,50 @@
-# React Native - Component Library
+# Shadrn Ui - React Native Ui Library
 
 Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
 
-![React Native Bottom Sheet](./preview.jpg)
+## Installation
+```sh
+npm install shadrn-ui
+```
+
+## Provider
+```js
+import { ThemeProvider } from 'shadrn-ui';
+import HomeScreen from '@app/HomeScreen';
+
+export default function App() {
+  return (
+  <ThemeProvider>
+    <HomeScreen/>
+  <ThemeProvider>
+  );
+}
+```
+## Usage
+```js
+import { View, Text, Button } from 'react-native';
+import React from 'react';
+import { useTheme } from 'shadrn-ui';
+
+export default function HomeScreen() {
+  const { currentTheme, toggleTheme, themeScheme } = useTheme();
+
+  return (
+    <View style={{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: currentTheme.background,
+    }}>
+      <Button title={`switch to ${themeScheme === 'light' ? 'dark' : 'light'} mode`}
+        onPress={toggleTheme} />
+    </View>
+  );
+}
+```
+## Preview
+
+![React Native Ui](https://raw.githubusercontent.com/AkashMondal0/shadrn-ui/refs/heads/master/preview.jpg)
 
 ---
 

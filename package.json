@@ -1,6 +1,6 @@
 {
-  "name": "shadrn-ui",
-  "version": "1.0.0",
+  "name": "skysolo-ui",
+  "version": "0.1.0",
   "description": "Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -16,13 +16,15 @@
     "react-native",
     "ios",
     "android",
-    "web",
-    "bottom-sheet",
     "reanimated"
   ],
-  "author": "Akash Mondal",
+  "repository": {
+    "type": "git",
+    "url": "git+https://www.npmjs.com/package/shadrn-ui.git"
+  },
+  "author": "Akash Mondal <akash2003modal@gmail.com> (https://www.npmjs.com/package/shadrn-ui)",
   "license": "MIT",
-  "homepage": "https://github.com/AkashMondal0/shadrn-ui#readme",
+  "homepage": "https://github.com/AkashMondal0/shadrn-ui.git#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
