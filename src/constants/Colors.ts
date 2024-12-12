@@ -1,31 +1,36 @@
 export type ThemeSchema = "light" | "dark";
-export type ColorNames = "Zinc" | "State" | "Stone" | "Grey" | "Neutral" | "Red" | "Rose" | "Orange" | "Yellow" | "Green";
-export type ColorSchemeKeys =
-  | "background"
-  | "foreground"
-  | "card"
-  | "card_foreground"
-  | "popover"
-  | "popover_foreground"
-  | "primary"
-  | "primary_foreground"
-  | "secondary"
-  | "secondary_foreground"
-  | "muted"
-  | "muted_foreground"
-  | "accent"
-  | "accent_foreground"
-  | "destructive"
-  | "destructive_foreground"
-  | "border"
-  | "input"
-  | "ring"
-  | "chart_1"
-  | "chart_2"
-  | "chart_3"
-  | "chart_4"
-  | "chart_5";
-export type ColorScheme = Record<ColorSchemeKeys, string>;
+export type ThemeName = "Zinc" | "State" | "Stone" | "Grey" | "Neutral" | "Red" | "Rose" | "Orange" | "Yellow" | "Green";
+export type ThemeColors = {
+  background: string;
+  foreground: string;
+  card: string;
+  card_foreground: string;
+  popover: string;
+  popover_foreground: string;
+  primary: string;
+  primary_foreground: string;
+  secondary: string;
+  secondary_foreground: string;
+  muted: string;
+  muted_foreground: string;
+  accent: string;
+  accent_foreground: string;
+  destructive: string;
+  destructive_foreground: string;
+  border: string;
+  input: string;
+  ring: string;
+  chart_1: string;
+  chart_2: string;
+  chart_3: string;
+  chart_4: string;
+  chart_5: string;
+}
+export type Theme = {
+  name: ThemeName;
+  light: ThemeColors;
+  dark: ThemeColors;
+}
 export const themeColors = [
   {
     "name": "Zinc",
