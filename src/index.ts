@@ -1,4 +1,12 @@
-import { themeColors } from "./constants/Colors";
-import { useTheme } from "./hooks/useTheme";
-import ThemeProvider from "./provider/themeProvider";
-export { useTheme, themeColors, ThemeProvider };
+export { default as Button } from "./components/Button";
+export { default as useTheme } from "./hooks/useTheme";
+export { default as ThemeContext } from "./context/themeContext";
+export { ThemeProvider } from "./provider/themeProvider";
+export { themeColors } from "./constants/Colors";
+
+export type {
+    Theme as ThemeType,
+    ThemeColors as ThemeColorsType,
+    ThemeName as ThemeNameType,
+    ThemeSchema as ThemeSchemaType
+} from "./constants/Colors";

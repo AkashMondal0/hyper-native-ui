@@ -4,7 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { StatusBar, View } from 'react-native';
 import 'react-native-reanimated';
-import { ThemeProvider, useTheme } from 'skysolo-x';
+import { ThemeProvider, useTheme } from 'skysolo-ui';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 SplashScreen.preventAutoHideAsync();
 

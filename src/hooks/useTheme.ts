@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ThemeColors, ThemeName, ThemeSchema } from "../constants/Colors";
 import ThemeContext from "../../src/context/themeContext";
 
-export const useTheme = (): {
+const useTheme = (): {
     currentTheme: ThemeColors,
     themeScheme: ThemeSchema,
     themeName: ThemeName,
@@ -19,3 +19,5 @@ export const useTheme = (): {
         themeName: themeContext!.themeName,
     };
 };
+
+export default useTheme;
