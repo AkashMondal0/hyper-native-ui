@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { ThemeName, ThemeColors, ThemeSchema } from "../../src/constants/Colors";
+import { ThemeName, ThemeColors, ThemeSchema } from "../constants/Colors";
 interface ThemeHook {
     currentTheme: ThemeColors,
     themeName: ThemeName,

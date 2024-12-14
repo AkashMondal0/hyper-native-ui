@@ -36,15 +36,13 @@ export default function HomeScreen() {
       alignItems: 'center',
       backgroundColor: currentTheme.background,
     }}>
-      <Button title={`switch to ${themeScheme === 'light' ? 'dark' : 'light'} mode`}
-        onPress={toggleTheme} />
+      <Button onPress={toggleTheme}>
+        {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
+      </Button>
     </View>
   );
 }
 ```
-## Preview
-
-![React Native Ui](https://raw.githubusercontent.com/AkashMondal0/shadrn-ui/refs/heads/master/preview.jpg)
 
 ---
 

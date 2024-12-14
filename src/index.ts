@@ -1,7 +1,7 @@
 export { default as Button } from "./components/Button";
 export { default as useTheme } from "./hooks/useTheme";
 export { default as ThemeContext } from "./context/themeContext";
-export { ThemeProvider } from "./provider/themeProvider";
+export { default as ThemeProvider } from "./provider/themeProvider";
 export { themeColors } from "./constants/Colors";
 
 export type {

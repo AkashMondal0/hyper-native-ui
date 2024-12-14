@@ -1,6 +1,6 @@
 import React, { ReactNode, useCallback, useMemo, useReducer } from "react";
 import { ThemeName, ThemeColors, ThemeSchema, themeColors } from "../constants/Colors";
-import ThemeContext from "../../src/context/themeContext";
+import ThemeContext from "../context/themeContext";
 
 type ThemeAction = {
     type: "TOGGLE_THEME_LIGHT_AND_DARK" | "SET_INITIAL_THEME" | "CHANGE_THEME",
@@ -51,7 +51,7 @@ interface ThemeProviderProps {
     children: ReactNode;
 }
 
-export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
+const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const [state, dispatch] = useReducer<ThemeReducer>(themeReducer, initialTheme);
 
     const toggleTheme = useCallback(() => {

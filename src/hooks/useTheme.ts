@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ThemeColors, ThemeName, ThemeSchema } from "../constants/Colors";
-import ThemeContext from "../../src/context/themeContext";
+import ThemeContext from "../context/themeContext";
 
 const useTheme = (): {
     currentTheme: ThemeColors,

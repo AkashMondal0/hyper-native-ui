@@ -7,8 +7,8 @@ import {
     type ActivityIndicatorProps
 } from 'react-native';
 import React, { memo } from 'react';
-import useTheme from '../../src/hooks/useTheme';
-import { ThemeName, themeColors } from '../../src/constants/Colors';
+import useTheme from '../hooks/useTheme';
+import { ThemeName, themeColors } from '../constants/Colors';
 
 export type Props = TouchableOpacityProps & {
     themeScheme?: "light" | "dark";
@@ -183,9 +183,6 @@ const Button = memo(function Button({
                 buttonStyle={buttonStyle} />
         </TouchableOpacity>
     )
-}, (prevProps, nextProps) => {
-    if (nextProps.disableMemo || prevProps.disableMemo) return false
-    return prevProps.disabled === nextProps.disabled && prevProps.loading === nextProps.loading
 })
 
 export default Button
