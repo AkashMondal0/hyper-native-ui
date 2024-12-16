@@ -1,6 +1,6 @@
 {
-  "name": "shadrn-ui",
-  "version": "0.0.0",
+  "name": "hyper-native-ui",
+  "version": "0.1.0",
   "description": "Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -20,11 +20,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/AkashMondal0/shadrn-ui"
+    "url": "https://github.com/AkashMondal0/hyper-native-ui"
   },
-  "author": "Akash Mondal (https://www.npmjs.com/package/shadrn-ui)",
+  "author": "Akash Mondal (https://www.npmjs.com/package/hyper-native-ui)",
   "license": "MIT",
-  "homepage": "https://shadrn-ui.vercel.app/",
+  "homepage": "https://hyper-native-ui.vercel.app/",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

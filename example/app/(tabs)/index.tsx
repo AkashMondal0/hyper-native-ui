@@ -1,6 +1,6 @@
 import { ScrollView } from 'react-native';
 import React from 'react';
-import { useTheme } from 'skysolo-ui';
+import { useTheme } from 'hyper-native-ui';
 import ThemesExampleDemo from '@/components/ThemesExampleDemo';
 
 export default function HomeScreen() {

@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import React from 'react';
-import { useTheme, Button, themeColors } from 'skysolo-ui';
+import { useTheme, Button, themeColors } from 'hyper-native-ui';
 
 export default function ButtonExampleDemo() {
   const { currentTheme, toggleTheme, themeScheme, themeName } = useTheme();

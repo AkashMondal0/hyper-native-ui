@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { IconSymbol } from '@/components/ui/IconSymbol';
-import { useTheme } from 'skysolo-ui';
+import { useTheme } from 'hyper-native-ui';
 
 export default function TabLayout() {
   const { currentTheme } = useTheme();

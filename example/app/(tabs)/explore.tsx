@@ -1,17 +1,20 @@
-import { ScrollView } from 'react-native';
 import React from 'react';
-import { useTheme } from 'skysolo-ui';
+import { View } from 'react-native';
+import { useTheme } from 'hyper-native-ui';
 import ButtonExampleDemo from '@/components/ButtonExampleDemo';
 
-export default function ThemesExplore() {
+
+export default function ButtonExample() {
   const { currentTheme } = useTheme();
 
   return (
-    <ScrollView style={{
+    <View style={{
       flex: 1,
-      backgroundColor: currentTheme.background
+      backgroundColor: currentTheme.background,
+      justifyContent: "center",
+      alignItems: "center"
     }}>
-      <ButtonExampleDemo/>
-    </ScrollView>
+      <ButtonExampleDemo />
+    </View>
   );
 }

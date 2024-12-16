@@ -1,61 +1,56 @@
-# Shadrn Ui - React Native Ui Library
+# React Native Ui Library
 
 Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
 
 ## Installation
 ```sh
-npm install shadrn-ui
+npm install hyper-native-ui
 ```
 
 ## Provider
 ```js
-import { ThemeProvider } from 'shadrn-ui';
-import HomeScreen from '@app/HomeScreen';
+// app.tsx
+import React from 'react';
+import { View } from 'react-native';
+import { useTheme, Button, ThemeProvider } from 'hyper-native-ui';
 
 export default function App() {
   return (
   <ThemeProvider>
-    <HomeScreen/>
-  <ThemeProvider>
+    <ButtonExample/>
+  </ThemeProvider>
   );
 }
-```
-## Usage
-```js
-import { View, Text, Button } from 'react-native';
-import React from 'react';
-import { useTheme } from 'shadrn-ui';
 
-export default function HomeScreen() {
-  const { currentTheme, toggleTheme, themeScheme } = useTheme();
+// Usage - Button example
+function ButtonExample() {
+  const { currentTheme, toggleTheme } = useTheme();
 
   return (
     <View style={{
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
       backgroundColor: currentTheme.background,
+      justifyContent: "center",
+      alignItems: "center"
     }}>
       <Button onPress={toggleTheme}>
-        {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
+        This is a Button
       </Button>
     </View>
   );
 }
 ```
 
----
-
 ## Features
 - Support `React Navigation` Integration, [read more]().
 - Compatible with `Expo`.
 - Accessibility support.
 - Written in `TypeScript`.
-- [Read more](https://shadrn-ui.vercel.app/feature).
+- [Read more](https://hyper-native-ui.vercel.app/feature).
 
 ## Getting Started
 
-Check out [the documentation website](https://shadrn-ui.vercel.app).
+Check out [the documentation website](https://hyper-native-ui.vercel.app).
 
 ## Author
 
