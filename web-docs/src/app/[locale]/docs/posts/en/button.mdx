@@ -10,29 +10,26 @@ tag: "Android IOS Web"
 
 The `Button` component is a versatile, theme-aware button for React Native applications. It supports various styles, sizes, states, and customization options such as loading indicators, icons, and theming.
 
+Import Component
+
 <CodeBlock className="my-24"
     compact
     codeInstances={[
         {
-            code: `import { View } from 'react-native';
-import { useTheme, Button } from 'hyper-native-ui';
+            code: `import { useTheme, Button } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+Usage Component
 
-export default function ButtonExample() {
-  const { currentTheme, toggleTheme } = useTheme();
-
-  return (
-    <View style={{
-      flex: 1,
-      backgroundColor: currentTheme.background,
-      justifyContent: "center",
-      alignItems: "center"
-    }}>
-      <Button onPress={toggleTheme}>
-        This is a Button
-      </Button>
-    </View>
-  );
-}`,
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Button onPress={toggleTheme}>This is a Button</Button>`,
             label: 'React Native',
             language: 'jsx'
         },
@@ -40,6 +37,21 @@ export default function ButtonExample() {
     copyButton
 />
 ---
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/hyper-native-ui-button" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
 
 ### **Props**
 

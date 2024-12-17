@@ -47,6 +47,11 @@ export function Posts({
                         thumbnail={thumbnail}
                     />
                     <Post
+                        key={allBlogs[2].slug}
+                        post={allBlogs[2]}
+                        thumbnail={thumbnail}
+                    />
+                    <Post
                         key={allBlogs[0].slug}
                         post={allBlogs[0]}
                         thumbnail={thumbnail}
