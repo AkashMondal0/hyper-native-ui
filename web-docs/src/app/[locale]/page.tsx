@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { Heading, Flex, Text, Button, Avatar, RevealFx, Arrow } from '@/once-ui/components';
-
 import { baseURL, routes, renderContent } from '@/app/resources';
 import { Mailchimp } from '@/components';
 import { Posts } from '@/components/blog/Posts';
@@ -102,7 +100,7 @@ export default function Home(
 							<Button
 								id="about"
 								data-border="rounded"
-								href={`/${locale}/about`}
+								href={`/docs/installation`}
 								variant="tertiary"
 								size="m">
 								<Flex

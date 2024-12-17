@@ -1,0 +1,327 @@
+---
+title: "Button"
+publishedAt: "2024-12-17"
+# image: "/images/gallery/img-02.jpg"
+summary: "A customizable Button component with support for themes, sizes, variants, icons, and loading states."
+tag: "Android IOS Web"
+---
+
+## **Button Component**
+
+The `Button` component is a versatile, theme-aware button for React Native applications. It supports various styles, sizes, states, and customization options such as loading indicators, icons, and theming.
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { View } from 'react-native';
+import { useTheme, Button } from 'hyper-native-ui';
+
+export default function ButtonExample() {
+  const { currentTheme, toggleTheme } = useTheme();
+
+  return (
+    <View style={{
+      flex: 1,
+      backgroundColor: currentTheme.background,
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
+      <Button onPress={toggleTheme}>
+        This is a Button
+      </Button>
+    </View>
+  );
+}`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+---
+
+### **Props**
+
+The `Button` component accepts the following props:
+
+- **`themeScheme`**  
+  Sets the theme scheme explicitly. Can be one of `"light"` or `"dark"`.  
+  **Type**: `"light" | "dark"`  
+  **Default**: Inherited theme  
+
+- **`children`**  
+  Content of the button. Can be a `string` or any `React.ReactNode`.  
+  **Type**: `string | React.ReactNode`  
+  **Default**: `"Button"`  
+
+- **`textStyle`**  
+  Custom styles for the button text.  
+  **Type**: `TextProps["style"]`  
+  **Default**: `undefined`  
+
+- **`textTextProps`**  
+  Additional props for the `Text` component.  
+  **Type**: `TextProps`  
+  **Default**: `undefined`  
+
+- **`loadingStyle`**  
+  Custom styles for the loading spinner.  
+  **Type**: `ActivityIndicatorProps["style"]`  
+  **Default**: `undefined`  
+
+- **`loadingProps`**  
+  Additional props for the loading spinner.  
+  **Type**: `ActivityIndicatorProps`  
+  **Default**: `undefined`  
+
+- **`size`**  
+  Defines the size of the button. Can be one of `"small"`, `"medium"`, `"large"`, or `"extraLarge"`.  
+  **Type**: `"small" | "medium" | "large" | "extraLarge"`  
+  **Default**: `"medium"`  
+
+- **`icon`**  
+  Adds an optional icon to the button.  
+  **Type**: `React.ReactNode`  
+  **Default**: `undefined`  
+
+- **`loading`**  
+  When `true`, shows a loading spinner and disables interaction.  
+  **Type**: `boolean`  
+  **Default**: `false`  
+
+- **`disableMemo`**  
+  Disables memoization of the component for debugging purposes.  
+  **Type**: `boolean`  
+  **Default**: `false`  
+
+- **`variant`**  
+  Controls the button style variant. Can be one of `"default"`, `"secondary"`, `"danger"`, `"warning"`, `"success"`, `"outline"`, or a custom `ThemeName`.  
+  **Type**: `"default" | "secondary" | "danger" | "warning" | "success" | "outline" | ThemeName`  
+  **Default**: `"default"`  
+
+- **`style`**  
+  Custom styles for the button container.  
+  **Type**: `TouchableOpacityProps["style"]`  
+  **Default**: `undefined`  
+
+- **`disabled`**  
+  Disables the button interaction and applies a reduced opacity.  
+  **Type**: `boolean`  
+  **Default**: `false`  
+
+- **`...otherProps`**  
+  Additional props forwarded to the `TouchableOpacity` component.  
+  **Type**: `TouchableOpacityProps`  
+  **Default**: `undefined`  
+
+
+
+### **Variants**
+
+The `variant` prop controls the button's color scheme and styling. It supports the following predefined values:
+
+- **`default`**: Uses the primary theme color.
+- **`secondary`**: Uses the secondary theme color.
+- **`danger`**: A red variant for destructive actions.
+- **`warning`**: A yellow variant for warnings.
+- **`success`**: A green variant for success actions.
+- **`outline`**: A transparent background with a border matching the theme color.
+- **Custom**: Pass a `ThemeName` for custom theming.
+
+Example usage:
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Button variant="danger">Delete</Button>
+<Button variant="success">Save</Button>
+<Button variant="outline">Cancel</Button>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+---
+
+### **Sizes**
+
+The `size` prop controls the padding and text size of the button. Available options:
+
+- **`small`**: Smaller padding and text size.
+- **`medium`** (default): Standard size.
+- **`large`**: Larger button with increased padding.
+- **`extraLarge`**: Extra-large button with more padding.
+
+Example usage:
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Button size="small">Small Button</Button>
+<Button size="medium">Medium Button</Button>
+<Button size="large">Large Button</Button>
+<Button size="extraLarge">Extra Large Button</Button>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+---
+
+### **Loading State**
+
+The `loading` prop shows a spinner and disables the button when set to `true`.
+
+Example usage:
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Button loading={true}>Loading...</Button>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+You can customize the loading spinner's appearance using `loadingStyle` and `loadingProps` props.
+
+---
+
+### **Icons**
+
+The `icon` prop allows you to include an icon next to the button text.
+
+Example usage:
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { Text, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+<Button icon={<Ionicons name="add-circle" size={20} color="white" />}>Add</Button>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+---
+
+### **Theming**
+
+The `Button` component integrates with a theme using the `useTheme` hook. You can:
+
+1. Set a theme scheme (`"light"` or `"dark"`) using the `themeScheme` prop.
+2. Customize colors dynamically via the theme system.
+3. Use predefined variants (e.g., `default`, `success`) or extend with `ThemeName` for custom themes.
+
+Example usage:
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Button themeScheme="light" variant="default">Light Theme Button</Button>
+<Button themeScheme="dark" variant="secondary">Dark Theme Button</Button>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+---
+
+### **Full Example**
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React from "react";
+import { Button } from "./Button";
+import { View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+export default function App() {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Button
+        variant="success"
+        size="large"
+        loading={false}
+        icon={<Ionicons name="checkmark-circle" size={20} color="white" />}
+      >
+        Submit
+      </Button>
+      <Button variant="danger" loading={true} size="medium">
+        Deleting...
+      </Button>
+      <Button variant="outline" size="small">
+        Cancel
+      </Button>
+    </View>
+  );
+}`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+---
+
+### **Accessibility**
+
+- The `TouchableOpacity` component ensures proper accessibility behaviors.
+- You can add accessibility labels using `...otherProps` forwarded to the button.
+
+Example:
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Button accessibilityLabel="Submit form button">Submit</Button>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+---
+
+### **Custom Styles**
+
+You can override styles for the button container and text:
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Button style={{ backgroundColor: "purple", borderRadius: 20 }}>
+  Custom Button
+</Button>
+<Button textStyle={{ fontSize: 20, color: "white" }}>Styled Text</Button>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+---
+
+### **Dependencies**
+
+- **React Native**: Base components like `TouchableOpacity`, `Text`, and `ActivityIndicator`.
+- **`useTheme` Hook**: Required to manage the theme and colors.
+
+---
+
+### **Conclusion**
+
+The `Button` component is a flexible and theme-aware component for React Native applications. It supports sizes, variants, loading states, and icons while ensuring a consistent and customizable design experience.

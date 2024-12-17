@@ -1,8 +1,7 @@
 import { Flex, Heading } from '@/once-ui/components';
-import { Posts } from '@/components/blog/Posts';
-import { baseURL, renderContent } from '@/app/resources'
+import { baseURL } from '@/app/resources'
 import { unstable_setRequestLocale } from 'next-intl/server';
-import { useTranslations } from 'next-intl';
+import { Posts } from '@/components/blog/Posts';
 
 export async function generateMetadata(
 	{ params: { locale } }: { params: { locale: string } }
@@ -39,9 +38,6 @@ export default function Docs(
 	{ params: { locale } }: { params: { locale: string } }
 ) {
 	unstable_setRequestLocale(locale);
-
-	const t = useTranslations();
-	const { newsletter } = renderContent(t);
 	return (
 		<Flex
 			fillWidth maxWidth="s"
@@ -75,8 +71,10 @@ export default function Docs(
 			</Heading>
 			<Flex
 				fillWidth flex={1} direction="column">
-				<Posts range={[1, 3]} locale={locale} thumbnail />
-				<Posts range={[4]} columns="2" locale={locale} />
+				<Posts range={[1, 2]} locale={locale} thumbnail />
+				{/* <Posts range={[1, 1]} columns="2" locale={locale} /> */}
+				{/* <Posts range={[1]} locale={locale} thumbnail /> */}
+				{/* <Posts range={[2]} locale={locale} thumbnail /> */}
 			</Flex>
 		</Flex>
 	);

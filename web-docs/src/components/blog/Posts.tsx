@@ -17,30 +17,40 @@ export function Posts({
 }: PostsProps) {
     let allBlogs = getPosts(['src', 'app', '[locale]', 'docs', 'posts', locale]);
 
-    const sortedBlogs = allBlogs.sort((a, b) => {
-        return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
-    });
+    // const sortedBlogs = allBlogs.sort((a, b) => {
+    //     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
+    // });
 
-    const displayedBlogs = range
-        ? sortedBlogs.slice(
-            range[0] - 1,
-            range.length === 2 ? range[1] : sortedBlogs.length
-        )
-        : sortedBlogs;
+    // const displayedBlogs = range
+    //     ? sortedBlogs.slice(
+    //         range[0] - 1,
+    //         range.length === 2 ? range[1] : sortedBlogs.length
+    //     )
+    //     : sortedBlogs;
 
     return (
         <>
-            {displayedBlogs.length > 0 && (
+            {allBlogs.length > 0 && (
                 <Grid
-                    columns={`repeat(${columns}, 1fr)`} mobileColumns="1col"
+                    columns={`repeat(${2}, 1fr)`} mobileColumns="1col"
                     fillWidth marginBottom="40" gap="m">
-                    {displayedBlogs.map((post) => (
+                    {/* {allBlogs.map((post) => (
                         <Post
                             key={post.slug}
                             post={post}
                             thumbnail={thumbnail}
                         />
-                    ))}
+                    ))} */}
+                    <Post
+                        key={allBlogs[1].slug}
+                        post={allBlogs[1]}
+                        thumbnail={thumbnail}
+                    />
+                    <Post
+                        key={allBlogs[0].slug}
+                        post={allBlogs[0]}
+                        thumbnail={thumbnail}
+                    />
                 </Grid>
             )}
         </>

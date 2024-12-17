@@ -34,8 +34,8 @@ const social = [
 const home = {
     label: 'Hyper Native Ui',
     title: `Hyper Native Ui`,
-    description: `React Native Components Library`,
-    headline: <>React Native Components Library</>,
+    description: `Cross-Platform Components Library For React Native`,
+    headline: <>Cross-platform Components <br /> Library For React Native</>,
     subline: <>
         Beautifully designed components that you can copy and paste into your apps. <InlineCode>Accessible</InlineCode>. Customizable. Open Source
     </>
@@ -48,4 +48,4 @@ const docs = {
 }
 
 
-export { social, newsletter, home,docs };
+export { social, newsletter, home, docs };

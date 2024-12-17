@@ -1,6 +1,6 @@
 {
-	"name": "hnu-docs",
-	"version": "0.2.0",
+	"name": "hyper-native-ui-docs",
+	"version": "0.1.0",
 	"scripts": {
 		"dev": "next dev",
 		"export": "next export",
