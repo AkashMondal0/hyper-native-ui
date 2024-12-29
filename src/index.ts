@@ -1,4 +1,5 @@
 export { default as Button } from "./components/Button";
+export { default as Input } from "./components/Input";
 export { default as useTheme } from "./hooks/useTheme";
 export { default as ThemeContext } from "./context/themeContext";
 export { default as ThemeProvider } from "./provider/themeProvider";

@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import React, { memo } from 'react';
 import useTheme from '../hooks/useTheme';
-import { ThemeName, themeColors } from '../constants/Colors';
+import { componentVariant, themeColors, } from '../constants/Colors';
 
 export type Props = TouchableOpacityProps & {
     themeScheme?: "light" | "dark";
@@ -21,7 +21,7 @@ export type Props = TouchableOpacityProps & {
     icon?: React.ReactNode;
     loading?: boolean;
     disableMemo?: boolean;
-    variant?: "default" | "secondary" | "danger" | "warning" | "success" | "outline" | ThemeName;
+    variant?: componentVariant;
 };
 
 const Button = memo(function Button({
