@@ -1,7 +1,7 @@
 import { ScrollView } from 'react-native';
 import React from 'react';
 import { useTheme } from 'hyper-native-ui';
-import ThemesExampleDemo from '@/components/ThemesExampleDemo';
+import ThemesExampleDemo from '@/components/example/ThemesExampleDemo';
 
 export default function HomeScreen() {
   const { currentTheme } = useTheme();

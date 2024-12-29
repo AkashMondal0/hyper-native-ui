@@ -2,14 +2,16 @@ import React from 'react'
 import BouncyCheckbox, { BouncyCheckboxProps } from "react-native-bouncy-checkbox";
 import { componentVariant, themeColors } from '../constants/Colors';
 import useTheme from '../hooks/useTheme';
+import { View } from 'react-native';
 
 
 export type Props = BouncyCheckboxProps & {
     themeScheme?: "light" | "dark";
     variant?: componentVariant;
+    size?: number
 };
 
-const CheckBox = ({ variant = "default", themeScheme, ...props }: Props) => {
+const CheckBox = ({ size = 25, variant = "default", themeScheme, ...props }: Props) => {
     const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
 
     const colorVariant = () => {
@@ -47,17 +49,26 @@ const CheckBox = ({ variant = "default", themeScheme, ...props }: Props) => {
     const colors = { ...colorVariant() };
 
     return (
-        <BouncyCheckbox
-            {...props}
-            size={25}
-            style={{ opacity: props?.disabled ? 0.3 : 1 }}
-            fillColor={colors.backgroundColor}
-            iconStyle={{ borderColor: colors?.backgroundColor }}
-            innerIconStyle={{ borderWidth: 2, borderColor: colors?.backgroundColor }}
-            iconImageStyle={{ tintColor: colors?.color }}
-        // textStyle={{ fontFamily: "JosefinSans-Regular" }}
-        // onPress={(isChecked: boolean) => { console.log(isChecked) }}
-        />
+        <View style={{
+            width: size,
+            height: size,
+        }}>
+            <BouncyCheckbox
+                {...props}
+                size={size}
+                style={{ opacity: props?.disabled ? 0.3 : 1 }}
+                fillColor={colors.backgroundColor}
+                iconStyle={{ borderColor: colors?.backgroundColor }}
+                innerIconStyle={{ borderWidth: 2, borderColor: colors?.backgroundColor }}
+                iconImageStyle={{
+                    tintColor: colors?.color,
+                    width: size - size / 2,
+                    height: size - size / 2,
+                }}
+            // textStyle={{ fontFamily: "JosefinSans-Regular" }}
+            // onPress={(isChecked: boolean) => { console.log(isChecked) }}
+            />
+        </View>
     )
 };
 export default CheckBox

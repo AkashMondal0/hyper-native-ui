@@ -129,7 +129,7 @@ const Avatar = ({
     return (
         <>
             <TouchableOpacity
-                // {...touchableOpacityProps}
+                {...touchableOpacityProps}
                 onPress={onPress}
                 onLongPress={onLongPress}
                 style={{
@@ -152,9 +152,7 @@ const Avatar = ({
                     height: "100%",
                     display: isActivityIndicator ? state === "normal" ? "none" : "flex" : "none",
                 }}>
-                    <ActivityIndicator
-                        color={currentTheme.primary} size={40}
-                        {...activityIndicatorProps} />
+                    <ActivityIndicator color={currentTheme.primary} size={40} {...activityIndicatorProps} />
                 </View>
                 <ImageComponent />
             </TouchableOpacity>

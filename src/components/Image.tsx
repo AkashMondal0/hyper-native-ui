@@ -1,6 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
-import { Image as RNImage, ImageProps, Text, TouchableOpacity, View, TouchableOpacityProps, ActivityIndicator, ActivityIndicatorProps } from 'react-native';
+import {
+    Image as RNImage,
+    ImageProps,
+    Text,
+    TouchableOpacity,
+    View,
+    TouchableOpacityProps,
+    ActivityIndicator,
+    ActivityIndicatorProps
+} from 'react-native';
 import useTheme from '../hooks/useTheme';
 
 export type Props = ImageProps & {
@@ -85,6 +94,8 @@ const Image = ({
             style={{
                 justifyContent: "center",
                 alignItems: "center",
+                width: otherProps.width ?? "100%",
+                height: otherProps.height ?? "auto",
             }}
             onPress={onPress}
             onLongPress={onLongPress}
