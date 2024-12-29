@@ -78,12 +78,6 @@
       "optional": true
     }
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-commit": "yarn lint-no-fix && yarn typescript && yarn test"
-    }
-  },
   "react-native-builder-bob": {
     "source": "src",
     "output": "lib",
