@@ -72,7 +72,7 @@ export default function Docs(
 			<Flex
 				fillWidth flex={1} direction="column">
 				<Posts range={[1, 2]} locale={locale} thumbnail />
-				{/* <Posts range={[1, 1]} columns="2" locale={locale} /> */}
+				{/* <Posts range={[3, 4]} columns="2" locale={locale} /> */}
 				{/* <Posts range={[1]} locale={locale} thumbnail /> */}
 				{/* <Posts range={[2]} locale={locale} thumbnail /> */}
 			</Flex>
