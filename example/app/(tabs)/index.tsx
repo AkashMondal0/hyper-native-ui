@@ -1,17 +1,18 @@
-import { ScrollView } from 'react-native';
 import React from 'react';
+import { View } from 'react-native';
 import { useTheme } from 'hyper-native-ui';
-import ThemesExampleDemo from '@/components/ThemesExampleDemo';
+import CheckboxExampleDemo from '@/components/example/CheckboxExampleDemo';
 
-export default function HomeScreen() {
+export default function ImageExample() {
   const { currentTheme } = useTheme();
 
   return (
-    <ScrollView style={{
+    <View style={{
       flex: 1,
-      backgroundColor: currentTheme.background
+      backgroundColor: currentTheme.background,
     }}>
-      <ThemesExampleDemo />
-    </ScrollView>
+      <CheckboxExampleDemo />
+      {/* <ImageExampleDemo /> */}
+    </View>
   );
 }

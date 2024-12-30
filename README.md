@@ -1,8 +1,13 @@
 # React Native Ui Library
+<p align="center">
+     <img src="icon.png" height="250px" style="display:block"/>
+</p>
+<p align="center">Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable.</p>
+<p align="center">
+     <img src="img.jpg"/>
+</p>
 
-Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.
-
-## Installation
+### Installation
 ```sh
 npm install hyper-native-ui
 ```

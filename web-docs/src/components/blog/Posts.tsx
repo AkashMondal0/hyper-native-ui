@@ -17,9 +17,9 @@ export function Posts({
 }: PostsProps) {
     let allBlogs = getPosts(['src', 'app', '[locale]', 'docs', 'posts', locale]);
 
-    // const sortedBlogs = allBlogs.sort((a, b) => {
-    //     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
-    // });
+    const sortedBlogs = allBlogs.sort((a, b) => {
+        return new Date(a.metadata.publishedAt).getTime() - new Date(b.metadata.publishedAt).getTime();
+    });
 
     // const displayedBlogs = range
     //     ? sortedBlogs.slice(
@@ -34,14 +34,14 @@ export function Posts({
                 <Grid
                     columns={`repeat(${2}, 1fr)`} mobileColumns="1col"
                     fillWidth marginBottom="40" gap="m">
-                    {/* {allBlogs.map((post) => (
+                    {sortedBlogs.map((post) => (
                         <Post
                             key={post.slug}
                             post={post}
                             thumbnail={thumbnail}
                         />
-                    ))} */}
-                    <Post
+                    ))}
+                    {/* <Post
                         key={allBlogs[1].slug}
                         post={allBlogs[1]}
                         thumbnail={thumbnail}
@@ -55,7 +55,7 @@ export function Posts({
                         key={allBlogs[0].slug}
                         post={allBlogs[0]}
                         thumbnail={thumbnail}
-                    />
+                    /> */}
                 </Grid>
             )}
         </>

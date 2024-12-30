@@ -1,20 +1,17 @@
+import { ScrollView } from 'react-native';
 import React from 'react';
-import { View } from 'react-native';
 import { useTheme } from 'hyper-native-ui';
-import ButtonExampleDemo from '@/components/ButtonExampleDemo';
+import ThemesExampleDemo from '@/components/example/ThemesExampleDemo';
 
-
-export default function ButtonExample() {
+export default function HomeScreen() {
   const { currentTheme } = useTheme();
 
   return (
-    <View style={{
+    <ScrollView style={{
       flex: 1,
-      backgroundColor: currentTheme.background,
-      justifyContent: "center",
-      alignItems: "center"
+      backgroundColor: currentTheme.background
     }}>
-      <ButtonExampleDemo />
-    </View>
+      <ThemesExampleDemo />
+    </ScrollView>
   );
 }

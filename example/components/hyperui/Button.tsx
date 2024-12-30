@@ -12,6 +12,8 @@ import { componentVariant, themeColors, } from '../constants/Colors';
 
 export type Props = TouchableOpacityProps & {
     themeScheme?: "light" | "dark";
+    variant?: componentVariant;
+    
     children?: string | React.ReactNode;
     textStyle?: TextProps["style"];
     textTextProps?: TextProps;
@@ -21,7 +23,6 @@ export type Props = TouchableOpacityProps & {
     icon?: React.ReactNode;
     loading?: boolean;
     disableMemo?: boolean;
-    variant?: componentVariant;
 };
 
 const Button = memo(function Button({
