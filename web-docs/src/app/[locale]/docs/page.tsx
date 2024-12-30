@@ -6,7 +6,7 @@ import { Posts } from '@/components/blog/Posts';
 export async function generateMetadata(
 	{ params: { locale } }: { params: { locale: string } }
 ) {
-	const title = `Docs`;
+	const title = `Docs HyperNative Ui`;
 	const description = ``;
 	const ogImage = `https://${baseURL}/og?title=${encodeURIComponent(title)}`;
 
@@ -42,28 +42,28 @@ export default function Docs(
 		<Flex
 			fillWidth maxWidth="s"
 			direction="column">
-			{/* <script
+			<script
 				type="application/ld+json"
 				suppressHydrationWarning
 				dangerouslySetInnerHTML={{
 					__html: JSON.stringify({
 						'@context': 'https://schema.org',
 						'@type': 'Blog',
-						headline: blog.title,
-						description: blog.description,
+						headline: 'Docs HyperNative Ui',
+						description: 'Docs HyperNative Ui',
 						url: `https://${baseURL}/blog`,
-						image: `${baseURL}/og?title=${encodeURIComponent(blog.title)}`,
+						// image: `${baseURL}/og?title=${encodeURIComponent(blog.title)}`,
 						author: {
 							'@type': 'Person',
-							name: person.name,
+							name: 'akashmondal0',
 							image: {
 								'@type': 'ImageObject',
-								url: `${baseURL}${person.avatar}`,
+								url: ``,
 							},
 						},
 					}),
 				}}
-			/> */}
+			/>
 			<Heading
 				marginBottom="l"
 				variant="display-strong-s">
@@ -71,7 +71,7 @@ export default function Docs(
 			</Heading>
 			<Flex
 				fillWidth flex={1} direction="column">
-				<Posts range={[1, 2]} locale={locale} thumbnail />
+				<Posts range={[1, 100]} locale={locale} thumbnail />
 				{/* <Posts range={[3, 4]} columns="2" locale={locale} /> */}
 				{/* <Posts range={[1]} locale={locale} thumbnail /> */}
 				{/* <Posts range={[2]} locale={locale} thumbnail /> */}

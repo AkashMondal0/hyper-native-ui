@@ -35,7 +35,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     }, []);
 
     const handleImageClick = () => {
-        if(images.length > 1) {
+        if (images.length > 1) {
             setIsTransitioning(false);
             const nextIndex = (activeIndex + 1) % images.length;
             handleControlClick(nextIndex);
@@ -59,7 +59,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             direction="column">
             {images[activeIndex] && <Flex onClick={handleImageClick}>
                 <RevealFx
-                    style={{width: '100%'}}
+                    style={{ width: '100%' }}
                     delay={0.4}
                     trigger={isTransitioning}
                     speed="fast">
@@ -74,7 +74,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                             ...(images.length > 1 && {
                                 cursor: 'pointer',
                             }),
-                        }}/>
+                        }} />
                 </RevealFx>
             </Flex>}
             {images.length > 1 && (
@@ -87,8 +87,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                             key={index}
                             onClick={() => handleControlClick(index)}
                             style={{
-                                background: activeIndex === index 
-                                    ? 'var(--neutral-on-background-strong)' 
+                                background: activeIndex === index
+                                    ? 'var(--neutral-on-background-strong)'
                                     : 'var(--neutral-alpha-medium)',
                                 cursor: 'pointer',
                                 transition: 'background 0.3s ease',
@@ -121,7 +121,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                             <AvatarGroup
                                 avatars={avatars}
                                 size="m"
-                                reverseOrder/>
+                                reverseOrder />
                         )}
                         {description?.trim() && (
                             <Text
@@ -134,12 +134,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                         {content?.trim() && (
                             <SmartLink
                                 suffixIcon="chevronRight"
-                                style={{margin: '0', width: 'fit-content'}}
+                                style={{ margin: '0', width: 'fit-content' }}
                                 href={href}>
-                                    <Text
-                                        variant="body-default-s">
-                                       {t("projectCard.label")}
-                                    </Text>
+                                <Text
+                                    variant="body-default-s">
+                                    Read More
+                                </Text>
                             </SmartLink>
                         )}
                     </Flex>

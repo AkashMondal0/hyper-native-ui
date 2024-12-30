@@ -52,7 +52,7 @@ export function generateMetadata({ params: { slug, locale } }: BlogParams) {
 		: `https://${baseURL}/og?title=${title}`;
 
 	return {
-		title,
+		title: `${title} - HyperNative Ui`,
 		description,
 		openGraph: {
 			title,
@@ -88,7 +88,7 @@ export default function Slug({ params }: BlogParams) {
 			fillWidth maxWidth="xs"
 			direction="column"
 			gap="m">
-			{/* <script
+			<script
 				type="application/ld+json"
 				suppressHydrationWarning
 				dangerouslySetInnerHTML={{
@@ -102,14 +102,14 @@ export default function Slug({ params }: BlogParams) {
 						image: post.metadata.image
 							? `https://${baseURL}${post.metadata.image}`
 							: `https://${baseURL}/og?title=${post.metadata.title}`,
-							url: `https://${baseURL}/${params.locale}/blog/${post.slug}`,
+						url: `https://${baseURL}/${params.locale}/blog/${post.slug}`,
 						author: {
 							'@type': 'Person',
-							name: person.name,
+							name: 'akashmondal0',
 						},
 					}),
 				}}
-			/> */}
+			/>
 			<Button
 				href={`/${params.locale}/docs`}
 				variant="tertiary"

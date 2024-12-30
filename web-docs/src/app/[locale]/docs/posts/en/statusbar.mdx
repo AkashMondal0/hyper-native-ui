@@ -5,93 +5,195 @@ publishedAt: "2024-12-30"
 summary: "Open a Terminal in your project's folder and run"
 tag: "Android IOS Web"
 ---
-## Installation
 
-* Open a Terminal in your project's folder and run:
+The `Statusbar` component is a customizable and reusable component designed for React Native applications. It combines a `StatusBar` with a `View`, enabling users to style and configure the status bar along with providing safe area padding.
+
+## Import Component 
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { Statusbar } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+## Usage Component
 
 <CodeBlock className="my-24"
     compact
     codeInstances={[
         {
-            code: 'npm install hyper-native-ui',
+            code: `<Statusbar
+				viewProps={{ style: styles.viewStyle }}
+				safeAreaTopPadding={30}
+				variant="secondary"
+				themeScheme="light"
+				barStyle="dark-content"/>`,
             label: 'React Native',
-            language: 'bash'
+            language: 'jsx'
         },
     ]}
     copyButton
 />
-## Provider
+---
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/statusbar-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
 
-You can provide a custom theme to customize the colors, typescales etc. with the `Provider` component.
+## Props
 
-### **Code Example**
+The component accepts the following props:
+
+### Required Props
+
+- **`viewProps`** (`ViewProps`):
+  Props to customize the wrapping `View` component.
+
+- **`safeAreaTopPadding`** (`number`):
+  Specifies the padding to apply at the top of the `View`, often used for safe area insets.
+
+### Optional Props
+
+- **`variant`** (`"default" | "secondary" | string`):
+  Specifies the color scheme for the component. Defaults to `"default"`.
+
+- **`themeScheme`** (`"light" | "dark"`):
+  Overrides the theme scheme of the component. When not provided, it defaults to the theme's current scheme.
+
+- **`...otherProps`** (`StatusBarProps`):
+  Additional props passed directly to the `StatusBar` component.
+
+## Behavior
+
+The component dynamically determines styles for color, border color, and background color based on the `variant`, `themeScheme`, and the current theme using the `useTheme` hook. If an unrecognized `variant` is provided, it defaults to the `currentTheme` colors.
+
+### Styling Variants
+
+The component supports built-in `"default"` and `"secondary"` variants. Custom variants can be added by extending the `themeColors` constant. Each variant determines the foreground color, border color, and background color.
+
+
+## Example Usage
 <CodeBlock className="my-24"
     compact
     codeInstances={[
         {
             code: `import React from 'react';
-import { View } from 'react-native';
-import { useTheme, Button, ThemeProvider } from 'hyper-native-ui';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import Statusbar from './Statusbar';
 
-export default function App() {
-  return (
-  <ThemeProvider>
-    <ButtonExample/>
-  </ThemeProvider>
-  );
-}`,
+const App = () => {
+    return (
+        <SafeAreaView style={styles.container}>
+            <Statusbar
+                viewProps={{ style: styles.viewStyle }}
+                safeAreaTopPadding={30}
+                variant="secondary"
+                themeScheme="light"
+                barStyle="dark-content"
+            />
+        </SafeAreaView>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    viewStyle: {
+        backgroundColor: 'white',
+    },
+});
+
+export default App;`,
             label: 'React Native',
-            language: 'tsx'
+            language: 'jsx'
         },
     ]}
     copyButton
 />
-
-## Usage
-
-The `ButtonExample` function is a React Native component that demonstrates the usage of a button to toggle between themes (e.g., light and dark modes) in an application.
-
-### **Purpose**  
-This component provides an interactive button that switches the app's theme when pressed. It leverages the `useTheme` custom hook to retrieve the current theme and toggle it dynamically.
-
-### **Functionality**  
-
-- **Theme Management**  
-   - The `useTheme` hook exposes `currentTheme` and `toggleTheme`.
-     - `currentTheme`: Provides theme-specific properties, including the background color.  
-     - `toggleTheme`: A function that switches the app's theme (e.g., light to dark or vice versa).
-
-- **UI Layout**  
-   - The component uses a centered `View` with a background color based on the `currentTheme`.  
-   - A button is displayed at the center of the screen.
-
-- **Button Interaction**  
-   - When the button is pressed, the `toggleTheme` function is triggered, which switches the theme.
-
-### **Code Example**
-
+## Component Code
 <CodeBlock className="my-24"
     compact
     codeInstances={[
         {
-            code: `function ButtonExample() {
-  const { currentTheme, toggleTheme } = useTheme();
+            code: `import React from 'react';
+import { StatusBar, View, type ViewProps, StatusBarProps } from 'react-native';
+import { componentVariant, themeColors } from '../constants/Colors';
+import useTheme from '../hooks/useTheme';
 
-  return (
-    <View style={{
-      flex: 1,
-      backgroundColor: currentTheme.background,
-      justifyContent: "center",
-      alignItems: "center"
-    }}>
-      <Button onPress={toggleTheme}>
-        This is a Button
-      </Button>
-    </View>
-  );
-}`,
+export type Props = StatusBarProps & {
+    viewProps: ViewProps
+    safeAreaTopPadding: number
+    variant?: componentVariant;
+    themeScheme?: "light" | "dark";
+};
+
+const Statusbar = ({ viewProps,
+    variant = "default",
+    safeAreaTopPadding = 20,
+    themeScheme,
+    ...otherProps }: Props) => {
+    const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
+
+    const colorVariant = () => {
+        switch (variant) {
+            case "secondary":
+                return {
+                    color: currentTheme.primary_foreground,
+                    borderColor: currentTheme.border,
+                    backgroundColor: currentTheme.primary
+                }
+            case "default":
+                return {
+                    color: currentTheme.primary_foreground,
+                    borderColor: currentTheme.border,
+                    backgroundColor: currentTheme.primary
+                }
+            default:
+                const theme = themeColors.find((theme) => theme.name === variant)![themeScheme ?? defaultThemeScheme]
+                if (theme) {
+                    return {
+                        color: theme.primary_foreground,
+                        borderColor: theme.border,
+                        backgroundColor: theme.primary
+                    }
+                }
+                return {
+                    color: currentTheme.primary_foreground,
+                    borderColor: currentTheme.border,
+                    backgroundColor: currentTheme.primary
+                }
+
+        }
+    };
+
+    const colors = { ...colorVariant() };
+
+    return (<>
+        <View style={{ paddingTop: safeAreaTopPadding }} {...viewProps} />
+        <StatusBar barStyle={themeScheme === "dark" ? "light-content" : "dark-content"}
+            backgroundColor={colors.backgroundColor} {...otherProps} />
+    </>)
+}
+
+export default Statusbar`,
             label: 'React Native',
-            language: 'tsx'
+            language: 'jsx'
         },
     ]}
     copyButton

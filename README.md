@@ -1,10 +1,10 @@
 # React Native Ui Library
 <p align="center">
-     <img src="icon.png" height="250px" style="display:block"/>
+     <img src="https://raw.githubusercontent.com/AkashMondal0/hyper-native-ui/refs/heads/main/icon.png" height="250px" style="display:block"/>
 </p>
 <p align="center">Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable.</p>
 <p align="center">
-     <img src="img.jpg"/>
+     <img src="https://raw.githubusercontent.com/AkashMondal0/hyper-native-ui/refs/heads/main/img.jpg"/>
 </p>
 
 ### Installation

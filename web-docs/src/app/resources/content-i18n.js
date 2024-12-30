@@ -2,7 +2,7 @@ const createI18nContent = (t) => {
 
     const newsletter = {
         display: true,
-        title: <>Subscribe to Hyper Native Ui's Newsletter</>,
+        title: <>Subscribe to HyperNative Ui's Newsletter</>,
         description: <>I occasionally write about design, technology, and share thoughts on the intersection of creativity and engineering.</>
     }
 
@@ -32,8 +32,8 @@ const createI18nContent = (t) => {
     ]
 
     const home = {
-        label: 'Hyper Native Ui',
-        title: `Hyper Native Ui`,
+        label: 'HyperNative Ui',
+        title: `HyperNative Ui`,
         description: `React Native Components Library`,
         headline: <>React Native Components Library</>,
         subline: <>

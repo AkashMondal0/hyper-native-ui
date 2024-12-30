@@ -11,7 +11,8 @@ const i18nOptions = {
 
 const routes = {
     '/': true,
-    '/docs': true
+    '/docs': true,
+    '/work': true,
 }
 
 // Enable password protection on selected routes

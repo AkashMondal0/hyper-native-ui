@@ -1,7 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useTheme } from 'hyper-native-ui';
-import CheckboxExampleDemo from '@/components/example/CheckboxExampleDemo';
+// import CheckboxExampleDemo from '@/components/example/CheckboxExampleDemo';
+import InputExampleDemo from '@/components/example/InputExampleDemo';
 
 export default function ImageExample() {
   const { currentTheme } = useTheme();
@@ -11,7 +12,8 @@ export default function ImageExample() {
       flex: 1,
       backgroundColor: currentTheme.background,
     }}>
-      <CheckboxExampleDemo />
+      <InputExampleDemo />
+      {/* <CheckboxExampleDemo /> */}
       {/* <ImageExampleDemo /> */}
     </View>
   );
