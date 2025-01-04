@@ -1,0 +1,145 @@
+---
+title: "A Social Media App built with HyperNative Ui and Expo React Native."
+publishedAt: "2024-05-05"
+summary: "This a React Native application and a full social media
+application backend made with NestJS."
+images:
+  - "/images/projects/snaapio/4.jpg"
+  - "/images/projects/snaapio/1.jpg"
+  - "/images/projects/snaapio/2.jpg"
+  - "/images/projects/snaapio/3.jpg"
+team:
+  - name: "Selene Yu"
+    role: "Software Engineer"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/akashmondal0/"
+#   - name: "Olivia"
+#     role: "Product Manager"
+#     avatar: "/images/projects/snaapio/avatar-2.png"
+#     linkedIn: "https://www.linkedin.com/in/"
+---
+
+# Snaapio Android App Overview
+
+This repository has a React Native application and a full social media
+application backend made with NestJS. For social networking functions like user
+administration, post interactions, and authentication, the backend provides a
+robust API. For users to interact with the social networking platform, the
+client-side application offers a simple and responsive interface.
+
+## Client - React Native - Expo
+
+- `@hookform/resolvers`: Resolvers for `react-hook-form`.
+- `@reduxjs/toolkit`: Redux toolkit for state management.
+- `@supabase/supabase-js`: Supabase client library.
+- `lucide-react`: Icon library for React.
+- `react-hook-form`: Forms library for React.
+- `react-redux`: Official React bindings for Redux.
+- `socket.io-client`: Real-time bidirectional event-based communication.
+- `zod`: TypeScript-first schema declaration and validation library.
+
+## Tech Stack
+
+React Native, Redux toolkit, react-hook-form, socket io, zod
+
+## Features
+
+- User authentication with JWT and NextAuth.js.
+- Real time chat using Socket io.
+- Image uploading feature.
+- Share Photo with your friends.
+- Light and dark modes Toggle and switch themes.
+- ChatBot: Ask Google Gemini AI anything.
+
+## Run Locally
+[Github repository link](https://github.com/AkashMondal0/Snaapio.git)
+
+Clone the project
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `git clone https://github.com/AkashMondal0/Snaapio.git`,
+            label: 'Bash',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Go to the project directory
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `cd Snaapio`,
+            label: 'Bash',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+Install dependencies
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `npm install`,
+            label: 'Bash',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+## Environment Variables
+
+Create a `.env.local` file in the `client` directory and configure the necessary
+environment variables:
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `# supabase config
+EXPO_PUBLIC_SUPABASE_URL=supabaseUrl
+EXPO_PUBLIC_SUPABASE_ANON_KEY=
+# user config
+EXPO_PUBLIC_SUPABASE_STORAGE_URL=supabaseUrl + /storage/v1/object/public/
+EXPO_PUBLIC_SERVER_URL=http://192.168.31.232:5000/v1
+EXPO_PUBLIC_AI_API_URL=supabaseUrl + /functions/v1/generative`,
+            label: 'env',
+            language: 'env'
+        },
+    ]}
+    copyButton
+/>
+
+### Server - Docker Image
+
+To run this project, you will need to add the following environment variables to
+your .env file
+
+### The Server Application
+
+To Start The Docker Container:
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `docker compose up`,
+            label: 'Bash',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+## Screenshots
+
+![App Screenshot](/images/projects/snaapio/2.jpg)
+
+![App Screenshot](/images/projects/snaapio/1.jpg)
+
+## Themes
+
+![App Screenshot](/images/projects/snaapio/3.jpg)

@@ -1,8 +1,8 @@
 import React from 'react';
 import { type TextInputProps, type ViewProps, TextInput, View } from 'react-native';
-import { ThemeName, themeColors } from '../constants/Colors';
+import { themeColors } from '../constants/Colors';
 import useTheme from '../hooks/useTheme';
-
+export type ThemeName = "Zinc" | "State" | "Stone" | "Grey" | "Neutral" | "Red" | "Rose" | "Orange" | "Yellow" | "Green";
 export type Props = TextInputProps & {
     lightColor?: string;
     darkColor?: string;
@@ -114,6 +114,7 @@ const Input = ({ disabled,
                     color: inputStyle.color,
                     height: "auto",
                     width: '100%',
+                    padding: 6,
                     fontSize: inputStyle.fontSize
                 }, style]}
                 selectionHandleColor={currentTheme?.primary}

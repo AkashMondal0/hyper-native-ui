@@ -27,7 +27,7 @@ export const Footer = () => {
                         © {currentYear} /
                     </Text>
                     <Text paddingX="4">
-                        {'Hyper Native Ui'}
+                        {'HyperNative Ui'}
                     </Text>
                 </Text>
                 <Flex

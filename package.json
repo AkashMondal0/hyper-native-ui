@@ -1,6 +1,6 @@
 {
   "name": "hyper-native-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -41,9 +41,7 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.0",
-    "invariant": "^2.2.4",
-    "react-native-bouncy-checkbox": "^4.1.2",
-    "react-native-safe-area-context": "^5.0.0"
+    "react-native-bouncy-checkbox": "^4.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",

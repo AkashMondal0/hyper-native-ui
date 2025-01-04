@@ -5,6 +5,7 @@ import { Mailchimp } from '@/components';
 import { Posts } from '@/components/blog/Posts';
 import { getTranslations, unstable_setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
+import { Projects } from '@/components/work/Projects';
 
 export async function generateMetadata(
 	{ params: { locale } }: { params: { locale: string } }
@@ -113,11 +114,10 @@ export default function Home(
 						</Flex>
 					</RevealFx>
 				</Flex>
-
 			</Flex>
-			{/* <RevealFx translateY="16" delay={0.6}>
+			<RevealFx translateY="16" delay={0.6}>
 				<Projects range={[1, 1]} locale={locale} />
-			</RevealFx> */}
+			</RevealFx>
 			{routes['/docs'] && (
 				<Flex
 					fillWidth gap="24"
@@ -132,7 +132,7 @@ export default function Home(
 					</Flex>
 					<Flex
 						flex={3} paddingX="20">
-						<Posts range={[1, 2]} columns="2" locale={locale} />
+						<Posts range={[4, 6]} columns="2" locale={locale} />
 					</Flex>
 				</Flex>
 			)}

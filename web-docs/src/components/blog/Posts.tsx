@@ -21,12 +21,12 @@ export function Posts({
         return new Date(a.metadata.publishedAt).getTime() - new Date(b.metadata.publishedAt).getTime();
     });
 
-    // const displayedBlogs = range
-    //     ? sortedBlogs.slice(
-    //         range[0] - 1,
-    //         range.length === 2 ? range[1] : sortedBlogs.length
-    //     )
-    //     : sortedBlogs;
+    const displayedBlogs = range
+        ? sortedBlogs.slice(
+            range[0] - 1,
+            range.length === 2 ? range[1] : sortedBlogs.length
+        )
+        : sortedBlogs;
 
     return (
         <>
@@ -34,7 +34,7 @@ export function Posts({
                 <Grid
                     columns={`repeat(${2}, 1fr)`} mobileColumns="1col"
                     fillWidth marginBottom="40" gap="m">
-                    {sortedBlogs.map((post) => (
+                    {displayedBlogs.map((post) => (
                         <Post
                             key={post.slug}
                             post={post}
