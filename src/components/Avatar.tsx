@@ -10,7 +10,7 @@ import {
     ActivityIndicator,
     ActivityIndicatorProps
 } from 'react-native';
-import { componentVariant, themeColors } from '../constants/Colors';
+import { themeColors, ThemeName } from '../constants/Colors';
 import useTheme from '../hooks/useTheme';
 
 export type Props = ImageProps & {
@@ -22,8 +22,9 @@ export type Props = ImageProps & {
     touchableOpacityProps?: TouchableOpacityProps
     activityIndicatorProps?: ActivityIndicatorProps
     isActivityIndicator?: boolean;
-    borderVariant?: componentVariant;
+    borderVariant?: "default" | "secondary" | ThemeName;
     borderWidth?: number;
+    isBorder?: boolean;
     borderStyle?: TouchableOpacityProps["style"];
     onPress?: () => void;
     onLongPress?: () => void;

@@ -1,11 +1,9 @@
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import { StatusBar, View } from 'react-native';
+import React, { useEffect } from 'react';
 import 'react-native-reanimated';
-import { ThemeProvider, useTheme } from 'hyper-native-ui';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ThemeProvider } from 'hyper-native-ui';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -25,21 +23,10 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider>
-      <ThemedStatusBar />
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>
   );
-}
-
-const ThemedStatusBar = () => {
-  const { themeScheme, currentTheme } = useTheme();
-  const insets = useSafeAreaInsets();
-  return (<>
-    <View style={{ paddingTop: insets.top }} />
-    <StatusBar barStyle={themeScheme === "dark" ? "light-content" : "dark-content"}
-      backgroundColor={currentTheme.background} />
-  </>)
 }

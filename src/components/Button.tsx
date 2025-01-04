@@ -4,7 +4,8 @@ import {
     ActivityIndicator,
     type TextProps,
     type TouchableOpacityProps,
-    type ActivityIndicatorProps
+    type ActivityIndicatorProps,
+    ViewStyle
 } from 'react-native';
 import React, { memo } from 'react';
 import useTheme from '../hooks/useTheme';
@@ -22,6 +23,8 @@ export type Props = TouchableOpacityProps & {
     loading?: boolean;
     disableMemo?: boolean;
     variant?: componentVariant;
+    width?: ViewStyle["width"];
+    center?: boolean;
 };
 
 const Button = memo(function Button({
@@ -32,6 +35,8 @@ const Button = memo(function Button({
     loadingStyle,
     loadingProps,
     textTextProps,
+    width = 80,
+    center = false,
     variant = "default",
     size = "medium",
     icon = undefined,
@@ -41,6 +46,11 @@ const Button = memo(function Button({
     disableMemo = false,
     ...otherProps }: Props) {
     const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
+    // Determine the computed width
+    const computedWidth =
+        typeof width === 'number' || /^[0-9]+$/.test(width as string)
+            ? Number(width) // Convert numeric strings to numbers
+            : width; // Use string as-is for percentages
 
     const colorVariant = () => {
         switch (variant) {
@@ -168,6 +178,8 @@ const Button = memo(function Button({
                 opacity: disabled ? 0.6 : 1,
                 borderWidth: 0.6,
                 flexWrap: 'wrap',
+                width: computedWidth ?? "auto",
+                marginHorizontal: center ? "auto" : 0,
             },
                 style,
                 buttonStyle,
