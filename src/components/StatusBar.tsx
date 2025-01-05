@@ -2,57 +2,51 @@ import React from 'react';
 import { StatusBar, View, type ViewProps, StatusBarProps } from 'react-native';
 import { componentVariant, themeColors } from '../constants/Colors';
 import useTheme from '../hooks/useTheme';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export type Props = StatusBarProps & {
-    viewProps: ViewProps
-    safeAreaTopPadding: number
+type Props = StatusBarProps & {
+    viewProps?: ViewProps
+    safeAreaTopPadding?: number
     variant?: componentVariant;
     themeScheme?: "light" | "dark";
 };
 
-const Statusbar = ({ viewProps,
+const Statusbar = ({
+    viewProps,
     variant = "default",
-    safeAreaTopPadding = 20,
+    safeAreaTopPadding = 0,
     themeScheme,
     ...otherProps }: Props) => {
+    const insets = useSafeAreaInsets();
     const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
 
     const colorVariant = () => {
         switch (variant) {
             case "secondary":
                 return {
-                    color: currentTheme.primary_foreground,
-                    borderColor: currentTheme.border,
-                    backgroundColor: currentTheme.primary
+                    backgroundColor: currentTheme.background
                 }
             case "default":
                 return {
-                    color: currentTheme.primary_foreground,
-                    borderColor: currentTheme.border,
-                    backgroundColor: currentTheme.primary
+                    backgroundColor: currentTheme.background
                 }
             default:
                 const theme = themeColors.find((theme) => theme.name === variant)![themeScheme ?? defaultThemeScheme]
                 if (theme) {
                     return {
-                        color: theme.primary_foreground,
-                        borderColor: theme.border,
                         backgroundColor: theme.primary
                     }
                 }
                 return {
-                    color: currentTheme.primary_foreground,
-                    borderColor: currentTheme.border,
-                    backgroundColor: currentTheme.primary
+                    backgroundColor: currentTheme.background
                 }
-
         }
     };
 
     const colors = { ...colorVariant() };
 
     return (<>
-        <View style={{ paddingTop: safeAreaTopPadding }} {...viewProps} />
+        <View style={{ paddingTop: insets.top }} {...viewProps} />
         <StatusBar barStyle={themeScheme === "dark" ? "light-content" : "dark-content"}
             backgroundColor={colors.backgroundColor} {...otherProps} />
     </>)
