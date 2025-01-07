@@ -35,7 +35,7 @@ const Button = memo(function Button({
     loadingStyle,
     loadingProps,
     textTextProps,
-    width = 80,
+    width,
     center = false,
     variant = "default",
     size = "medium",

@@ -1,8 +1,9 @@
+import { StatusBar, ThemeProvider, useTheme } from 'hyper-native-ui';
 import React from 'react';
 import { View } from 'react-native';
-import { useTheme } from 'hyper-native-ui';
+import TextExampleDemo from './components/example/TextExample';
 
-export default function ImageExample() {
+const App = () => {
   const { currentTheme } = useTheme();
 
   return (
@@ -10,10 +11,20 @@ export default function ImageExample() {
       flex: 1,
       backgroundColor: currentTheme.background,
     }}>
+      <TextExampleDemo />
+      {/* <ModalExampleDemo /> */}
       {/* <InputExampleDemo /> */}
       {/* <CheckboxExampleDemo /> */}
       {/* <ImageExampleDemo /> */}
       {/* <AvatarExampleDemo /> */}
     </View>
+  );
+}
+export default function InitializedApp() {
+  return (
+    <ThemeProvider>
+      <StatusBar />
+      <App />
+    </ThemeProvider>
   );
 }
