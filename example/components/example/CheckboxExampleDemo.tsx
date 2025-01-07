@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useTheme, Button, themeColors, CheckBox } from 'hyper-native-ui';
 
 export default function CheckboxExampleDemo() {
@@ -11,7 +11,7 @@ export default function CheckboxExampleDemo() {
   });
 
   return (
-    <ScrollView style={{
+    <View style={{
       flex: 1,
       backgroundColor: currentTheme.background,
     }}>
@@ -114,6 +114,6 @@ export default function CheckboxExampleDemo() {
           ))}
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { StatusBar, View, type ViewProps, StatusBarProps } from 'react-native';
-import { componentVariant, themeColors } from '../constants/Colors';
+import { themeColors, ThemeName } from '../constants/Colors';
 import useTheme from '../hooks/useTheme';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type Props = StatusBarProps & {
     viewProps?: ViewProps
     safeAreaTopPadding?: number
-    variant?: componentVariant;
+    variant?: "default" | "secondary" | "danger" | "warning" | "success" | "outline" | ThemeName;
     themeScheme?: "light" | "dark";
 };
 
@@ -17,38 +17,50 @@ const Statusbar = ({
     safeAreaTopPadding = 0,
     themeScheme,
     ...otherProps }: Props) => {
-    const insets = useSafeAreaInsets();
     const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
+    const insets = useSafeAreaInsets();
 
-    const colorVariant = () => {
-        switch (variant) {
-            case "secondary":
-                return {
-                    backgroundColor: currentTheme.background
-                }
-            case "default":
-                return {
-                    backgroundColor: currentTheme.background
-                }
-            default:
-                const theme = themeColors.find((theme) => theme.name === variant)![themeScheme ?? defaultThemeScheme]
-                if (theme) {
-                    return {
-                        backgroundColor: theme.primary
-                    }
-                }
-                return {
-                    backgroundColor: currentTheme.background
-                }
+    const colorStyle = useMemo(() => {
+        if (variant === 'default') {
+            return {
+                backgroundColor: currentTheme.background,
+            };
         }
-    };
 
-    const colors = { ...colorVariant() };
+        if (variant === 'secondary') {
+            return {
+                backgroundColor: currentTheme.secondary,
+            };
+        }
+
+        if (variant === 'danger') {
+            return {
+                backgroundColor: currentTheme.destructive,
+            };
+        }
+
+        if (variant === 'warning') {
+            return {
+                backgroundColor: "hsl(47.9 95.8% 53.1%)",
+            };
+        }
+
+        if (variant === 'success') {
+            return {
+                backgroundColor: "hsl(142.1 76.2% 36.3%)",
+            };
+        }
+
+        const theme = themeColors.find((t) => t.name === variant)?.[themeScheme ?? defaultThemeScheme];
+        return {
+            backgroundColor: theme?.primary || currentTheme.primary,
+        };
+    }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
 
     return (<>
         <View style={{ paddingTop: insets.top }} {...viewProps} />
         <StatusBar barStyle={themeScheme === "dark" ? "light-content" : "dark-content"}
-            backgroundColor={colors.backgroundColor} {...otherProps} />
+            backgroundColor={colorStyle.backgroundColor} {...otherProps} />
     </>)
 }
 

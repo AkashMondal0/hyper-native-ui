@@ -1,67 +1,78 @@
-// import { RootState } from '@/redux-stores/store';
-// import React, { useState } from 'react';
-// import { View, Switch, SwitchProps } from 'react-native';
-// import { useSelector } from 'react-redux';
-
-// export type Props = SwitchProps & {
-//     variant?: "heading1" | "heading2" | "heading3" | "heading4";
-//     lightColor?: string;
-//     darkColor?: string;
-// };
-
-// const SkySoloSwitch = ({ ...props }: Props) => {
-//     const currentTheme = useSelector((state: RootState) => state.ThemeState.currentTheme)
-//     const [isEnabled, setIsEnabled] = useState(false);
-//     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
-//     return (
-//         <View
-//             style={[{
-//                 alignItems: 'center',
-//                 justifyContent: 'center',
-//                 height: 30,
-//                 width: "auto",
-//                 borderRadius: 100,
-//                 backgroundColor: isEnabled ? currentTheme?.primary : currentTheme?.muted,
-//                 borderWidth: 0.6,
-//                 borderColor: currentTheme?.border,
-//                 opacity: props.disabled ? 0.5 : 1,
-//             }]}>
-//             <Switch
-//                 {...props}
-//                 value={isEnabled}
-//                 onValueChange={toggleSwitch}
-//                 ios_backgroundColor={isEnabled ? currentTheme?.primary : currentTheme?.muted}
-//                 thumbColor={currentTheme?.background}
-//                 trackColor={{ false: "transparent", true: "transparent" }}
-//                 style={{
-//                     transform: [{ scaleX: 1 }, { scaleY: 1 }],
-//                     elevation: 5,
-//                     opacity: props.disabled ? 0.5 : 1,
-//                 }} />
-//         </View>
-//     )
-// }
-// export default SkySoloSwitch
-
-import React, { memo } from 'react';
+import React, { useMemo } from 'react';
+import { View, Switch as RNSwitch, SwitchProps, ViewStyle } from 'react-native';
 import useTheme from '../hooks/useTheme';
-import { ThemeName } from '../constants/Colors';
+import { themeColors, ThemeName } from '../constants/Colors';
 
-export type Props = {
+export type Props = SwitchProps & {
     themeScheme?: "light" | "dark";
-    variantColor?: "default" | ThemeName;
-    variant?: "H1" | "H2" | "H3" | "H4" | "H5" | "H6" | "subtitle1" | "subtitle2" | "body1" | "body2" | "button" | "caption" | "overline";
+    variant?: "default" | ThemeName;
+    // size: "small" | "medium" | "large";
+
+    isChecked: boolean;
+    onValueChange: (value: boolean) => void
+
+    viewStyle?: ViewStyle;
+    switchStyle?: {
+        isChecked: string,
+        unChecked: string,
+        thumbColor: string,
+        borderColor: string
+    } | undefined
 };
 
-const Component = memo(function Component() {
-    const { currentTheme } = useTheme();
+const Switch = ({ isChecked,
+    variant = 'default',
+    viewStyle,
+    switchStyle,
+    onValueChange, themeScheme, style, ...props }: Props) => {
+    const { currentTheme, themeScheme: defaultThemeScheme } = useTheme()
 
-    if (!currentTheme) return <></>;
+    const colorStyle = useMemo(() => {
+        if (variant === 'default') {
+            return {
+                isChecked: currentTheme.primary,
+                unChecked: currentTheme.muted,
+                thumbColor: currentTheme.background,
+                borderColor: currentTheme.border
+            };
+        }
+        if (switchStyle) return switchStyle;
+
+        const theme = themeColors.find((t) => t.name === variant)?.[themeScheme ?? defaultThemeScheme];
+        return {
+            isChecked: theme?.primary ?? currentTheme.primary,
+            unChecked: theme?.muted ?? currentTheme.muted,
+            thumbColor: theme?.background ?? currentTheme.background,
+            borderColor: theme?.border ?? currentTheme.border
+        };
+    }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
+
 
     return (
-        <></>
+        <View
+            style={[{
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: 30,
+                width: "auto",
+                borderRadius: 100,
+                backgroundColor: isChecked ? colorStyle.isChecked : colorStyle.unChecked,
+                borderWidth: 0.6,
+                borderColor: colorStyle?.borderColor,
+                opacity: props.disabled ? 0.5 : 1,
+            }, viewStyle]}>
+            <RNSwitch
+                value={isChecked}
+                onValueChange={onValueChange}
+                ios_backgroundColor={isChecked ? colorStyle.isChecked : colorStyle.unChecked}
+                thumbColor={colorStyle.thumbColor}
+                trackColor={{ false: "transparent", true: "transparent" }}
+                style={[{
+                    transform: [{ scaleX: 1 }, { scaleY: 1 }],
+                    elevation: 5,
+                    opacity: props.disabled ? 0.5 : 1,
+                }, style]}  {...props} />
+        </View>
     )
-})
-
-export default Component;
+}
+export default Switch

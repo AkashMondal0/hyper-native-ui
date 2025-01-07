@@ -95,7 +95,7 @@ const Modal = ({
                                 alignItems: "center",
                                 margin: 5
                             }} />
-                            <Text bold="bold" variant="H5" bold="500">{headerTitle}</Text>
+                            <Text variant="H5" bold="500">{headerTitle}</Text>
                             {/* cancel */}
                             <TouchableOpacity onPress={clickHandler} style={{
                                 borderRadius: 50,

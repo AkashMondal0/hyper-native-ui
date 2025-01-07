@@ -693,4 +693,3 @@ export const themeColors = [
     }
   }
 ];
-export type componentVariant = "default" | "secondary" | "danger" | "warning" | "success" | "outline" | ThemeName;

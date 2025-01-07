@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { type TextInputProps, type ViewProps, TextInput, View } from 'react-native';
 import { themeColors } from '../constants/Colors';
 import useTheme from '../hooks/useTheme';
@@ -33,43 +33,35 @@ const Input = ({ disabled,
     const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
     const [isFocused, setIsFocused] = React.useState(false)
 
-    const colorVariant = () => {
-        switch (variant) {
-            case "secondary":
-                return {
-                    backgroundColor: currentTheme.background,
-                    color: currentTheme.foreground,
-                    borderColor: currentTheme.border,
-                    isFocused: currentTheme.primary
-                }
-            case "default":
-                return {
-                    backgroundColor: currentTheme.input,
-                    color: currentTheme.foreground,
-                    borderColor: currentTheme.border,
-                    isFocused: currentTheme.primary
-                }
-            default:
-                const theme = themeColors.find((theme) => theme.name === variant)![themeScheme ?? defaultThemeScheme]
-                if (theme) {
-                    return {
-                        backgroundColor: theme.input,
-                        color: theme.foreground,
-                        borderColor: theme.border,
-                        isFocused: theme.primary
-                    }
-                }
-                return {
-                    backgroundColor: currentTheme.input,
-                    color: currentTheme.foreground,
-                    borderColor: currentTheme.border,
-                    isFocused: currentTheme.primary
-                }
-
+    const colorStyle = useMemo(() => {
+        if (variant === 'default') {
+            return {
+                backgroundColor: currentTheme.input,
+                color: currentTheme.foreground,
+                borderColor: currentTheme.border,
+                isFocused: currentTheme.primary
+            };
         }
-    }
 
-    const sizeVariant = () => {
+        if (variant === 'secondary') {
+            return {
+                backgroundColor: currentTheme.background,
+                color: currentTheme.foreground,
+                borderColor: currentTheme.border,
+                isFocused: currentTheme.primary
+            };
+        }
+
+        const theme = themeColors.find((t) => t.name === variant)?.[themeScheme ?? defaultThemeScheme];
+        return {
+            backgroundColor: theme?.input ?? currentTheme.input,
+            color: theme?.foreground ?? currentTheme.foreground,
+            borderColor: theme?.border ?? currentTheme.border,
+            isFocused: theme?.primary ?? currentTheme.primary
+        };
+    }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
+
+    const sizeVariant = useMemo(() => {
         switch (size) {
             case "small":
                 return {
@@ -88,11 +80,7 @@ const Input = ({ disabled,
                     fontSize: 16
                 }
         }
-    }
-    const inputStyle = {
-        ...colorVariant(),
-        ...sizeVariant()
-    };
+    }, [size])
 
     if (!currentTheme) return <></>
 
@@ -103,19 +91,19 @@ const Input = ({ disabled,
                 alignItems: 'center',
                 borderRadius: 14,
                 borderWidth: 1,
-                paddingHorizontal: 4,
+                padding: 4,
                 opacity: disabled ? 0.5 : 1,
-                borderColor: isErrorBorder ? currentTheme?.destructive : disabled || !isFocused ? inputStyle?.borderColor : inputStyle?.isFocused,
-                backgroundColor: inputStyle.backgroundColor,
+                borderColor: isErrorBorder ? currentTheme?.destructive : disabled || !isFocused ? colorStyle?.borderColor : colorStyle?.isFocused,
+                backgroundColor: colorStyle.backgroundColor,
             }, containerStyle]}>
             {props.leftSideComponent}
             <TextInput
                 style={[{
-                    color: inputStyle.color,
+                    color: colorStyle.color,
                     height: "auto",
                     width: '100%',
                     padding: 6,
-                    fontSize: inputStyle.fontSize
+                    fontSize: sizeVariant.fontSize
                 }, style]}
                 selectionHandleColor={currentTheme?.primary}
                 placeholderTextColor={currentTheme?.muted_foreground}

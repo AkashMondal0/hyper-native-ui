@@ -14,8 +14,8 @@ export { default as Carousel } from "./components/Carousel";
 export { default as Collapsible } from "./components/Collapsible";
 export { default as Icon } from "./components/Icon";
 export { default as Skeleton } from "./components/Skeleton";
-//
 export { default as Loader } from "./components/Loader";
+//
 export { default as Modal } from "./components/Modal";
 export { default as Switch } from "./components/Switch";
 export { default as View } from "./components/View";
@@ -26,5 +26,4 @@ export type {
     ThemeColors as ThemeColorsType,
     ThemeName as ThemeNameType,
     ThemeSchema as ThemeSchemaType,
-    componentVariant as ComponentVariantType
 } from "./constants/Colors";
