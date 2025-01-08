@@ -1,17 +1,28 @@
-import React, { useMemo } from 'react'
-import BouncyCheckbox, { BouncyCheckboxProps } from "react-native-bouncy-checkbox";
-import { themeColors, ThemeName } from '../constants/Colors';
+import {
+    View as RNview,
+    ViewStyle,
+    type ViewProps,
+} from 'react-native';
+import React, { memo, useMemo } from 'react';
 import useTheme from '../hooks/useTheme';
-import { View } from 'react-native';
+import { themeColors, ThemeName } from '../constants/Colors';
 
-
-export type Props = BouncyCheckboxProps & {
+export type Props = ViewProps & {
     themeScheme?: "light" | "dark";
     variant?: "default" | "secondary" | "danger" | "warning" | "success" | "outline" | ThemeName;
-    size?: number
+    width?: ViewStyle["width"];
+    height?: ViewStyle["height"];
+    center?: boolean;
 };
 
-const CheckBox = ({ size = 25, variant = "default", themeScheme, ...props }: Props) => {
+const View = memo(function View({
+    style,
+    themeScheme,
+    width = 0,
+    height = 0,
+    center = false,
+    variant = "default",
+    ...otherProps }: Props) {
     const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
 
     const colorStyle = useMemo(() => {
@@ -63,27 +74,20 @@ const CheckBox = ({ size = 25, variant = "default", themeScheme, ...props }: Pro
         };
     }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
 
+    if (!currentTheme) return <></>
+
     return (
-        <View style={{
-            width: size,
-            height: size,
-        }}>
-            <BouncyCheckbox
-                {...props}
-                size={size}
-                style={{ opacity: props?.disabled ? 0.3 : 1 }}
-                fillColor={colorStyle.backgroundColor}
-                iconStyle={{ borderColor: colorStyle?.backgroundColor }}
-                innerIconStyle={{ borderWidth: 2, borderColor: colorStyle?.backgroundColor }}
-                iconImageStyle={{
-                    tintColor: colorStyle?.color,
-                    width: size - size / 2,
-                    height: size - size / 2,
-                }}
-            // textStyle={{ fontFamily: "JosefinSans-Regular" }}
-            // onPress={(isChecked: boolean) => { console.log(isChecked) }}
-            />
-        </View>
+        <RNview
+            style={[{
+                width,
+                height,
+                marginHorizontal: center ? "auto" : 0,
+            },
+                style,
+                colorStyle,
+            ]}
+            {...otherProps} />
     )
-};
-export default CheckBox
+})
+
+export default View;

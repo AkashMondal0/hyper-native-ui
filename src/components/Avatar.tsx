@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useState } from 'react';
 import {
     Image as RNImage,
@@ -52,29 +52,25 @@ const Avatar = ({
     const [state, setState] = useState<"idle" | "pending" | "normal" | "error">("idle");
     borderWidth = borderWidth > 0 ? borderWidth : 0
 
-    const colorVariant = () => {
-        switch (borderVariant) {
-            case "secondary":
-                return {
-                    isFocused: currentTheme.primary
-                }
-            case "default":
-                return {
-                    isFocused: currentTheme.primary
-                }
-            default:
-                const theme = themeColors.find((theme) => theme.name === borderVariant)![themeScheme ?? defaultThemeScheme]
-                if (theme) {
-                    return {
-                        isFocused: theme.primary
-                    }
-                }
-                return {
-                    isFocused: currentTheme.primary
-                }
-
+    const colorStyle = useMemo(() => {
+        if (borderVariant === 'default') {
+            return {
+                isFocused: currentTheme.primary
+            };
         }
-    }
+
+        if (borderVariant === 'secondary') {
+            return {
+                isFocused: currentTheme.secondary
+            };
+        }
+
+        const theme = themeColors.find((t) => t.name === borderVariant)?.[themeScheme ?? defaultThemeScheme];
+        return {
+            isFocused: theme?.primary ?? currentTheme.primary
+        };
+    }, [currentTheme, themeScheme, defaultThemeScheme, borderVariant]);
+
 
     if (state === "error" && showImageError || !src) {
         return (
@@ -130,20 +126,20 @@ const Avatar = ({
     return (
         <>
             <TouchableOpacity
-                {...touchableOpacityProps}
                 onPress={onPress}
                 onLongPress={onLongPress}
                 style={{
                     justifyContent: "center",
                     alignItems: "center",
                     borderWidth: borderWidth,
-                    borderColor: colorVariant().isFocused,
+                    borderColor: colorStyle.isFocused,
                     borderRadius: 1000,
                     padding: 2,
                     aspectRatio: 1 / 1,
                     width: size + 10
                 }}
-                activeOpacity={isTouchableOpacity ? touchableOpacityProps?.activeOpacity ?? 0.5 : 1}>
+                activeOpacity={isTouchableOpacity ? touchableOpacityProps?.activeOpacity ?? 0.5 : 1}
+                {...touchableOpacityProps}>
                 <View style={{
                     position: "absolute",
                     justifyContent: "center",

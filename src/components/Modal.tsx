@@ -1,60 +1,65 @@
 import React, { useCallback } from 'react';
-import { Modal, View, type ModalProps, TouchableOpacity } from 'react-native';
-import SkysoloText from './Text';
+import { Modal as RNModal, View, type ModalProps, TouchableOpacity, ViewStyle } from 'react-native';
 import useTheme from '../hooks/useTheme';
+import { ThemeName } from '../constants/Colors';
+import Text from './Text';
 
 export type Props = ModalProps & {
-    variant?: any
+    variant?: ThemeName;
     lightColor?: string;
     darkColor?: string;
-    trigger?: React.ReactNode,
-    children?: React.ReactNode,
-    modalVisible: boolean,
-    setModalVisible: (value: boolean) => void
+    trigger?: React.ReactNode;
+    children?: React.ReactNode;
+    modalVisible: boolean;
+    setModalVisible: (value: boolean) => void;
+    headerTitle?: string;
+    showHeader?: boolean;
+    containerStyle?: ViewStyle;
+    modalVisibleBackgroundOpcity?: number;
 };
 
-
-const SkysoloModal = ({
-    modalVisible,
-    setModalVisible,
+const Modal = ({
     children,
     showHeader = false,
+    trigger,
     headerTitle = "Container",
-    ...props
-}: {
-    setModalVisible: (value: boolean) => void,
-    modalVisible: boolean,
-    children: React.ReactNode,
-    otherProps?: ModalProps,
-    headerTitle?: string,
-    showHeader?: boolean
-}) => {
+    modalVisible,
+    setModalVisible,
+    containerStyle,
+    modalVisibleBackgroundOpcity = 0.7,
+    ...otherProps
+}: Props) => {
     const { currentTheme } = useTheme();
 
     const clickHandler = useCallback(() => {
         setModalVisible(!modalVisible)
     }, [])
 
+    if (!currentTheme) return <></>
 
-    if (!currentTheme) return <View />
     return (
         <View>
-            <Modal
+            {trigger ? <TouchableOpacity onPress={clickHandler}>
+                {trigger}
+            </TouchableOpacity> : <></>}
+            <RNModal
                 animationType="slide"
                 transparent={true}
                 visible={modalVisible}
+                statusBarTranslucent={true}
                 onRequestClose={() => {
                     setModalVisible(!modalVisible);
-                }} {...props}>
+                }} {...otherProps}>
                 <View style={{
                     flex: 1,
                     width: "100%",
                     height: "auto",
+                    backgroundColor: `rgba(0,0,0,${modalVisibleBackgroundOpcity})`,
                     paddingHorizontal: 10,
                     justifyContent: 'center',
                 }}>
                     {/* container */}
-                    <View style={{
+                    <View style={[{
                         backgroundColor: currentTheme.accent,
                         borderRadius: 20,
                         alignItems: 'center',
@@ -69,9 +74,10 @@ const SkysoloModal = ({
                         elevation: 0.5,
                         borderColor: currentTheme.border,
                         borderWidth: 0.5,
-                        minHeight: 280,
+                        minHeight: "50%",
+                        maxHeight: "86%",
                         width: "100%",
-                    }}>
+                    }, containerStyle]}>
                         {showHeader ? <View style={{
                             width: "100%",
                             display: "flex",
@@ -89,33 +95,26 @@ const SkysoloModal = ({
                                 alignItems: "center",
                                 margin: 5
                             }} />
-                            <SkysoloText variant="heading2" style={{ fontWeight: "bold" }}>Container</SkysoloText>
-                            <TouchableOpacity
-                                style={{
-                                    backgroundColor: currentTheme.accent_foreground,
-                                    borderRadius: 50,
-                                    opacity: 0.8,
-                                    borderColor: currentTheme.border,
-                                    borderWidth: 0.5,
-                                    width: 30,
-                                    height: 30,
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    margin: 5
-                                }}
-                                onPress={clickHandler}>
-                                {/* <X style={{
-                                    //@ts-ignore
-                                    color: currentTheme.accent
-                                }} /> */}
+                            <Text variant="H5" bold="500">{headerTitle}</Text>
+                            {/* cancel */}
+                            <TouchableOpacity onPress={clickHandler} style={{
+                                borderRadius: 50,
+                                opacity: 0.8,
+                                width: 30,
+                                height: 30,
+                                justifyContent: "center",
+                                alignItems: "center",
+                                margin: 5,
+                            }}>
+                                <Text size={30}>X</Text>
                             </TouchableOpacity>
                         </View> : <></>}
                         {children}
                     </View>
                 </View>
-            </Modal>
+            </RNModal>
         </View>
     );
 };
 
-export default SkysoloModal;
+export default Modal;

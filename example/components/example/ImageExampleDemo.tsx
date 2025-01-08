@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { Button, Image, useTheme } from 'hyper-native-ui';
 
 export default function ImageExampleDemo() {
@@ -9,7 +9,7 @@ export default function ImageExampleDemo() {
   const url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzNSiBdF8NduudcXQBx-L3sZ4acmAyjCUDAb8Q2W_RpRYgGD59'
 
   return (
-    <ScrollView style={{
+    <View style={{
       flex: 1,
       backgroundColor: currentTheme.background,
     }}>
@@ -56,6 +56,6 @@ export default function ImageExampleDemo() {
           borderRadius={30}
           src={url} />
       </View>
-    </ScrollView>
+    </View>
   );
 }

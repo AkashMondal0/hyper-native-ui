@@ -1,6 +1,6 @@
-import { View, Button, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text } from 'react-native';
 import React from 'react';
-import { useTheme, themeColors } from 'hyper-native-ui';
+import { useTheme, themeColors, Button } from 'hyper-native-ui';
 
 export default function ThemesExampleDemo() {
   const { currentTheme, changeTheme, toggleTheme } = useTheme();
@@ -51,7 +51,9 @@ export default function ThemesExampleDemo() {
           </TouchableOpacity>
         })}
       </View>
-      <Button title="Change Theme" onPress={toggleTheme} />
+      <Button onPress={toggleTheme}>
+        Toggle Mode
+      </Button>
     </View>
   );
 }

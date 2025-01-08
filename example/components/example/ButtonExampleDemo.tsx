@@ -51,6 +51,7 @@ export default function ButtonExampleDemo() {
             width: "50%",
             padding: 10,
           }}>
+            {/* @ts-ignore */}
             <Button variant={color.name} loading={loading} disabled={disabled}>
               {color.name}
             </Button>

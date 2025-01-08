@@ -7,9 +7,9 @@ import {
     type ActivityIndicatorProps,
     ViewStyle
 } from 'react-native';
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import useTheme from '../hooks/useTheme';
-import { componentVariant, themeColors, } from '../constants/Colors';
+import { themeColors, ThemeName } from '../constants/Colors';
 
 export type Props = TouchableOpacityProps & {
     themeScheme?: "light" | "dark";
@@ -22,7 +22,7 @@ export type Props = TouchableOpacityProps & {
     icon?: React.ReactNode;
     loading?: boolean;
     disableMemo?: boolean;
-    variant?: componentVariant;
+    variant?: "default" | "secondary" | "danger" | "warning" | "success" | "outline" | ThemeName;
     width?: ViewStyle["width"];
     center?: boolean;
 };
@@ -35,7 +35,7 @@ const Button = memo(function Button({
     loadingStyle,
     loadingProps,
     textTextProps,
-    width = 80,
+    width,
     center = false,
     variant = "default",
     size = "medium",
@@ -52,116 +52,87 @@ const Button = memo(function Button({
             ? Number(width) // Convert numeric strings to numbers
             : width; // Use string as-is for percentages
 
-    const colorVariant = () => {
-        switch (variant) {
-            case "outline":
-                return {
-                    backgroundColor: currentTheme.secondary,
-                    color: currentTheme.secondary_foreground,
-                    borderColor: currentTheme.secondary_foreground
-                }
-            case "secondary":
-                return {
-                    backgroundColor: currentTheme.secondary,
-                    color: currentTheme.secondary_foreground,
-                    borderColor: currentTheme.secondary
-                }
-            case "danger":
-                return {
-                    backgroundColor: currentTheme.destructive,
-                    color: currentTheme.destructive_foreground,
-                    borderColor: currentTheme.destructive
-                }
-            case "warning":
-                return {
-                    backgroundColor: "hsl(47.9 95.8% 53.1%)",
-                    color: "hsl(26 83.3% 14.1%)",
-                    borderColor: "hsl(47.9 95.8% 53.1%)"
-                }
-            case "success":
-                return {
-                    backgroundColor: "hsl(142.1 76.2% 36.3%)",
-                    color: "hsl(355.7 100% 97.3%)",
-                    borderColor: "hsl(142.1 76.2% 36.3%)"
-                }
-            case "default":
-                return {
-                    backgroundColor: currentTheme.primary,
-                    color: currentTheme.primary_foreground,
-                    borderColor: currentTheme.border,
-                }
-            default:
-                const theme = themeColors.find((theme) => theme.name === variant)![themeScheme ?? defaultThemeScheme]
-                if (theme) {
-                    return {
-                        backgroundColor: theme.primary,
-                        color: theme.primary_foreground,
-                        borderColor: theme.border,
-                    }
-                }
-                return {
-                    backgroundColor: currentTheme.primary,
-                    color: currentTheme.primary_foreground,
-                    borderColor: currentTheme.border,
-                }
-
+    const colorStyle = useMemo(() => {
+        if (variant === 'default') {
+            return {
+                backgroundColor: currentTheme.primary,
+                color: currentTheme.primary_foreground,
+                borderColor: currentTheme.border,
+            };
         }
-    }
 
-    const sizeVariant = () => {
+        if (variant === 'secondary') {
+            return {
+                backgroundColor: currentTheme.secondary,
+                color: currentTheme.secondary_foreground,
+                borderColor: currentTheme.secondary,
+            };
+        }
+
+        if (variant === 'danger') {
+            return {
+                backgroundColor: currentTheme.destructive,
+                color: currentTheme.destructive_foreground,
+                borderColor: currentTheme.destructive,
+            };
+        }
+
+        if (variant === 'warning') {
+            return {
+                backgroundColor: "hsl(47.9 95.8% 53.1%)",
+                color: "hsl(26 83.3% 14.1%)",
+                borderColor: "hsl(47.9 95.8% 53.1%)",
+            };
+        }
+
+        if (variant === 'success') {
+            return {
+                backgroundColor: "hsl(142.1 76.2% 36.3%)",
+                color: "hsl(355.7 100% 97.3%)",
+                borderColor: "hsl(142.1 76.2% 36.3%)",
+            };
+        }
+
+        const theme = themeColors.find((t) => t.name === variant)?.[themeScheme ?? defaultThemeScheme];
+        return {
+            backgroundColor: theme?.primary || currentTheme.primary,
+            color: theme?.primary_foreground || currentTheme.primary_foreground,
+            borderColor: theme?.border || currentTheme.border,
+        };
+    }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
+
+    const sizeVariant = useMemo(() => {
         switch (size) {
-            case "medium":
+            case "small":
                 return {
-                    paddingVertical: 10,
-                    paddingHorizontal: 24,
-                    borderRadius: 12
+                    paddingVertical: 5,
+                    paddingHorizontal: 10,
+                    borderRadius: 5,
+                    fontSize: 12,
                 }
             case "large":
                 return {
-                    paddingVertical: 10,
-                    paddingHorizontal: 42,
-                    borderRadius: 14,
-                }
-            case "extraLarge":
-                return {
-                    paddingVertical: 10,
-                    paddingHorizontal: 50,
-                    borderRadius: 12,
-                }
-            default:
-                return {
-                    paddingVertical: 10,
-                    paddingHorizontal: 18,
-                    borderRadius: 12,
-                }
-        }
-    }
-
-    const textStyleVariant = () => {
-        switch (size) {
-            case "medium":
-                return {
-                    fontSize: 14,
-                }
-            case "large":
-                return {
+                    paddingVertical: 15,
+                    paddingHorizontal: 20,
+                    borderRadius: 15,
                     fontSize: 16
                 }
             case "extraLarge":
                 return {
+                    paddingVertical: 20,
+                    paddingHorizontal: 25,
+                    borderRadius: 20,
                     fontSize: 18
                 }
             default:
                 return {
-                    fontSize: 14
+                    paddingVertical: 10,
+                    paddingHorizontal: 15,
+                    borderRadius: 10,
+                    fontSize: 14,
                 }
         }
-    }
-
-    const buttonStyle = {
-        ...colorVariant(),
-        ...sizeVariant(),
-    };
+    }, [size]);
 
     if (!currentTheme) return <></>
 
@@ -180,19 +151,20 @@ const Button = memo(function Button({
                 flexWrap: 'wrap',
                 width: computedWidth ?? "auto",
                 marginHorizontal: center ? "auto" : 0,
+                borderRadius: sizeVariant.borderRadius,
             },
                 style,
-                buttonStyle,
+                colorStyle,
             ]}
             {...otherProps}>
             <ButtonContent children={children}
-                textStyle={[textStyle, textStyleVariant()]}
+                textStyle={[textStyle, sizeVariant]}
                 icon={icon}
                 textTextProps={textTextProps}
                 loadingStyle={loadingStyle}
                 loadingProps={loadingProps}
                 loading={loading}
-                buttonStyle={buttonStyle} />
+                color={colorStyle.color} />
         </TouchableOpacity>
     )
 })
@@ -204,10 +176,10 @@ const ButtonContent = ({
     textStyle,
     icon,
     loading,
-    buttonStyle,
     loadingStyle,
     loadingProps,
-    textTextProps
+    textTextProps,
+    color
 }: {
     children: string | React.ReactNode,
     icon: React.ReactNode,
@@ -216,16 +188,8 @@ const ButtonContent = ({
     textStyle: TextProps["style"],
     loadingProps?: ActivityIndicatorProps,
     loadingStyle: ActivityIndicatorProps["style"],
-    buttonStyle: {
-        backgroundColor: string,
-        color: string,
-        borderColor: string,
-        paddingVertical: number,
-        paddingHorizontal: number,
-        borderRadius: number
-    }
+    color: string,
 }) => {
-    if (loading) return <ActivityIndicator color={buttonStyle.color} style={[loadingStyle]} {...loadingProps} />
 
     if (typeof children === "string") {
         return <>
@@ -234,13 +198,15 @@ const ButtonContent = ({
                 {...textTextProps}
                 numberOfLines={1}
                 style={[{
-                    color: buttonStyle.color,
+                    color: color,
                     textAlign: 'center',
                     textAlignVertical: 'center',
                     fontSize: 16,
                     fontWeight: "700",
                 }, textStyle]}>
-                {children}
+                {loading ? <ActivityIndicator color={color}
+                    size={20}
+                    style={[loadingStyle]} {...loadingProps} /> : children}
             </Text>
         </>
     }
@@ -250,13 +216,15 @@ const ButtonContent = ({
         return children.map((child, index) => {
             if (typeof child === "string") {
                 return <Text key={index} style={[{
-                    color: buttonStyle.color,
+                    color: color,
                     textAlign: 'center',
                     textAlignVertical: 'center',
                     fontSize: 16,
                     fontWeight: "700",
                 }, textStyle]}>
-                    {child}
+                    {loading ? <ActivityIndicator color={color}
+                        size={20}
+                        style={[loadingStyle]} {...loadingProps} /> : child}
                 </Text>
             }
             else {
