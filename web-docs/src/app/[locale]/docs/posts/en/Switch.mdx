@@ -1,0 +1,179 @@
+---
+title: "Switch"
+publishedAt: "2025-01-08"
+# image: "/images/gallery/img-02.jpg"
+summary: "Open a Terminal in your project's folder and run"
+tag: "Android IOS Web"
+---
+
+The `Switch` component is a flexible and themeable toggle switch designed for React Native applications. It supports various customization options, including colors, styles, and interaction callbacks.
+
+Import Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { Switch } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+Usage Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Switch isChecked={value} onValueChange={() => setValue(!value)} />`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+---
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/switch-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+## Props
+
+The component accepts the following props:
+
+### Required Props
+
+- **`isChecked`** (`boolean`):
+  Indicates whether the switch is in the "on" state.
+
+- **`onValueChange`** (`(value: boolean) => void`):
+  Callback function triggered when the switch is toggled.
+
+### Optional Props
+
+- **`themeScheme`** (`"light" | "dark"`):
+  Overrides the current theme scheme. Defaults to the app's current theme scheme.
+
+- **`variant`** (`"default" | ThemeName`):
+  Specifies the color variant for the switch. Defaults to `"default"`.
+
+- **`viewStyle`** (`ViewStyle`):
+  Custom styles for the container wrapping the switch.
+
+- **`switchStyle`** (`{ isChecked: string, unChecked: string, thumbColor: string, borderColor: string }`):
+  Custom styles for the switch colors and thumb appearance.
+
+- **`...props`** (`SwitchProps`):
+  Additional props passed to the underlying `RNSwitch` component.
+
+## Behavior
+
+1. **Styling**:
+   - The appearance of the switch is determined by the `variant` prop or the custom `switchStyle` object.
+   - Colors adapt to the current theme by default but can be overridden using the `themeScheme` prop.
+
+2. **Interaction**:
+   - The switch can be toggled between "on" and "off" states, triggering the `onValueChange` callback.
+   - Disabled states are styled with reduced opacity.
+
+3. **Customization**:
+   - Custom container styles can be applied using the `viewStyle` prop.
+   - Custom switch styles can be defined with `switchStyle`.
+
+### Basic Switch
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import Switch from './Switch';
+
+const App = () => {
+    const [isChecked, setIsChecked] = useState(false);
+
+    return (
+        <View style={styles.container}>
+            <Switch
+                isChecked={isChecked}
+                onValueChange={setIsChecked}
+            />
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
+
+export default App;`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+## Custom Switch with Styling
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Switch
+    isChecked={true}
+    onValueChange={(value) => console.log('Switch toggled:', value)}
+    variant="secondary"
+    viewStyle={{ margin: 10 }}
+    switchStyle={{
+        isChecked: '#4caf50',
+        unChecked: '#f44336',
+        thumbColor: '#ffffff',
+        borderColor: '#000000',
+    }}/>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+## Notes
+   - Ensure onValueChange is implemented to handle the toggling logic.
+
+   - Use the variant prop to align the component's appearance with your theme.
+
+   - Customize the component's appearance as needed with viewStyle and switchStyle.
+
+    - The component's appearance will adapt to the current theme scheme by default.
+
+    - The switch can be toggled between "on" and "off" states, triggering the onValueChange callback.
+
+    - Disabled states are styled with reduced opacity.
+
+    - Custom container styles can be applied using the viewStyle prop.
+
+    - Custom switch styles can be defined with switchStyle.
+
+    - The appearance of the switch is determined by the variant prop or the custom switchStyle object.
+
+    - Colors adapt to the current theme by default but can be overridden using the themeScheme prop.

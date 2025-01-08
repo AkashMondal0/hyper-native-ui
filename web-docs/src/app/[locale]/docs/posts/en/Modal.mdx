@@ -1,0 +1,225 @@
+---
+title: "Modal"
+publishedAt: "2025-01-08"
+# image: "/images/gallery/img-02.jpg"
+summary: "Open a Terminal in your project's folder and run"
+tag: "Android IOS Web"
+---
+
+The `CheckBox` component is a flexible and customizable checkbox built on top of [react-native-bouncy-checkbox](https://www.npmjs.com/package/react-native-bouncy-checkbox) .
+ It supports a variety of themes and variants, allowing it to integrate seamlessly into diverse design systems.
+Import Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { CheckBox } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+Usage Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<CheckBox />`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+---
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/checkbox-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+## Props
+
+### `themeScheme`
+
+- **Type**: `"light" | "dark"`
+- **Optional**
+- **Description**: Specifies the theme scheme for the checkbox. If not provided, it defaults to the current theme scheme retrieved from the `useTheme` hook.
+
+### `variant`
+
+- **Type**: `"default" | "secondary" | "danger" | "warning" | "success" | "outline" | "Zinc" | "State" | "Stone" | "Grey" | "Neutral" | "Red" | "Rose" | "Orange" | "Yellow" | "Green"`
+- **Optional**
+- **Default**: `"default"`
+- **Description**: Specifies the visual style variant of the checkbox. Custom theme colors are applied based on the provided `variant`.
+
+### `size`
+
+- **Type**: `number`
+- **Optional**
+- **Default**: `25`
+- **Description**: Specifies the size of the checkbox (in pixels).
+
+### `...props`
+
+- **Type**: `BouncyCheckboxProps`
+- **Optional**
+- **Description**: Additional props to be passed down to the `BouncyCheckbox` component. Refer to the `react-native-bouncy-checkbox` documentation for a list of all supported props.
+
+## How It Works
+
+The component determines its appearance based on the provided `variant` and `themeScheme`. If a variant matches a predefined theme name, the corresponding colors are applied. Otherwise, it falls back to the `default` styling.
+
+The `useTheme` hook provides the `currentTheme` and `defaultThemeScheme` for seamless integration with your app's global theme.
+
+### Theme Color Resolution Logic
+
+1. If the `variant` is `"default"` or `"secondary"`, the current theme colors are applied.
+2. If a custom `variant` (e.g., `"Red"`, `"Orange"`) is provided, the component uses matching theme colors from `themeColors`.
+3. Fallback colors are applied when no matching theme or variant is found.
+
+## Example Usage
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React from 'react';
+import { View } from 'react-native';
+import CheckBox from './CheckBox';
+
+const App = () => {
+  return (
+    <View>
+      {/* Light-themed success variant checkbox */}
+      <CheckBox
+        size={30}
+        variant="success"
+        themeScheme="light"
+        isChecked={true}
+        onPress={(isChecked: boolean) => {
+          console.log("Checkbox is now:", isChecked);
+        }}
+      />
+
+      {/* Dark-themed warning variant checkbox */}
+      <CheckBox
+        size={30}
+        variant="warning"
+        themeScheme="dark"
+        isChecked={false}
+        onPress={(isChecked: boolean) => {
+          console.log("Checkbox is now:", isChecked);
+        }}
+      />
+    </View>
+  );
+};
+
+export default App;`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+## Component Code
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React from 'react';
+import BouncyCheckbox, { BouncyCheckboxProps } from "react-native-bouncy-checkbox";
+import { themeColors } from '../constants/Colors';
+import useTheme from '../hooks/useTheme';
+import { View } from 'react-native';
+
+export type ThemeSchema = "light" | "dark";
+export type ThemeName = "Zinc" | "State" | "Stone" | "Grey" | "Neutral" | "Red" | "Rose" | "Orange" | "Yellow" | "Green";
+export type componentVariant = "default" | "secondary" | "danger" | "warning" | "success" | "outline" | ThemeName;
+
+export type Props = BouncyCheckboxProps & {
+    themeScheme?: "light" | "dark";
+    variant?: componentVariant;
+    size?: number
+};
+
+const CheckBox = ({ size = 25, variant = "default", themeScheme, ...props }: Props) => {
+    const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
+
+    const colorVariant = () => {
+        switch (variant) {
+            case "secondary":
+                return {
+                    color: currentTheme.primary_foreground,
+                    borderColor: currentTheme.border,
+                    backgroundColor: currentTheme.primary
+                };
+            case "default":
+                return {
+                    color: currentTheme.primary_foreground,
+                    borderColor: currentTheme.border,
+                    backgroundColor: currentTheme.primary
+                };
+            default:
+                const theme = themeColors.find((theme) => theme.name === variant)![themeScheme ?? defaultThemeScheme];
+                if (theme) {
+                    return {
+                        color: theme.primary_foreground,
+                        borderColor: theme.border,
+                        backgroundColor: theme.primary
+                    };
+                }
+                return {
+                    color: currentTheme.primary_foreground,
+                    borderColor: currentTheme.border,
+                    backgroundColor: currentTheme.primary
+                };
+        }
+    };
+
+    const colors = { ...colorVariant() };
+
+    return (
+        <View style={{
+            width: size,
+            height: size,
+        }}>
+            <BouncyCheckbox
+                {...props}
+                size={size}
+                style={{ opacity: props?.disabled ? 0.3 : 1 }}
+                fillColor={colors.backgroundColor}
+                iconStyle={{ borderColor: colors?.backgroundColor }}
+                innerIconStyle={{ borderWidth: 2, borderColor: colors?.backgroundColor }}
+                iconImageStyle={{
+                    tintColor: colors?.color,
+                    width: size - size / 2,
+                    height: size - size / 2,
+                }}
+            />
+        </View>
+    );
+};
+
+export default CheckBox;`,
+            label: 'React Native',
+            language: 'tsx'
+        },
+    ]}
+    copyButton
+/>

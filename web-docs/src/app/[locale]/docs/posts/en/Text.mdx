@@ -1,0 +1,191 @@
+---
+title: "Text"
+publishedAt: "2025-01-08"
+# image: "/images/gallery/img-02.jpg"
+summary: "Open a Terminal in your project's folder and run"
+tag: "Android IOS Web"
+---
+
+The `Text` component is a versatile and theme-aware typography element designed for React Native applications. It supports various text styles, colors, alignment, and other customization options.
+
+Import Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { Text } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+Usage Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Text>Text Example</Text>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+---
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/text-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+### Basic Text
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import Text from './Text';
+
+const App = () => (
+    <View style={styles.container}>
+        <Text variant="H1">Hello World</Text>
+    </View>
+);
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
+
+export default App;`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+### Centered Text with Custom Color
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Text
+    variant="H4"
+    variantColor="primary"
+    center
+>
+    Centered Text Example
+</Text>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+## Disabled Text
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Text
+    disable
+    variant="body2"
+>
+    Disabled Text Example
+</Text>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+## Custom Font Weight and Size
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Text
+    bold="700"
+    size={18}
+>
+    Bold and Large Text
+</Text>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+## Props
+
+The component accepts the following props:
+
+### Required Props
+
+- **`children`** (`React.ReactNode`):
+  The content of the text.
+
+### Optional Props
+
+- **`variant`** (`"H1" | "H2" | "H3" | "H4" | "H5" | "H6" | "subtitle1" | "subtitle2" | "body1" | "body2" | "button" | "caption" | "overline"`):
+  Specifies the text style variant. Defaults to `"body1"`.
+
+- **`variantColor`** (`"default" | ThemeName`):
+  Specifies the color variant for the text. Defaults to `"default"`.
+
+- **`themeScheme`** (`"light" | "dark"`):
+  Overrides the current theme scheme. Defaults to the app's current theme scheme.
+
+- **`bold`** (`TextStyle['fontWeight']`):
+  Specifies the font weight.
+
+- **`size`** (`TextStyle['fontSize']`):
+  Specifies the font size in pixels.
+
+- **`center`** (`boolean`):
+  If `true`, centers the text horizontally. Defaults to `false`.
+
+- **`disable`** (`boolean`):
+  If `true`, dims the text to indicate a disabled state. Defaults to `false`.
+
+- **`style`** (`TextStyle`):
+  Additional custom styles for the text.
+
+- **`...otherProps`** (`TextProps`):
+  Additional props passed to the underlying `Text` component.
+
+## Behavior
+
+1. **Typography Variants**:
+   - The `variant` prop determines the text's font size, weight, and spacing based on Material Design guidelines.
+
+2. **Styling**:
+   - Text color adapts to the current theme but can be overridden using the `variantColor` and `themeScheme` props.
+
+3. **Accessibility**:
+   - The `disable` prop reduces text opacity to indicate non-interactive or disabled states.
