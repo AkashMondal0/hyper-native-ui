@@ -1,6 +1,6 @@
 ---
-title: "Getting Started"
-publishedAt: "2024-12-16"
+title: "Theming"
+publishedAt: "2024-12-17"
 # image: "/images/gallery/img-02.jpg"
 summary: "Open a Terminal in your project's folder and run"
 tag: "Android IOS Web"
@@ -24,7 +24,6 @@ tag: "Android IOS Web"
 
 You can provide a custom theme to customize the colors, typescales etc. with the `Provider` component.
 
-### **Code Example**
 <CodeBlock className="my-24"
     compact
     codeInstances={[
@@ -50,23 +49,25 @@ export default function App() {
 ## Usage
 
 The `ButtonExample` function is a React Native component that demonstrates the usage of a button to toggle between themes (e.g., light and dark modes) in an application.
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/theming-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
 
 ### **Purpose**  
 This component provides an interactive button that switches the app's theme when pressed. It leverages the `useTheme` custom hook to retrieve the current theme and toggle it dynamically.
-
-### **Functionality**  
-
-- **Theme Management**  
-   - The `useTheme` hook exposes `currentTheme` and `toggleTheme`.
-     - `currentTheme`: Provides theme-specific properties, including the background color.  
-     - `toggleTheme`: A function that switches the app's theme (e.g., light to dark or vice versa).
-
-- **UI Layout**  
-   - The component uses a centered `View` with a background color based on the `currentTheme`.  
-   - A button is displayed at the center of the screen.
-
-- **Button Interaction**  
-   - When the button is pressed, the `toggleTheme` function is triggered, which switches the theme.
 
 ### **Code Example**
 
