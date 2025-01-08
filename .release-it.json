@@ -1,14 +1,15 @@
 {
-  "git": {
-    "push": true,
-    "tagName": "v${version}",
-    "commitMessage": "chore: release v${version}"
-  },
-  "github": {
-    "release": true
-  },
   "npm": {
     "publish": false
+  },
+  "git": {
+    "commitMessage": "chore: release ${version}",
+    "requireBranch": "main",
+    "tagName": "v${version}",
+    "push": false
+  },
+  "github": {
+    "release": false
   },
   "plugins": {
     "@release-it/conventional-changelog": {

@@ -20,6 +20,7 @@ export default function TextExampleDemo() {
                 <Text variant="H5">
                     Text Example Demo
                 </Text>
+                {/* @ts-ignore */}
                 <Text variant="H6">
                     Current theme: {themeName}
                 </Text>
@@ -43,6 +44,7 @@ export default function TextExampleDemo() {
                     Example
                 </Text>
                 {_variant.map((name, i) => {
+                    // {/* @ts-ignore */ }
                     return <Text variant={name} key={i} disable={disabled}>
                         {name}
                     </Text>
@@ -67,6 +69,7 @@ export default function TextExampleDemo() {
                             <Text center
                                 disable={disabled}
                                 variant="H6"
+                                // {/* @ts-ignore */}
                                 variantColor={color.name}>
                                 {color.name}
                             </Text>

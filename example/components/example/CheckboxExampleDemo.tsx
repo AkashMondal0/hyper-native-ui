@@ -83,6 +83,7 @@ export default function CheckboxExampleDemo() {
                 }}>
                   small
                 </Text>
+                {/* @ts-ignore */}
                 <CheckBox variant={color.name}
                   isChecked={isChecked.name === color.name ? true : false}
                   size={25}
@@ -94,6 +95,7 @@ export default function CheckboxExampleDemo() {
                 }}>
                   medium
                 </Text>
+                {/* @ts-ignore */}
                 <CheckBox variant={color.name}
                   size={40}
                   isChecked={isChecked.name === color.name ? true : false}
@@ -105,6 +107,7 @@ export default function CheckboxExampleDemo() {
                 }}>
                   large
                 </Text>
+                {/* @ts-ignore */}
                 <CheckBox variant={color.name}
                   isChecked={isChecked.name === color.name ? true : false}
                   size={60}

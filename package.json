@@ -1,6 +1,6 @@
 {
   "name": "hyper-native-ui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable. Open Source.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -30,14 +30,9 @@
   },
   "scripts": {
     "typescript": "tsc --skipLibCheck --noEmit",
-    "lint": "biome lint --error-on-warnings ./src",
     "build": "bob build",
-    "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" lib/typescript",
-    "delete-debug-view": "find ./lib/commonjs -name '*.d.js*' -delete && find ./lib/module -name '*.d.js*' -delete",
-    "delete-dts.js": "find ./lib/commonjs -name '*.d.js*' -delete && find ./lib/module -name '*.d.js*' -delete",
-    "release": "rm -rf lib && yarn build && release-it",
-    "example": "yarn --cwd example",
-    "bootstrap": "yarn install && yarn example"
+    "release": "release-it",
+    "example": "yarn --cwd example"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.0",
@@ -48,12 +43,8 @@
     "@commitlint/cli": "^17.6.5",
     "@commitlint/config-conventional": "^17.6.5",
     "@release-it/conventional-changelog": "^8.0.1",
-    "@types/invariant": "^2.2.34",
     "@types/react": "~18.3.12",
     "@types/react-native": "~0.73.0",
-    "copyfiles": "^2.4.1",
-    "husky": "^4.3.8",
-    "lint-staged": "^13.2.2",
     "metro-react-native-babel-preset": "^0.77.0",
     "react": "18.3.1",
     "react-native": "0.76.0",

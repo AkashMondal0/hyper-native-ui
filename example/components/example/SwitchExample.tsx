@@ -53,6 +53,7 @@ export default function SwitchExampleDemo() {
                         </Text>
                         <Switch
                             disabled={disabled}
+                            // @ts-ignore
                             variant={t.name}
                             isChecked={value}
                             onValueChange={() => setValue(!value)} />

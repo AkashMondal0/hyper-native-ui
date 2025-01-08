@@ -81,6 +81,7 @@ export default function AvatarExampleDemo() {
               alignItems: "center"
             }}>
               <Avatar
+                // @ts-ignore
                 borderVariant={color.name}
                 borderWidth={2}
                 isTouchableOpacity={touchable}
