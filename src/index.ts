@@ -18,7 +18,7 @@ export { default as Loader } from "./components/Loader";
 //
 export { default as Modal } from "./components/Modal";
 export { default as Switch } from "./components/Switch";
-export { default as View } from "./components/View";
+export { default as ThemedView } from "./components/View";
 export { default as Text } from "./components/Text";
 
 export type {

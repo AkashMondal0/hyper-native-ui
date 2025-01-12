@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Avatar, Button, themeColors, useTheme } from 'hyper-native-ui';
 
 export default function AvatarExampleDemo() {
@@ -8,10 +8,10 @@ export default function AvatarExampleDemo() {
   const [touchable, setTouchable] = useState(false)
   const url = 'https://nypost.com/wp-content/uploads/sites/2/2021/02/gina-carano-03.jpg'
   return (
-    <View style={{
+    <ScrollView style={{
       flex: 1,
-      backgroundColor: currentTheme.background,
-      padding: 5
+      padding: 5,
+      backgroundColor:currentTheme.background
     }}>
       <Button onPress={toggleTheme} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>
         {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
@@ -100,6 +100,6 @@ export default function AvatarExampleDemo() {
           ))}
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }

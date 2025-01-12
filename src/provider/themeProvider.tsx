@@ -1,11 +1,10 @@
 import React, { ReactNode, useCallback, useMemo, useReducer } from "react";
-import { ThemeName, ThemeColors, ThemeSchema, themeColors } from "../constants/Colors";
+import { ThemeName, ThemeColors, ThemeSchema, themeColors, StatusBarVariant } from "../constants/Colors";
 import ThemeContext from "../context/themeContext";
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 type ThemeAction = {
-    type: "TOGGLE_THEME_LIGHT_AND_DARK" | "SET_INITIAL_THEME" | "CHANGE_THEME",
-    payload?: { themeName?: ThemeName, themeSchema?: ThemeSchema } | undefined,
+    type: "TOGGLE_THEME_LIGHT_AND_DARK" | "SET_INITIAL_THEME" | "CHANGE_THEME" | "CHANGE_STATUSBAR_COLOR";
+    payload?: { themeName?: ThemeName, themeSchema?: ThemeSchema, statusBarVariant?: StatusBarVariant } | undefined,
 }
 
 type ThemeReducer = (state: ThemeState, action: ThemeAction) => ThemeState
@@ -13,12 +12,14 @@ type ThemeReducer = (state: ThemeState, action: ThemeAction) => ThemeState
 type ThemeState = {
     theme: ThemeSchema,
     themeName: ThemeName,
+    statusBarColor: StatusBarVariant,
     currentTheme: ThemeColors,
 }
 
 const initialTheme: ThemeState = {
     theme: 'light',
     themeName: 'Zinc',
+    statusBarColor: 'default',
     currentTheme: themeColors[0]['light']
 }
 
@@ -45,6 +46,13 @@ const themeReducer: ThemeReducer = (state, action) => {
             currentTheme: themeColors.find(theme => theme.name === state.themeName)![state.theme],
         }
     }
+    if (action.type === 'CHANGE_STATUSBAR_COLOR') {
+        if (!action?.payload || !action.payload.statusBarVariant) return state;
+        return {
+            ...state,
+            statusBarColor: action.payload.statusBarVariant,
+        }
+    }
     return state;
 }
 
@@ -63,8 +71,8 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         dispatch({ type: 'CHANGE_THEME', payload: { themeName: _themeName } })
     }, [])
 
-    const setInitialTheme = useCallback(() => {
-        dispatch({ type: "SET_INITIAL_THEME", payload: { themeName: "Zinc", themeSchema: "dark" } })
+    const changeStatusBarColor = useCallback((themeName: StatusBarVariant) => {
+        dispatch({ type: "CHANGE_STATUSBAR_COLOR", payload: { statusBarVariant: themeName } })
     }, [])
 
     const navigationThemeValues = useMemo(() => {
@@ -89,11 +97,10 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
             navigationThemeValues: navigationThemeValues,
             toggleTheme,
             changeTheme,
-            setInitialTheme,
+            changeStatusBarColor,
+            statusBarColor: state.statusBarColor,
         }}>
-            <SafeAreaProvider>
-                {children}
-            </SafeAreaProvider>
+            {children}
         </ThemeContext.Provider>
     )
 };

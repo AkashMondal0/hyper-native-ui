@@ -1,4 +1,4 @@
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, ScrollView } from 'react-native';
 import React from 'react';
 import { useTheme, themeColors, Button } from 'hyper-native-ui';
 
@@ -6,9 +6,9 @@ export default function ThemesExampleDemo() {
   const { currentTheme, changeTheme, toggleTheme } = useTheme();
 
   return (
-    <View style={{
-      justifyContent: 'center',
-      alignItems: 'center',
+    <ScrollView style={{
+      flex: 1,
+      backgroundColor: currentTheme.background
     }}>
       <Text style={{
         color: currentTheme.foreground,
@@ -51,9 +51,9 @@ export default function ThemesExampleDemo() {
           </TouchableOpacity>
         })}
       </View>
-      <Button onPress={toggleTheme}>
+      <Button onPress={toggleTheme} width={"80%"} center>
         Toggle Mode
       </Button>
-    </View>
+    </ScrollView>
   );
 }

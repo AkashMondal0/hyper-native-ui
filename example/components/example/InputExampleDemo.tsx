@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import React from 'react';
 import { useTheme, Button, themeColors, Input } from 'hyper-native-ui';
 
@@ -7,11 +7,9 @@ export default function InputExampleDemo() {
     const [disabled, setDisabled] = React.useState(false);
 
     return (
-        <View style={{
+        <ScrollView style={{
             flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: currentTheme.background,
+            backgroundColor: currentTheme.background
         }}>
             <Text style={{
                 color: currentTheme.foreground,
@@ -27,13 +25,14 @@ export default function InputExampleDemo() {
                 color: currentTheme.foreground,
                 fontSize: 20,
                 marginVertical: 10,
+                textAlign: "center"
             }}>
                 Current theme: {themeName}
             </Text>
-            <Button onPress={toggleTheme}>
+            <Button onPress={toggleTheme} width={"80%"} center>
                 {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
             </Button>
-            <Button onPress={() => setDisabled(!disabled)}>
+            <Button onPress={() => setDisabled(!disabled)} width={"80%"} center>
                 {disabled ? 'Enabled' : 'Disabled'}
             </Button>
             <View style={{
@@ -57,6 +56,6 @@ export default function InputExampleDemo() {
                     </View>
                 ))}
             </View>
-        </View>
+        </ScrollView>
     );
 }

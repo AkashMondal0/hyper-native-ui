@@ -1,19 +1,18 @@
 {
   "npm": {
-    "publish": false
+    "publish": true
   },
   "git": {
     "commitMessage": "chore: release ${version}",
     "requireBranch": "main",
     "tagName": "v${version}",
-    "push": false
+    "push": true
   },
   "github": {
     "release": false
   },
   "plugins": {
     "@release-it/conventional-changelog": {
-      "preset": "angular",
       "infile": "CHANGELOG.md"
     }
   }

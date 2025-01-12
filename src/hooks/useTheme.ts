@@ -1,13 +1,16 @@
 import { useContext } from "react";
-import { ThemeColors, ThemeName, ThemeSchema } from "../constants/Colors";
-import ThemeContext from "../context/themeContext";
+import { StatusBarVariant, ThemeColors, ThemeName, ThemeSchema } from "../constants/Colors";
+import ThemeContext, { ThemeHook } from "../context/themeContext";
 
 const useTheme = (): {
     currentTheme: ThemeColors,
     themeScheme: ThemeSchema,
     themeName: ThemeName,
     toggleTheme: () => void,
-    changeTheme: (themeName: ThemeName) => void
+    changeTheme: (themeName: ThemeName) => void,
+    navigationThemeValues: ThemeHook["navigationThemeValues"],
+    changeStatusBarColor: (themeName: StatusBarVariant) => void,
+    statusBarColor: StatusBarVariant
 } => {
     const themeContext = useContext(ThemeContext);
 
@@ -17,6 +20,9 @@ const useTheme = (): {
         toggleTheme: themeContext!.toggleTheme,
         changeTheme: themeContext!.changeTheme,
         themeName: themeContext!.themeName,
+        changeStatusBarColor: themeContext!.changeStatusBarColor,
+        navigationThemeValues: themeContext!.navigationThemeValues,
+        statusBarColor: themeContext!.statusBarColor
     };
 };
 

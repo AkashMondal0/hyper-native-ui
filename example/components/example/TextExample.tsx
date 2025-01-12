@@ -10,7 +10,8 @@ export default function TextExampleDemo() {
     return (
         <ScrollView style={{
             flex: 1,
-            padding: 10
+            padding: 10,
+            backgroundColor:currentTheme.background
         }}>
             <View style={{
                 justifyContent: 'center',
