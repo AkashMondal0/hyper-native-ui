@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { Button, Image, useTheme } from 'hyper-native-ui';
 
 export default function ImageExampleDemo() {
@@ -9,9 +9,9 @@ export default function ImageExampleDemo() {
   const url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzNSiBdF8NduudcXQBx-L3sZ4acmAyjCUDAb8Q2W_RpRYgGD59'
 
   return (
-    <View style={{
+    <ScrollView style={{
       flex: 1,
-      backgroundColor: currentTheme.background,
+      backgroundColor:currentTheme.background
     }}>
       <Button onPress={toggleTheme} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>
         {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
@@ -56,6 +56,6 @@ export default function ImageExampleDemo() {
           borderRadius={30}
           src={url} />
       </View>
-    </View>
+    </ScrollView>
   );
 }

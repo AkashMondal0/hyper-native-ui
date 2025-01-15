@@ -1,18 +1,17 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { useTheme, Button, Text, Modal } from 'hyper-native-ui';
 
 export default function ModalExampleDemo() {
-    const { toggleTheme, themeScheme, themeName } = useTheme();
+    const { toggleTheme, themeScheme, themeName,currentTheme } = useTheme();
     const [visible, setVisible] = React.useState(false);
 
     return (
-        <View style={{
+        <ScrollView style={{
             padding: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
+            backgroundColor:currentTheme.background
         }}>
-            <Button onPress={() => setVisible(true)}>
+            <Button onPress={() => setVisible(true)} center>
                 Show Modal
             </Button>
             <Modal
@@ -40,6 +39,6 @@ export default function ModalExampleDemo() {
                     </Button>
                 </View>
             </Modal>
-        </View>
+        </ScrollView>
     );
 }

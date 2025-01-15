@@ -138,7 +138,7 @@ const Button = memo(function Button({
 
     return (
         <TouchableOpacity
-            activeOpacity={0.6}
+            activeOpacity={0.9}
             disabled={disabled}
             style={[{
                 alignItems: 'center',

@@ -1,6 +1,6 @@
 import { Switch, Text, themeColors, Button, useTheme } from 'hyper-native-ui';
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 export default function SwitchExampleDemo() {
     const [value, setValue] = React.useState(false);
@@ -8,12 +8,10 @@ export default function SwitchExampleDemo() {
     const [disabled, setDisabled] = React.useState(false);
 
     return (
-        <View style={{
+        <ScrollView style={{
             flex: 1,
             padding: 10,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: currentTheme.background
+            backgroundColor:currentTheme.background
         }}>
             <Button onPress={toggleTheme}>
                 {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
@@ -60,6 +58,6 @@ export default function SwitchExampleDemo() {
                     </View>
                 })}
             </View>
-        </View>
+        </ScrollView>
     );
 }
