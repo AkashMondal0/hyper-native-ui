@@ -1,0 +1,83 @@
+---
+title: "View"
+publishedAt: "2025-01-08"
+# image: "/images/gallery/img-02.jpg"
+summary: "Open a Terminal in your project's folder and run"
+tag: "Android IOS Web"
+---
+
+The `View` component is a customizable wrapper for React Native's `View` element. It integrates theming and design variants, offering flexibility for layout and styling.
+
+### Import Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { View } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+### Basic View Usage
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React from 'react';
+import { View } from 'hyper-native-ui';
+
+const App = () => {
+    return (
+        <View
+            width={100}
+            height={100}
+            variant="default"
+            style={{ margin: 10 }}
+        />
+    );
+};
+
+export default App;`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+### Required Props
+
+None. All props are optional and designed for flexibility.
+
+### Optional Props
+
+- **`variant`** (`string`): Defines the color scheme of the component. Defaults to `default`.
+- **`center`** (`boolean`): Aligns the component horizontally. Defaults to `false`.
+- **`width`** (`number`): Sets the width of the component.
+- **`height`** (`number`): Sets the height of the component.
+- **`themeScheme`** (`object`): Overrides the global theme with custom colors.
+
+## Styling and Behavior
+
+- **Theme Integration**:
+  - The component adapts to the current theme, applying `primary`, `secondary`, and other defined colors based on the `variant` prop.
+  - `themeScheme` allows overriding the global theme.
+
+- **Alignment**:
+  - Use the `center` prop for horizontal alignment.
+
+- **Custom Dimensions**:
+  - Define `width` and `height` for specific layouts.
+
+- **Variants**:
+  - **`default`**: Primary color from the theme.
+  - **`secondary`**: Secondary color scheme.
+  - **`danger`**: Error or destructive style.
+  - **`warning`**: Caution or alert style.
+  - **`success`**: Indicates success.
+  - Extendable with custom themes.

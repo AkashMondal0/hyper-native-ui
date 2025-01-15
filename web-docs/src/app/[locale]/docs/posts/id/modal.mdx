@@ -1,0 +1,192 @@
+---
+title: "Modal"
+publishedAt: "2025-01-08"
+# image: "/images/gallery/img-02.jpg"
+summary: "Open a Terminal in your project's folder and run"
+tag: "Android IOS Web"
+---
+
+The `Modal` component provides a flexible and customizable modal dialog for React Native applications. It supports dynamic theming, customizable headers, and a trigger element to open and close the modal.
+
+### Import Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { Modal } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+### Basic Modal Usage
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { ThemeProvider, Button, Text, Modal } from 'hyper-native-ui';
+import { useState } from 'react';
+import { View } from 'react-native';
+
+const App = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  return (
+    <ThemeProvider>
+      <View
+        style={{
+          flex: 1,
+        }}>
+        <Modal modalVisible={modalVisible} setModalVisible={setModalVisible}>
+          <View>
+            <Text>Modal Content</Text>
+          </View>
+          <Button onPress={() => setModalVisible(false)} width="40%" center>
+            close
+          </Button>
+        </Modal>
+        <Button onPress={() => setModalVisible(true)} width="40%" center>
+          Open
+        </Button>
+      </View>
+    </ThemeProvider>
+  );
+};
+
+export default App;`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+---
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/modal-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+## Props
+
+The component accepts the following props:
+
+### Required Props
+
+- **`modalVisible`** (`boolean`):  
+  Indicates whether the modal is currently visible.
+
+- **`setModalVisible`** (`(value: boolean) => void`):  
+  Function to toggle the visibility of the modal.
+
+### Optional Props
+
+- **`variant`** (`ThemeName`):  
+  Specifies the theme variant for the modal. Defaults to the current app theme.
+
+- **`lightColor`** (`string`):  
+  Custom background color for light mode.
+
+- **`darkColor`** (`string`):  
+  Custom background color for dark mode.
+
+- **`trigger`** (`React.ReactNode`):  
+  The element that triggers the modal when clicked. If undefined, the modal must be controlled programmatically.
+
+- **`headerTitle`** (`string`):  
+  The title displayed in the modal's header. Defaults to `"Container"`.
+
+- **`showHeader`** (`boolean`):  
+  Whether to display the modal header. Defaults to `false`.
+
+- **`containerStyle`** (`ViewStyle`):  
+  Custom styles for the modal container.
+
+- **`modalVisibleBackgroundOpacity`** (`number`):  
+  Opacity of the background overlay when the modal is visible. Defaults to `0.7`.
+
+- **`children`** (`React.ReactNode`):  
+  The content displayed inside the modal.
+
+- **`...otherProps`** (`ModalProps`):  
+  Additional props passed to the underlying `RNModal` component.
+
+## Behavior
+
+1. **Theming**:
+   - Adapts to the current theme using the `useTheme` hook.
+   - Custom colors can be applied with `lightColor` and `darkColor`.
+
+2. **Header**:
+   - An optional header displays a title and a close button.
+   - Controlled by the `showHeader` and `headerTitle` props.
+
+3. **Trigger**:
+   - The `trigger` prop renders an interactive element to toggle the modal.
+   - If no trigger is provided, the modal visibility must be managed programmatically.
+
+4. **Customization**:
+   - `containerStyle` allows you to extend or override modal container styles.
+   - `modalVisibleBackgroundOpacity` customizes the transparency of the modal backdrop.
+
+
+   ## Modal with Header and Trigger
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React, { useState } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import Modal from './Modal';
+
+const App = () => {
+    const [modalVisible, setModalVisible] = useState(false);
+
+    return (
+        <View style={styles.container}>
+            <Modal
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                showHeader={true}
+                headerTitle="Example Modal"
+                trigger={<Text>Click Me to Open</Text>}
+            >
+                <View>
+                    <Text>This is a modal with a header and a close button.</Text>
+                </View>
+            </Modal>
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
+
+export default App;
+`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
