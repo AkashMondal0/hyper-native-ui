@@ -9,7 +9,7 @@ import { themeColors, ThemeName } from '../constants/Colors';
 
 export type Props = ViewProps & {
     themeScheme?: "light" | "dark";
-    variant?: "default" | "secondary" | "danger" | "warning" | "success" | "outline" | ThemeName;
+    variant?: "default" | "secondary" | ThemeName;
     width?: ViewStyle["width"];
     height?: ViewStyle["height"];
     center?: boolean;
@@ -18,8 +18,8 @@ export type Props = ViewProps & {
 const View = memo(function View({
     style,
     themeScheme,
-    width = 0,
-    height = 0,
+    width = "auto",
+    height = "auto",
     center = false,
     variant = "default",
     ...otherProps }: Props) {
@@ -28,41 +28,17 @@ const View = memo(function View({
     const colorStyle = useMemo(() => {
         if (variant === 'default') {
             return {
-                backgroundColor: currentTheme.primary,
-                color: currentTheme.primary_foreground,
+                backgroundColor: currentTheme.background,
+                color: currentTheme.foreground,
                 borderColor: currentTheme.border,
             };
         }
 
         if (variant === 'secondary') {
             return {
-                backgroundColor: currentTheme.secondary,
-                color: currentTheme.secondary_foreground,
+                backgroundColor: currentTheme.foreground,
+                color: currentTheme.background,
                 borderColor: currentTheme.secondary,
-            };
-        }
-
-        if (variant === 'danger') {
-            return {
-                backgroundColor: currentTheme.destructive,
-                color: currentTheme.destructive_foreground,
-                borderColor: currentTheme.destructive,
-            };
-        }
-
-        if (variant === 'warning') {
-            return {
-                backgroundColor: "hsl(47.9 95.8% 53.1%)",
-                color: "hsl(26 83.3% 14.1%)",
-                borderColor: "hsl(47.9 95.8% 53.1%)",
-            };
-        }
-
-        if (variant === 'success') {
-            return {
-                backgroundColor: "hsl(142.1 76.2% 36.3%)",
-                color: "hsl(355.7 100% 97.3%)",
-                borderColor: "hsl(142.1 76.2% 36.3%)",
             };
         }
 

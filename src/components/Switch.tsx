@@ -6,7 +6,7 @@ import { themeColors, ThemeName } from '../constants/Colors';
 export type Props = SwitchProps & {
     themeScheme?: "light" | "dark";
     variant?: "default" | ThemeName;
-    size: "small" | "medium" | "large";
+    size?: "small" | "medium" | "large";
 
     isChecked: boolean;
     onValueChange: (value: boolean) => void

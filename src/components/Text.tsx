@@ -9,7 +9,7 @@ import { ThemeName, themeColors } from '../constants/Colors';
 
 export type Props = TextProps & {
     themeScheme?: 'light' | 'dark';
-    variantColor?: 'default' | ThemeName;
+    variantColor?: 'default' | 'primary' | 'secondary' | ThemeName;
     variant?:
     | 'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6'
     | 'subtitle1' | 'subtitle2'
@@ -36,7 +36,15 @@ const Text = memo(function Text({
 
     const colorStyle = useMemo(() => {
         if (variantColor === 'default') {
-            return { color: currentTheme.secondary_foreground };
+            return { color: currentTheme.foreground };
+        }
+
+        if (variantColor === 'secondary') {
+            return { color: currentTheme.muted_foreground };
+        }
+
+        if (variantColor === 'primary') {
+            return { color: currentTheme.primary };
         }
 
         const theme = themeColors.find((t) => t.name === variantColor)?.[themeScheme ?? defaultThemeScheme];
