@@ -16,6 +16,13 @@ export { default as Icon } from "./components/Icon";
 export { default as Skeleton } from "./components/Skeleton";
 export { default as Loader } from "./components/Loader";
 //
+export { default as AnimatedView } from "./components/AnimatedView";
+export { default as TouchableOpacity } from "./components/TouchableOpacity";
+export { default as Separator } from "./components/Separator";
+export { default as Alert } from "./components/Alert";
+export { default as ActionSheet } from "./components/ActionSheet";
+export { default as ToastAndroid } from "./components/ToastAndroid";
+//
 export { default as Modal } from "./components/Modal";
 export { default as Switch } from "./components/Switch";
 export { default as View } from "./components/View";

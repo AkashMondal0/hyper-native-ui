@@ -36,8 +36,7 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.0",
-    "react-native-bouncy-checkbox": "^4.1.2",
-    "react-native-safe-area-context": "^5.0.0"
+    "react-native-bouncy-checkbox": "^4.1.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.5",

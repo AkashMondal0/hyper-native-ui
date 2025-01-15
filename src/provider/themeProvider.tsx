@@ -1,7 +1,6 @@
 import React, { ReactNode, useCallback, useMemo, useReducer } from "react";
 import { ThemeName, ThemeColors, ThemeSchema, themeColors } from "../constants/Colors";
 import ThemeContext from "../context/themeContext";
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 type ThemeAction = {
     type: "TOGGLE_THEME_LIGHT_AND_DARK" | "SET_INITIAL_THEME" | "CHANGE_THEME",
@@ -91,9 +90,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
             changeTheme,
             setInitialTheme,
         }}>
-            <SafeAreaProvider>
-                {children}
-            </SafeAreaProvider>
+            {children}
         </ThemeContext.Provider>
     )
 };

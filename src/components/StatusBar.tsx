@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { StatusBar, View, type ViewProps, StatusBarProps } from 'react-native';
 import { themeColors, ThemeName } from '../constants/Colors';
 import useTheme from '../hooks/useTheme';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type Props = StatusBarProps & {
     viewProps?: ViewProps
@@ -18,7 +17,7 @@ const Statusbar = ({
     themeScheme,
     ...otherProps }: Props) => {
     const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
-    const insets = useSafeAreaInsets();
+
 
     const colorStyle = useMemo(() => {
         if (variant === 'default') {
@@ -58,7 +57,7 @@ const Statusbar = ({
     }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
 
     return (<>
-        <View style={{ paddingTop: insets.top }} {...viewProps} />
+        <View style={{ paddingTop: safeAreaTopPadding }} {...viewProps} />
         <StatusBar barStyle={themeScheme === "dark" ? "light-content" : "dark-content"}
             backgroundColor={colorStyle.backgroundColor} {...otherProps} />
     </>)

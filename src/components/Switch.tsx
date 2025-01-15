@@ -6,7 +6,7 @@ import { themeColors, ThemeName } from '../constants/Colors';
 export type Props = SwitchProps & {
     themeScheme?: "light" | "dark";
     variant?: "default" | ThemeName;
-    // size: "small" | "medium" | "large";
+    size: "small" | "medium" | "large";
 
     isChecked: boolean;
     onValueChange: (value: boolean) => void
@@ -23,6 +23,7 @@ export type Props = SwitchProps & {
 const Switch = ({ isChecked,
     variant = 'default',
     viewStyle,
+    size = "medium",
     switchStyle,
     onValueChange, themeScheme, style, ...props }: Props) => {
     const { currentTheme, themeScheme: defaultThemeScheme } = useTheme()
@@ -48,18 +49,41 @@ const Switch = ({ isChecked,
     }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
 
 
+    const sizeVariant = useMemo(() => {
+        if (size === "large") {
+            return {
+                width: 50,
+                height: 30,
+                bw: 0.6
+            };
+        };
+        if (size === "small") {
+            return {
+                width: 50,
+                height: 30,
+                bw: 0.6
+            };
+        };
+        return {
+            width: 50,
+            height: 30,
+            bw: 0.6
+        };
+    }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
+
+
     return (
         <View
             style={[{
                 alignItems: 'center',
                 justifyContent: 'center',
-                height: 30,
-                width: "auto",
                 borderRadius: 100,
                 backgroundColor: isChecked ? colorStyle.isChecked : colorStyle.unChecked,
                 borderWidth: 0.6,
                 borderColor: colorStyle?.borderColor,
                 opacity: props.disabled ? 0.5 : 1,
+                width: sizeVariant.width,
+                height: sizeVariant.height
             }, viewStyle]}>
             <RNSwitch
                 value={isChecked}
