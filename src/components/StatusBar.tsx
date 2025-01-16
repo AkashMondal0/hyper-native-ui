@@ -16,6 +16,13 @@ const Statusbar = ({
     ...otherProps }: Props) => {
     const { currentTheme, themeScheme: defaultThemeScheme, statusBarColor: variant } = useTheme();
 
+    const barStyle = useMemo(() => {
+        if (themeScheme) {
+            return themeScheme === "dark" ? "light-content" : "dark-content";
+        }
+        return defaultThemeScheme === "dark" ? "light-content" : "dark-content";
+    }, [themeScheme, defaultThemeScheme])
+
     const colorStyle = useMemo(() => {
         if (variant === 'default') {
             return {
@@ -55,9 +62,9 @@ const Statusbar = ({
 
     return (<>
         <View style={{ paddingTop: topPadding }} {...viewProps} />
-        <StatusBar barStyle={themeScheme === "dark" ? "light-content" : "dark-content"}
+        <StatusBar barStyle={barStyle}
             backgroundColor={colorStyle.backgroundColor} {...otherProps} />
     </>)
 }
 
-export default Statusbar
+export default Statusbar;

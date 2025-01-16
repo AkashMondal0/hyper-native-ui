@@ -41,9 +41,12 @@ const themeReducer: ThemeReducer = (state, action) => {
         }
     }
     if (action.type === 'SET_INITIAL_THEME') {
+        if (!action?.payload || !action.payload.themeName || !action.payload.themeSchema) return state;
         return {
             ...state,
-            currentTheme: themeColors.find(theme => theme.name === state.themeName)![state.theme],
+            theme: action?.payload.themeSchema,
+            themeName: action.payload.themeName,
+            currentTheme: themeColors.find(theme => theme.name === action.payload?.themeName)![action?.payload.themeSchema],
         }
     }
     if (action.type === 'CHANGE_STATUSBAR_COLOR') {
@@ -75,6 +78,10 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         dispatch({ type: "CHANGE_STATUSBAR_COLOR", payload: { statusBarVariant: themeName } })
     }, [])
 
+    const setInitialTheme = useCallback(({ themeSchema, themeName }: { themeSchema: ThemeSchema, themeName: ThemeName }) => {
+        dispatch({ type: 'SET_INITIAL_THEME', payload: { themeSchema, themeName } })
+    }, [])
+
     const navigationThemeValues = useMemo(() => {
         return {
             dark: state.theme === 'dark',
@@ -97,6 +104,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
             navigationThemeValues: navigationThemeValues,
             toggleTheme,
             changeTheme,
+            setInitialTheme,
             changeStatusBarColor,
             statusBarColor: state.statusBarColor,
         }}>

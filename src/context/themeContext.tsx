@@ -19,6 +19,7 @@ export interface ThemeHook {
     changeTheme: (themeName: ThemeName) => void,
     changeStatusBarColor: (themeName: StatusBarVariant) => void,
     statusBarColor: StatusBarVariant
+    setInitialTheme: ({ themeSchema, themeName }: { themeSchema: ThemeSchema, themeName: ThemeName }) => void
 }
 const ThemeContext = createContext<ThemeHook | undefined>(undefined);
 export default ThemeContext;
