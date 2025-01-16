@@ -4,6 +4,7 @@ export interface ThemeHook {
     currentTheme: ThemeColors,
     themeName: ThemeName,
     themeScheme: ThemeSchema,
+    systemTheme: boolean,
     navigationThemeValues: {
         dark: boolean,
         colors: {
@@ -15,11 +16,12 @@ export interface ThemeHook {
             notification: string,
         }
     },
-    toggleTheme: () => void,
+    toggleTheme: (themeSchema?: ThemeSchema) => void,
     changeTheme: (themeName: ThemeName) => void,
     changeStatusBarColor: (themeName: StatusBarVariant) => void,
-    statusBarColor: StatusBarVariant
-    setInitialTheme: ({ themeSchema, themeName }: { themeSchema: ThemeSchema, themeName: ThemeName }) => void
+    statusBarColor: StatusBarVariant,
+    setSystemTheme: (systemTheme: boolean) => void
+    setInitialTheme: ({ themeSchema, themeName }: { themeSchema: ThemeSchema | "system", themeName: ThemeName }) => void
 }
 const ThemeContext = createContext<ThemeHook | undefined>(undefined);
 export default ThemeContext;

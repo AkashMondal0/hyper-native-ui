@@ -9,11 +9,13 @@ const useTheme = (): ThemeHook => {
         currentTheme: themeContext!.currentTheme,
         toggleTheme: themeContext!.toggleTheme,
         changeTheme: themeContext!.changeTheme,
+        systemTheme: themeContext!.systemTheme,
         themeName: themeContext!.themeName,
         changeStatusBarColor: themeContext!.changeStatusBarColor,
         navigationThemeValues: themeContext!.navigationThemeValues,
         statusBarColor: themeContext!.statusBarColor,
-        setInitialTheme: themeContext!.setInitialTheme
+        setInitialTheme: themeContext!.setInitialTheme,
+        setSystemTheme: themeContext!.setSystemTheme
     };
 };
 

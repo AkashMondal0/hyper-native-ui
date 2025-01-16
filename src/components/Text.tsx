@@ -18,7 +18,6 @@ export type Props = TextProps & {
     bold?: TextStyle['fontWeight'];
     size?: TextStyle['fontSize'];
     center?: boolean;
-    disable?: boolean;
 };
 
 const Text = memo(function Text({
@@ -27,7 +26,6 @@ const Text = memo(function Text({
     bold,
     size,
     center = false,
-    disable = false,
     variantColor = 'default',
     variant = 'body1',
     ...otherProps
@@ -75,14 +73,14 @@ const Text = memo(function Text({
 
     const combinedStyles = useMemo(() => {
         return [
-            { textAlign: center ? 'center' as 'center' : 'auto' as 'auto', opacity: disable ? 0.5 : 1 },
+            { textAlign: center ? 'center' as 'center' : 'auto' as 'auto', opacity: otherProps?.disabled ? 0.5 : 1 },
             colorStyle,
             textVariantStyle,
             bold ? { fontWeight: bold } : {},
             size ? { fontSize: size } : {},
             style,
         ];
-    }, [center, disable, colorStyle, textVariantStyle, bold, size, style]);
+    }, [center, otherProps?.disabled, colorStyle, textVariantStyle, bold, size, style]);
 
     return <RNText style={combinedStyles} {...otherProps} />;
 });
