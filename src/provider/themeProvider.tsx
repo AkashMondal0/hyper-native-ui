@@ -25,7 +25,7 @@ type ThemeState = {
 
 const initialTheme: ThemeState = {
     theme: 'light',
-    systemTheme: true,
+    systemTheme: false,
     themeName: 'Zinc',
     statusBarColor: 'default',
     currentTheme: themeColors[0]['light']
@@ -58,10 +58,12 @@ const themeReducer: ThemeReducer = (state, action) => {
         }
     }
     if (action.type === 'SET_SYSTEM_THEME') {
-        if (!action?.payload) return state;
+        if (!action?.payload || !action.payload.themeSchema) return state;
         return {
             ...state,
+            theme: action.payload.themeSchema ?? state.theme,
             systemTheme: action.payload?.systemTheme ?? state.systemTheme,
+            currentTheme: themeColors.find(theme => theme.name === state.themeName)![action.payload.themeSchema],
         }
     }
     if (action.type === 'SET_INITIAL_THEME') {
@@ -92,12 +94,12 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const [state, dispatch] = useReducer<ThemeReducer>(themeReducer, initialTheme);
 
     const toggleTheme = useCallback((themeSchema?: ThemeSchema) => {
-        if (state.systemTheme) return;
         dispatch({ type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: { themeSchema } });
-    }, [state.themeName]);
+    }, [state.themeName, state.systemTheme]);
 
     const setSystemTheme = useCallback((systemTheme: boolean) => {
-        dispatch({ type: 'SET_SYSTEM_THEME', payload: { systemTheme } });
+        const st = Appearance.getColorScheme() as ThemeSchema;
+        dispatch({ type: 'SET_SYSTEM_THEME', payload: { systemTheme, themeSchema: st } });
     }, [state.systemTheme]);
 
     const changeTheme = useCallback((_themeName: ThemeName) => {
