@@ -93,6 +93,14 @@ const Button = memo(function Button({
             };
         }
 
+        if (variant === 'outline') {
+            return {
+                backgroundColor: currentTheme.background,
+                color: currentTheme.foreground,
+                borderColor: currentTheme.foreground,
+            };
+        }
+
         const theme = themeColors.find((t) => t.name === variant)?.[themeScheme ?? defaultThemeScheme];
         return {
             backgroundColor: theme?.primary || currentTheme.primary,
@@ -147,7 +155,8 @@ const Button = memo(function Button({
                 flexDirection: 'row',
                 gap: 5,
                 opacity: disabled ? 0.6 : 1,
-                borderWidth: 0.6,
+                borderWidth: variant === 'outline' ? 0.8 : 0.6,
+                borderColor: colorStyle.borderColor,
                 flexWrap: 'wrap',
                 width: computedWidth ?? "auto",
                 marginHorizontal: center ? "auto" : 0,

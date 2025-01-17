@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { StatusBar, View, type ViewProps, StatusBarProps } from 'react-native';
+import { StatusBar, View, type ViewProps, StatusBarProps, Appearance } from 'react-native';
 import { themeColors } from '../constants/Colors';
 import useTheme from '../hooks/useTheme';
 
@@ -14,14 +14,19 @@ const Statusbar = ({
     topPadding = 0,
     themeScheme,
     ...otherProps }: Props) => {
-    const { currentTheme, themeScheme: defaultThemeScheme, statusBarColor: variant } = useTheme();
+    const systemTheme = Appearance.getColorScheme() === "dark";
+    const {
+        currentTheme,
+        themeScheme: defaultThemeScheme,
+        statusBarColor: variant
+    } = useTheme();
 
     const barStyle = useMemo(() => {
         if (themeScheme) {
             return themeScheme === "dark" ? "light-content" : "dark-content";
         }
         return defaultThemeScheme === "dark" ? "light-content" : "dark-content";
-    }, [themeScheme, defaultThemeScheme])
+    }, [themeScheme, defaultThemeScheme]);
 
     const colorStyle = useMemo(() => {
         if (variant === 'default') {
@@ -60,10 +65,26 @@ const Statusbar = ({
         };
     }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
 
+    if (!currentTheme?.background) {
+        return (<>
+            <View style={{ paddingTop: topPadding }} {...viewProps} />
+            <StatusBar
+                {...otherProps}
+                animated
+                barStyle={systemTheme ? "light-content" : "light-content"}
+                backgroundColor={systemTheme ? "#000" : "#fff"}
+            />
+        </>)
+    }
+
     return (<>
         <View style={{ paddingTop: topPadding }} {...viewProps} />
-        <StatusBar barStyle={barStyle}
-            backgroundColor={colorStyle.backgroundColor} {...otherProps} />
+        <StatusBar
+            {...otherProps}
+            barStyle={barStyle}
+            animated
+            backgroundColor={colorStyle.backgroundColor}
+        />
     </>)
 }
 
