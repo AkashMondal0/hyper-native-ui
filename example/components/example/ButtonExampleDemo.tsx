@@ -10,7 +10,7 @@ export default function ButtonExampleDemo() {
   return (
     <ScrollView style={{
       flex: 1,
-      backgroundColor:currentTheme.background
+      backgroundColor: currentTheme.background
     }}>
       <View style={{
         justifyContent: 'center',
@@ -34,7 +34,7 @@ export default function ButtonExampleDemo() {
         }}>
           Current theme: {themeName}
         </Text>
-        <Button onPress={toggleTheme}>
+        <Button onPress={() => toggleTheme()}>
           {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
         </Button>
         <Button onPress={() => setLoading(!loading)}>

@@ -11,7 +11,7 @@ export default function TextExampleDemo() {
         <ScrollView style={{
             flex: 1,
             padding: 10,
-            backgroundColor:currentTheme.background
+            backgroundColor: currentTheme.background
         }}>
             <View style={{
                 justifyContent: 'center',
@@ -28,7 +28,7 @@ export default function TextExampleDemo() {
                 <View style={{
                     height: 30
                 }} />
-                <Button onPress={toggleTheme}>
+                <Button onPress={() => toggleTheme()}>
                     {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
                 </Button>
                 <Button onPress={() => setDisabled(!disabled)}>

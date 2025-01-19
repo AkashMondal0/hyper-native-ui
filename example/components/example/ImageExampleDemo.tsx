@@ -11,9 +11,9 @@ export default function ImageExampleDemo() {
   return (
     <ScrollView style={{
       flex: 1,
-      backgroundColor:currentTheme.background
+      backgroundColor: currentTheme.background
     }}>
-      <Button onPress={toggleTheme} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>
+      <Button onPress={() => toggleTheme()} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>
         {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
       </Button>
       <Button onPress={() => { setTouchable(!touchable) }} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>

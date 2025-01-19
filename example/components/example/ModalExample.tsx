@@ -3,13 +3,13 @@ import { ScrollView, View } from 'react-native';
 import { useTheme, Button, Text, Modal } from 'hyper-native-ui';
 
 export default function ModalExampleDemo() {
-    const { toggleTheme, themeScheme, themeName,currentTheme } = useTheme();
+    const { toggleTheme, themeScheme, themeName, currentTheme } = useTheme();
     const [visible, setVisible] = React.useState(false);
 
     return (
         <ScrollView style={{
             padding: 10,
-            backgroundColor:currentTheme.background
+            backgroundColor: currentTheme.background
         }}>
             <Button onPress={() => setVisible(true)} center>
                 Show Modal
@@ -31,7 +31,7 @@ export default function ModalExampleDemo() {
                     <View style={{
                         height: 30
                     }} />
-                    <Button onPress={toggleTheme}>
+                    <Button onPress={() => toggleTheme()}>
                         {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
                     </Button>
                     <Button onPress={() => setVisible(false)}>

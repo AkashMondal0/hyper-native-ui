@@ -11,9 +11,9 @@ export default function SwitchExampleDemo() {
         <ScrollView style={{
             flex: 1,
             padding: 10,
-            backgroundColor:currentTheme.background
+            backgroundColor: currentTheme.background
         }}>
-            <Button onPress={toggleTheme}>
+            <Button onPress={() => toggleTheme()}>
                 {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
             </Button>
             <Button onPress={() => setDisabled(!disabled)}>

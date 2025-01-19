@@ -95,12 +95,12 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 
     const toggleTheme = useCallback((themeSchema?: ThemeSchema) => {
         dispatch({ type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: { themeSchema } });
-    }, [state.themeName, state.systemTheme]);
+    }, []);
 
     const setSystemTheme = useCallback((systemTheme: boolean) => {
         const st = Appearance.getColorScheme() as ThemeSchema;
         dispatch({ type: 'SET_SYSTEM_THEME', payload: { systemTheme, themeSchema: st } });
-    }, [state.systemTheme]);
+    }, []);
 
     const changeTheme = useCallback((_themeName: ThemeName) => {
         dispatch({ type: 'CHANGE_THEME', payload: { themeName: _themeName } });

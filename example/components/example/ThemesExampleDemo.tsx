@@ -51,7 +51,7 @@ export default function ThemesExampleDemo() {
           </TouchableOpacity>
         })}
       </View>
-      <Button onPress={toggleTheme} width={"80%"} center>
+      <Button onPress={()=>toggleTheme()} width={"80%"} center>
         Toggle Mode
       </Button>
     </ScrollView>

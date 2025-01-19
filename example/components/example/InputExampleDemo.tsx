@@ -29,7 +29,7 @@ export default function InputExampleDemo() {
             }}>
                 Current theme: {themeName}
             </Text>
-            <Button onPress={toggleTheme} width={"80%"} center>
+            <Button onPress={() => toggleTheme()} width={"80%"} center>
                 {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
             </Button>
             <Button onPress={() => setDisabled(!disabled)} width={"80%"} center>

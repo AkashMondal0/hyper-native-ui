@@ -38,7 +38,7 @@ function ButtonExample() {
       justifyContent: "center",
       alignItems: "center"
     }}>
-      <Button onPress={toggleTheme}>
+      <Button onPress={()=>toggleTheme()}>
         This is a Button
       </Button>
     </View>
