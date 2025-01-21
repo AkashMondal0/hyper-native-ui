@@ -1,52 +1,26 @@
-import React, { ReactNode, useCallback, useEffect, useMemo, useReducer } from "react";
-import { ThemeName, ThemeColors, ThemeSchema, themeColors, StatusBarVariant } from "../constants/Colors";
-import ThemeContext from "../context/themeContext";
 import { Appearance } from "react-native";
-
-type ThemeAction = {
-    type: "TOGGLE_THEME_LIGHT_AND_DARK" | "SET_SYSTEM_THEME" | "SET_INITIAL_THEME" | "CHANGE_THEME" | "CHANGE_STATUSBAR_COLOR";
-    payload?: {
-        themeName?: ThemeName,
-        themeSchema?: ThemeSchema,
-        statusBarVariant?: StatusBarVariant,
-        systemTheme?: boolean
-    } | undefined,
-}
-
-type ThemeReducer = (state: ThemeState, action: ThemeAction) => ThemeState
-
-type ThemeState = {
-    theme: ThemeSchema,
-    systemTheme: boolean,
-    themeName: ThemeName,
-    statusBarColor: StatusBarVariant,
-    currentTheme: ThemeColors,
-}
-
-const initialTheme: ThemeState = {
-    theme: 'light',
-    systemTheme: false,
-    themeName: 'Zinc',
-    statusBarColor: 'default',
-    currentTheme: themeColors[0]['light']
-}
+import React, { ReactNode, useCallback, useEffect, useReducer } from "react";
+import StatusBar from "../components/StatusBar";
+import { ThemeName, ThemeSchema, themeColors, StatusBarVariant } from "../constants/Colors";
+import ThemeContext, { ThemeReducer } from "../context/themeContext";
 
 const themeReducer: ThemeReducer = (state, action) => {
     if (action.type === 'TOGGLE_THEME_LIGHT_AND_DARK') {
-        if (!action?.payload || !action.payload.themeSchema) {
-            const themeSchema = state.theme === 'light' ? 'dark' : 'light';
+        if (!action?.payload?.colorScheme) {
+            const themeSchema = state.colorScheme === "dark" ? "light" : "dark";
             return {
                 ...state,
-                theme: themeSchema,
+                colorScheme: themeSchema,
+                currentColorScheme: action?.payload?.currentColorScheme ?? state.currentColorScheme,
                 currentTheme: themeColors.find(theme => theme.name === state.themeName)![themeSchema],
             }
-        } else {
-            const themeSchema = action.payload.themeSchema;
-            return {
-                ...state,
-                theme: themeSchema,
-                currentTheme: themeColors.find(theme => theme.name === state.themeName)![themeSchema],
-            }
+        };
+        const themeSchema = action?.payload?.colorScheme;
+        return {
+            ...state,
+            colorScheme: themeSchema,
+            currentColorScheme: action?.payload?.currentColorScheme ?? state.currentColorScheme,
+            currentTheme: themeColors.find(theme => theme.name === state.themeName)![themeSchema],
         }
     }
     if (action.type === 'CHANGE_THEME') {
@@ -54,118 +28,84 @@ const themeReducer: ThemeReducer = (state, action) => {
         return {
             ...state,
             themeName: action.payload?.themeName ?? state.themeName,
-            currentTheme: themeColors.find(theme => theme.name === action.payload?.themeName)![state.theme],
-        }
-    }
-    if (action.type === 'SET_SYSTEM_THEME') {
-        if (!action?.payload || !action.payload.themeSchema) return state;
-        return {
-            ...state,
-            theme: action.payload.themeSchema ?? state.theme,
-            systemTheme: action.payload?.systemTheme ?? state.systemTheme,
-            currentTheme: themeColors.find(theme => theme.name === state.themeName)![action.payload.themeSchema],
-        }
-    }
-    if (action.type === 'SET_INITIAL_THEME') {
-        if (!action?.payload || !action?.payload?.themeSchema) return state;
-        return {
-            ...state,
-            theme: action?.payload.themeSchema,
-            themeName: action.payload.themeName ?? state.themeName,
-            systemTheme: action.payload.systemTheme ?? state.systemTheme,
-            currentTheme: themeColors.find(theme => theme.name === action.payload?.themeName)![action?.payload?.themeSchema],
+            currentTheme: themeColors.find(theme => theme.name === action.payload?.themeName)![state.colorScheme],
         }
     }
     if (action.type === 'CHANGE_STATUSBAR_COLOR') {
-        if (!action?.payload || !action.payload.statusBarVariant) return state;
+        if (!action?.payload?.statusBarColor) return state;
         return {
             ...state,
-            statusBarColor: action.payload.statusBarVariant,
+            statusBarColor: action?.payload?.statusBarColor,
         }
     }
     return state;
 }
 
-interface ThemeProviderProps {
-    children: ReactNode;
-}
+const ThemeProvider: React.FC<{
+    children: ReactNode,
+    initialScheme?: ThemeSchema,
+    themeName?: ThemeName,
+    enableThemedStatusBar?: boolean
+}> = ({
+    children,
+    initialScheme = "system",
+    themeName = "Grey",
+    enableThemedStatusBar = false
+}) => {
+        const appliedSchema = initialScheme === "system" ? Appearance.getColorScheme() as "dark" | "light" : initialScheme;
+        const [state, dispatch] = useReducer<ThemeReducer>(themeReducer, {
+            colorScheme: appliedSchema,
+            themeName: themeName,
+            statusBarColor: 'default',
+            currentColorScheme: initialScheme,
+            currentTheme: themeColors[0][appliedSchema]
+        });
 
-const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-    const [state, dispatch] = useReducer<ThemeReducer>(themeReducer, initialTheme);
+        const toggleTheme = useCallback((_themeSchema?: "dark" | "light") => {
+            dispatch({ type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: { colorScheme: _themeSchema } });
+        }, []);
 
-    const toggleTheme = useCallback((themeSchema?: ThemeSchema) => {
-        dispatch({ type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: { themeSchema } });
-    }, []);
+        const changeTheme = useCallback((_themeName: ThemeName) => {
+            dispatch({ type: 'CHANGE_THEME', payload: { themeName: _themeName } });
+        }, []);
 
-    const setSystemTheme = useCallback((systemTheme: boolean) => {
-        const st = Appearance.getColorScheme() as ThemeSchema;
-        dispatch({ type: 'SET_SYSTEM_THEME', payload: { systemTheme, themeSchema: st } });
-    }, []);
+        const changeStatusBarColor = useCallback((themeName: StatusBarVariant) => {
+            dispatch({ type: "CHANGE_STATUSBAR_COLOR", payload: { statusBarColor: themeName } });
+        }, []);
 
-    const changeTheme = useCallback((_themeName: ThemeName) => {
-        dispatch({ type: 'CHANGE_THEME', payload: { themeName: _themeName } });
-    }, []);
+        useEffect(() => {
+            const unSubscribe = Appearance.addChangeListener(({ colorScheme: cs }) => {
+                // console.log("colorScheme", cs)
+                if (state.currentColorScheme === "system") {
+                    dispatch({
+                        type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: {
+                            colorScheme: cs as any,
+                            currentColorScheme: 'system'
+                        }
+                    });
+                };
+            });
 
-    const changeStatusBarColor = useCallback((themeName: StatusBarVariant) => {
-        dispatch({ type: "CHANGE_STATUSBAR_COLOR", payload: { statusBarVariant: themeName } });
-    }, []);
+            return () => {
+                unSubscribe.remove();
+            };
+        }, [state.currentColorScheme]);
 
-    const setInitialTheme = useCallback(({ themeSchema, themeName }: { themeSchema: ThemeSchema | "system", themeName: ThemeName }) => {
-        if (themeSchema !== "system") {
-            dispatch({ type: 'SET_INITIAL_THEME', payload: { themeSchema, themeName, systemTheme: false } });
-            return;
-        }
-        const st = Appearance.getColorScheme() as ThemeSchema;
-        dispatch({ type: 'SET_INITIAL_THEME', payload: { themeSchema: st, themeName, systemTheme: true } });
-    }, []);
-
-    const navigationThemeValues = useMemo(() => {
-        return {
-            dark: state.theme === 'dark',
-            colors: {
-                primary: state.currentTheme.primary,
-                background: state.currentTheme.background,
-                card: state.currentTheme.card,
-                text: state.currentTheme.primary_foreground,
-                border: state.currentTheme.border,
-                notification: state.currentTheme.destructive,
-            },
-        };
-    }, [state.theme, state.currentTheme])
-
-    useEffect(() => {
-        const unSubscribe = Appearance.addChangeListener(({ colorScheme }) => {
-            if (state.systemTheme) {
-                dispatch({
-                    type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: {
-                        themeSchema: colorScheme as ThemeSchema
-                    }
-                });
-            }
-        })
-
-        return () => {
-            unSubscribe.remove()
-        }
-    }, [state.systemTheme])
-
-    return (
-        <ThemeContext.Provider value={{
-            currentTheme: state.currentTheme,
-            themeName: state.themeName,
-            themeScheme: state.theme,
-            systemTheme: state.systemTheme,
-            navigationThemeValues: navigationThemeValues,
-            toggleTheme,
-            changeTheme,
-            setInitialTheme,
-            setSystemTheme,
-            changeStatusBarColor,
-            statusBarColor: state.statusBarColor,
-        }}>
-            {children}
-        </ThemeContext.Provider>
-    )
-};
+        return (
+            <ThemeContext.Provider value={{
+                currentTheme: state.currentTheme,
+                themeName: state.themeName,
+                themeScheme: state.colorScheme,
+                currentColorScheme: state.currentColorScheme,
+                toggleTheme,
+                changeTheme,
+                changeStatusBarColor,
+                statusBarColor: state.statusBarColor,
+            }}>
+                {enableThemedStatusBar ? <StatusBar /> : <></>}
+                {children}
+            </ThemeContext.Provider>
+        )
+    };
 
 export default ThemeProvider;

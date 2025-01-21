@@ -1,6 +1,6 @@
 import React from 'react';
-import { ScrollView, TouchableOpacity } from 'react-native';
-import { Text, useTheme } from 'hyper-native-ui';
+import { Appearance, ScrollView, TouchableOpacity } from 'react-native';
+import { Button, Text, useTheme } from 'hyper-native-ui';
 import { useNavigation } from '@react-navigation/native';
 
 const routes = [
@@ -14,15 +14,23 @@ const routes = [
     "ModalExample",
     "StatusBarExample"
 ].sort()
-
 export default function ComponentList() {
     const navigation = useNavigation();
-    const { currentTheme } = useTheme();
+    const { currentTheme, toggleTheme, currentColorScheme } = useTheme();
     return (
         <ScrollView style={{
             padding: 20,
             backgroundColor: currentTheme.background
         }}>
+            <Button onPress={() => {
+
+            }}>
+                system {currentColorScheme}
+            </Button>
+            <Button onPress={() => { toggleTheme() }}>
+                toggle
+            </Button>
+
             <Text variant="H4" center bold="bold">Component List</Text>
             {routes.map((route, i) => {
                 return (

@@ -65,14 +65,13 @@ const Statusbar = ({
         };
     }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
 
-    if (!currentTheme?.background) {
+    if (currentTheme?.background) {
         return (<>
             <View style={{ paddingTop: topPadding }} {...viewProps} />
             <StatusBar
                 {...otherProps}
-                animated
-                barStyle={systemTheme ? "light-content" : "light-content"}
-                backgroundColor={systemTheme ? "#000" : "#fff"}
+                barStyle={barStyle}
+                backgroundColor={colorStyle.backgroundColor}
             />
         </>)
     }
@@ -81,9 +80,8 @@ const Statusbar = ({
         <View style={{ paddingTop: topPadding }} {...viewProps} />
         <StatusBar
             {...otherProps}
-            barStyle={barStyle}
-            animated
-            backgroundColor={colorStyle.backgroundColor}
+            barStyle={systemTheme ? "light-content" : "dark-content"}
+            backgroundColor={systemTheme ? "#000" : "#fff"}
         />
     </>)
 }

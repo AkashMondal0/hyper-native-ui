@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import { createStaticNavigation, DefaultTheme, useNavigation } from "@react-navigation/native";
+import { createStaticNavigation, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar, ThemeProvider, useTheme, Text, Button } from 'hyper-native-ui';
 import { useSafeAreaInsets, SafeAreaProvider } from 'react-native-safe-area-context';
