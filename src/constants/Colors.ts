@@ -1,4 +1,4 @@
-export type ThemeSchema = "light" | "dark";
+export type ThemeSchema = "light" | "dark" | "system";
 export type ThemeName = "Zinc" | "State" | "Stone" | "Grey" | "Neutral" | "Red" | "Rose" | "Orange" | "Yellow" | "Green";
 export type StatusBarVariant = "default" | "secondary" | "danger" | "warning" | "success" | "outline" | ThemeName;
 export type ThemeColors = {
