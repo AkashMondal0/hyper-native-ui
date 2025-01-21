@@ -13,6 +13,7 @@ const useTheme = (): ThemeHook => {
         changeStatusBarColor: themeContext!.changeStatusBarColor,
         statusBarColor: themeContext!.statusBarColor,
         currentColorScheme: themeContext!.currentColorScheme,
+        initialTheme: themeContext!.initialTheme,
     };
 };
 

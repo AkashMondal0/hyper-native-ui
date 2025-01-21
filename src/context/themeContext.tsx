@@ -9,7 +9,7 @@ export type ThemeState = {
 }
 
 export type ThemeAction = {
-    type: "TOGGLE_THEME_LIGHT_AND_DARK" | "SET_SYSTEM_THEME" | "SET_INITIAL_THEME" | "CHANGE_THEME" | "CHANGE_STATUSBAR_COLOR";
+    type: "TOGGLE_THEME_LIGHT_AND_DARK" | "SET_INITIAL_THEME" | "CHANGE_THEME" | "CHANGE_STATUSBAR_COLOR";
     payload?: {
         colorScheme?: "light" | "dark",
         currentColorScheme?: ThemeSchema,
@@ -25,9 +25,13 @@ export interface ThemeHook {
     currentColorScheme: ThemeSchema,
     themeName: ThemeName,
     currentTheme: ThemeColors,
-    toggleTheme: (themeSchema?: "light" | "dark") => void,
+    toggleTheme: (themeSchema?: ThemeSchema) => void,
     changeTheme: (themeName: ThemeName) => void,
     changeStatusBarColor: (themeName: StatusBarVariant) => void,
+    initialTheme: (values: {
+        colorScheme?: ThemeSchema,
+        themeName?: ThemeName,
+    }) => void,
     statusBarColor: StatusBarVariant
 }
 const ThemeContext = createContext<ThemeHook | undefined>(undefined);

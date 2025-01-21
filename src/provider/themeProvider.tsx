@@ -11,7 +11,7 @@ const themeReducer: ThemeReducer = (state, action) => {
             return {
                 ...state,
                 colorScheme: themeSchema,
-                currentColorScheme: action?.payload?.currentColorScheme ?? state.currentColorScheme,
+                currentColorScheme: action?.payload?.currentColorScheme || state.currentColorScheme,
                 currentTheme: themeColors.find(theme => theme.name === state.themeName)![themeSchema],
             }
         };
@@ -19,7 +19,7 @@ const themeReducer: ThemeReducer = (state, action) => {
         return {
             ...state,
             colorScheme: themeSchema,
-            currentColorScheme: action?.payload?.currentColorScheme ?? state.currentColorScheme,
+            currentColorScheme: action?.payload?.currentColorScheme || state.currentColorScheme,
             currentTheme: themeColors.find(theme => theme.name === state.themeName)![themeSchema],
         }
     }
@@ -27,8 +27,19 @@ const themeReducer: ThemeReducer = (state, action) => {
         if (!action?.payload || !action.payload?.themeName) return state;
         return {
             ...state,
-            themeName: action.payload?.themeName ?? state.themeName,
+            themeName: action.payload?.themeName || state.themeName,
             currentTheme: themeColors.find(theme => theme.name === action.payload?.themeName)![state.colorScheme],
+        }
+    }
+    if (action.type === 'SET_INITIAL_THEME') {
+        if (!action?.payload) return state;
+        return {
+            ...state,
+            themeName: action.payload?.themeName || state.themeName,
+            colorScheme: action.payload?.colorScheme || state.colorScheme,
+            currentColorScheme: action.payload?.currentColorScheme || state.currentColorScheme,
+            statusBarColor: action.payload?.statusBarColor || state.statusBarColor,
+            currentTheme: themeColors.find(theme => theme.name === action.payload?.themeName)![action.payload?.colorScheme || state.colorScheme],
         }
     }
     if (action.type === 'CHANGE_STATUSBAR_COLOR') {
@@ -61,8 +72,22 @@ const ThemeProvider: React.FC<{
             currentTheme: themeColors[0][appliedSchema]
         });
 
-        const toggleTheme = useCallback((_themeSchema?: "dark" | "light") => {
-            dispatch({ type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: { colorScheme: _themeSchema } });
+        const toggleTheme = useCallback((_themeSchema?: ThemeSchema) => {
+            if (_themeSchema == "system") {
+                dispatch({
+                    type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: {
+                        currentColorScheme: "system",
+                        colorScheme: Appearance.getColorScheme() as any
+                    }
+                });
+                return
+            }
+            dispatch({
+                type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: {
+                    colorScheme: _themeSchema,
+                    currentColorScheme: _themeSchema
+                }
+            });
         }, []);
 
         const changeTheme = useCallback((_themeName: ThemeName) => {
@@ -71,6 +96,32 @@ const ThemeProvider: React.FC<{
 
         const changeStatusBarColor = useCallback((themeName: StatusBarVariant) => {
             dispatch({ type: "CHANGE_STATUSBAR_COLOR", payload: { statusBarColor: themeName } });
+        }, []);
+
+        const initialTheme = useCallback(({
+            colorScheme,
+            themeName
+        }: {
+            colorScheme?: ThemeSchema,
+            themeName?: ThemeName,
+        }) => {
+            if (colorScheme === "system") {
+                dispatch({
+                    type: 'SET_INITIAL_THEME', payload: {
+                        currentColorScheme: "system",
+                        colorScheme: Appearance.getColorScheme() as any,
+                        themeName: themeName || "Zinc"
+                    }
+                });
+            } else {
+                dispatch({
+                    type: 'SET_INITIAL_THEME', payload: {
+                        currentColorScheme: colorScheme || "system",
+                        colorScheme: colorScheme || Appearance.getColorScheme() as any,
+                        themeName: themeName || "Zinc"
+                    }
+                });
+            }
         }, []);
 
         useEffect(() => {
@@ -100,6 +151,7 @@ const ThemeProvider: React.FC<{
                 toggleTheme,
                 changeTheme,
                 changeStatusBarColor,
+                initialTheme,
                 statusBarColor: state.statusBarColor,
             }}>
                 {enableThemedStatusBar ? <StatusBar /> : <></>}
