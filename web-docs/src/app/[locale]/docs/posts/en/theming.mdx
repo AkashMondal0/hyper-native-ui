@@ -1,73 +1,53 @@
 ---
 title: "Theming"
 publishedAt: "2024-12-17"
-# image: "/images/gallery/img-02.jpg"
-summary: "Open a Terminal in your project's folder and run"
-tag: "Android IOS Web"
+summary: "Guide to implementing theming in your React Native application."
+tag: "React Native"
 ---
+
 ## Installation
 
 * Open a Terminal in your project's folder and run:
 
-<CodeBlock className="my-24"
+<CodeBlock className="my-24" 
     compact
-    codeInstances={[
-        {
-            code: 'npm install hyper-native-ui',
-            label: 'React Native',
-            language: 'bash'
-        },
-    ]}
+    codeInstances={[{
+        code: 'npm install hyper-native-ui',
+        label: 'React Native',
+        language: 'bash'
+    }]}
     copyButton
 />
-## Provider
 
-You can provide a custom theme to customize the colors, typescales etc. with the `Provider` component.
+## Theme Provider
 
-<CodeBlock className="my-24"
+The `ThemeProvider` component manages theming across your app, allowing you to toggle themes, change theme colors, and manage system-based theming. Below is the updated API and implementation guide.
+
+### Usage
+
+Wrap your app with the `ThemeProvider` component:
+
+<CodeBlock className="my-24" 
     compact
-    codeInstances={[
-        {
-            code: `import React from 'react';
-import { View } from 'react-native';
-import { useTheme, Button, ThemeProvider } from 'hyper-native-ui';
+    codeInstances={[{
+        code: `
+import React from 'react';
+import { ThemeProvider } from 'hyper-native-ui';
 
-export default function App() {
-  return (
-  <ThemeProvider>
-    <ButtonExample/>
+const App = () => (
+  <ThemeProvider initialScheme="system" themeName="Grey" enableThemedStatusBar>
+    {/* Your application components */}
   </ThemeProvider>
-  );
-}`,
-            label: 'React Native',
-            language: 'tsx'
-        },
-    ]}
+);
+
+export default App;
+`,
+        label: 'React Native',
+        language: 'tsx'
+    }]}
     copyButton
 />
 
-## Usage
-
-The `ButtonExample` function is a React Native component that demonstrates the usage of a button to toggle between themes (e.g., light and dark modes) in an application.
-### **Expo Example Usage:**
-<div 
-data-snack-id="@akashmondal0/theming-hyper-native-ui" 
-data-snack-platform="web" 
-data-snack-preview="true" 
-data-snack-theme="dark" 
-style={{
-  "overflow":"hidden",
-  "background":"#0C0D0E",
-  "border":"1px solid var(--color-border)",
-  "borderRadius":"4px",
-  "height":"505px",
-  "width":"100%"
-}}></div>
-<script async src="https://snack.expo.dev/embed.js"></script>
-
-
-### **Purpose**  
-This component provides an interactive button that switches the app's theme when pressed. It leverages the `useTheme` custom hook to retrieve the current theme and toggle it dynamically.
 
 ### **Code Example**
 
@@ -97,3 +77,52 @@ This component provides an interactive button that switches the app's theme when
     ]}
     copyButton
 />
+
+### **Expo Demo:**
+<div 
+data-snack-id="@akashmondal0/theming-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+### Props
+- **`children`** (`ReactNode`): The child components wrapped by the provider. Default is `undefined`.
+- **`initialScheme`** (`"light" | "dark" | "system"`): The initial color scheme to apply. Default is `"system"`.
+- **`themeName`** (`string`): The initial theme name to use. Default is `"Grey"`.
+- **`enableThemedStatusBar`** (`boolean`): Whether to enable dynamic status bar theming. Default is `false`.
+
+### Context API
+
+The `ThemeContext` provides the following methods and properties for managing themes:
+
+#### Properties
+
+- `currentTheme`: The current theme object based on the `themeName` and `colorScheme`.
+- `themeName`: The name of the active theme.
+- `themeScheme`: The active theme scheme (`"light"` or `"dark"`).
+- `currentColorScheme`: Reflects whether the theme follows the system (`"system"`), light, or dark.
+- `statusBarColor`: The current status bar color.
+
+#### useTheme Hook Methods
+
+- `toggleTheme(themeSchema?: "light" | "dark" | "system")`
+  - Dynamically toggles the theme scheme.
+  - Pass `"system"` to follow the system preference.
+
+- `changeTheme(themeName: string)`
+  - Updates the theme name while maintaining the current color scheme.
+
+- `changeStatusBarColor(statusBarColor: string)`
+  - Changes the status bar color.
+
+- `initialTheme({ colorScheme, themeName })`
+  - Sets the initial theme configuration during app startup.

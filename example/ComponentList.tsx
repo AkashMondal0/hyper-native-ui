@@ -1,5 +1,5 @@
 import React from 'react';
-import { Appearance, ScrollView, TouchableOpacity } from 'react-native';
+import { ScrollView, TouchableOpacity } from 'react-native';
 import { Button, Text, useTheme } from 'hyper-native-ui';
 import { useNavigation } from '@react-navigation/native';
 
@@ -12,7 +12,8 @@ const routes = [
     "CheckboxExample",
     "ImageExample",
     "ModalExample",
-    "StatusBarExample"
+    "StatusBarExample",
+    "DropdownMenuExample"
 ].sort()
 export default function ComponentList() {
     const navigation = useNavigation();

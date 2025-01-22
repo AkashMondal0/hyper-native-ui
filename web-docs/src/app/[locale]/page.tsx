@@ -118,6 +118,24 @@ export default function Home(
 			<RevealFx translateY="16" delay={0.6}>
 				<Projects range={[1, 1]} locale={locale} />
 			</RevealFx>
+			<Heading
+				as="h2"
+				variant="display-strong-xs"
+				wrap="balance">
+				Example Expo App
+			</Heading>
+			<div data-snack-id="@akashmondal0/example-app-hyper-native-ui"
+				data-snack-platform="web" data-snack-preview="true"
+				data-snack-theme="dark"
+				style={{
+					overflow: 'hidden',
+					background: '#0C0D0E',
+					border: '1px solid var(--color-border)',
+					borderRadius: '4px',
+					height: '505px',
+					width: '80%',
+				}}></div>
+			<script async src="https://snack.expo.dev/embed.js"></script>
 			{routes['/docs'] && (
 				<Flex
 					fillWidth gap="24"
@@ -132,7 +150,7 @@ export default function Home(
 					</Flex>
 					<Flex
 						flex={3} paddingX="20">
-						<Posts range={[4, 6]} columns="2" locale={locale} />
+						<Posts range={[8, 10]} columns="2" locale={locale} />
 					</Flex>
 				</Flex>
 			)}

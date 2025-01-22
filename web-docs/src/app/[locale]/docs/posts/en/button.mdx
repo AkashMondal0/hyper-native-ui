@@ -8,7 +8,10 @@ tag: "Android IOS Web"
 
 The `Button` component is a versatile, theme-aware button for React Native applications. It supports various styles, sizes, states, and customization options such as loading indicators, icons, and theming.
 
-Import Component
+## Installation
+
+* Open a Terminal in your project's folder and run:
+
 
 <CodeBlock className="my-24"
     compact
@@ -21,7 +24,7 @@ Import Component
     ]}
     copyButton
 />
-Usage Component
+### Usage Component
 
 <CodeBlock className="my-24"
     compact
@@ -51,95 +54,7 @@ style={{
 }}></div>
 <script async src="https://snack.expo.dev/embed.js"></script>
 
-### **Props**
-
-The `Button` component accepts the following props:
-
-- **`themeScheme`**  
-  Sets the theme scheme explicitly. Can be one of `"light"` or `"dark"`.  
-  **Type**: `"light" | "dark"`  
-  **Default**: Inherited theme  
-
-- **`children`**  
-  Content of the button. Can be a `string` or any `React.ReactNode`.  
-  **Type**: `string | React.ReactNode`  
-  **Default**: `"Button"`  
-
-- **`textStyle`**  
-  Custom styles for the button text.  
-  **Type**: `TextProps["style"]`  
-  **Default**: `undefined`  
-
-- **`textTextProps`**  
-  Additional props for the `Text` component.  
-  **Type**: `TextProps`  
-  **Default**: `undefined`  
-
-- **`loadingStyle`**  
-  Custom styles for the loading spinner.  
-  **Type**: `ActivityIndicatorProps["style"]`  
-  **Default**: `undefined`  
-
-- **`loadingProps`**  
-  Additional props for the loading spinner.  
-  **Type**: `ActivityIndicatorProps`  
-  **Default**: `undefined`  
-
-- **`size`**  
-  Defines the size of the button. Can be one of `"small"`, `"medium"`, `"large"`, or `"extraLarge"`.  
-  **Type**: `"small" | "medium" | "large" | "extraLarge"`  
-  **Default**: `"medium"`  
-
-- **`icon`**  
-  Adds an optional icon to the button.  
-  **Type**: `React.ReactNode`  
-  **Default**: `undefined`  
-
-- **`loading`**  
-  When `true`, shows a loading spinner and disables interaction.  
-  **Type**: `boolean`  
-  **Default**: `false`  
-
-- **`disableMemo`**  
-  Disables memoization of the component for debugging purposes.  
-  **Type**: `boolean`  
-  **Default**: `false`  
-
-- **`variant`**  
-  Controls the button style variant. Can be one of `"default"`, `"secondary"`, `"danger"`, `"warning"`, `"success"`, `"outline"`, or a custom `ThemeName`.  
-  **Type**: `"default" | "secondary" | "danger" | "warning" | "success" | "outline" | ThemeName`  
-  **Default**: `"default"`  
-
-- **`style`**  
-  Custom styles for the button container.  
-  **Type**: `TouchableOpacityProps["style"]`  
-  **Default**: `undefined`  
-
-- **`disabled`**  
-  Disables the button interaction and applies a reduced opacity.  
-  **Type**: `boolean`  
-  **Default**: `false`  
-
-- **`...otherProps`**  
-  Additional props forwarded to the `TouchableOpacity` component.  
-  **Type**: `TouchableOpacityProps`  
-  **Default**: `undefined`  
-
-
-
-### **Variants**
-
-The `variant` prop controls the button's color scheme and styling. It supports the following predefined values:
-
-- **`default`**: Uses the primary theme color.
-- **`secondary`**: Uses the secondary theme color.
-- **`danger`**: A red variant for destructive actions.
-- **`warning`**: A yellow variant for warnings.
-- **`success`**: A green variant for success actions.
-- **`outline`**: A transparent background with a border matching the theme color.
-- **Custom**: Pass a `ThemeName` for custom theming.
-
-Example usage:
+### Example usage:
 <CodeBlock className="my-24"
     compact
     codeInstances={[
@@ -165,7 +80,7 @@ The `size` prop controls the padding and text size of the button. Available opti
 - **`large`**: Larger button with increased padding.
 - **`extraLarge`**: Extra-large button with more padding.
 
-Example usage:
+### Example usage:
 <CodeBlock className="my-24"
     compact
     codeInstances={[
@@ -330,281 +245,90 @@ You can override styles for the button container and text:
 - **React Native**: Base components like `TouchableOpacity`, `Text`, and `ActivityIndicator`.
 - **`useTheme` Hook**: Required to manage the theme and colors.
 
-## Component Code
+### **Props**
 
-<CodeBlock className="my-24"
-    compact
-    codeInstances={[
-        {
-            code: `import {
-    Text,
-    TouchableOpacity,
-    ActivityIndicator,
-    type TextProps,
-    type TouchableOpacityProps,
-    type ActivityIndicatorProps
-} from 'react-native';
-import React, { memo } from 'react';
-import useTheme from '../hooks/useTheme';
-import { componentVariant, themeColors, } from '../constants/Colors';
+The `Button` component accepts the following props:
 
-export type Props = TouchableOpacityProps & {
-    themeScheme?: "light" | "dark";
-    children?: string | React.ReactNode;
-    textStyle?: TextProps["style"];
-    textTextProps?: TextProps;
-    loadingStyle?: ActivityIndicatorProps["style"];
-    loadingProps?: ActivityIndicatorProps;
-    size?: "small" | "medium" | "large" | "extraLarge";
-    icon?: React.ReactNode;
-    loading?: boolean;
-    disableMemo?: boolean;
-    variant?: componentVariant;
-};
+- **`themeScheme`**  
+  Sets the theme scheme explicitly. Can be one of `"light"` or `"dark"`.  
+  **Type**: `"light" | "dark"`  
+  **Default**: Inherited theme  
 
-const Button = memo(function Button({
-    children = "Button",
-    style,
-    themeScheme,
-    textStyle,
-    loadingStyle,
-    loadingProps,
-    textTextProps,
-    variant = "default",
-    size = "medium",
-    icon = undefined,
-    loading = false,
-    disabled = false,
-    // disableMemo is used to disable memoization of the component
-    disableMemo = false,
-    ...otherProps }: Props) {
-    const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
+- **`children`**  
+  Content of the button. Can be a `string` or any `React.ReactNode`.  
+  **Type**: `string | React.ReactNode`  
+  **Default**: `"Button"`  
 
-    const colorVariant = () => {
-        switch (variant) {
-            case "outline":
-                return {
-                    backgroundColor: currentTheme.secondary,
-                    color: currentTheme.secondary_foreground,
-                    borderColor: currentTheme.secondary_foreground
-                }
-            case "secondary":
-                return {
-                    backgroundColor: currentTheme.secondary,
-                    color: currentTheme.secondary_foreground,
-                    borderColor: currentTheme.secondary
-                }
-            case "danger":
-                return {
-                    backgroundColor: currentTheme.destructive,
-                    color: currentTheme.destructive_foreground,
-                    borderColor: currentTheme.destructive
-                }
-            case "warning":
-                return {
-                    backgroundColor: "hsl(47.9 95.8% 53.1%)",
-                    color: "hsl(26 83.3% 14.1%)",
-                    borderColor: "hsl(47.9 95.8% 53.1%)"
-                }
-            case "success":
-                return {
-                    backgroundColor: "hsl(142.1 76.2% 36.3%)",
-                    color: "hsl(355.7 100% 97.3%)",
-                    borderColor: "hsl(142.1 76.2% 36.3%)"
-                }
-            case "default":
-                return {
-                    backgroundColor: currentTheme.primary,
-                    color: currentTheme.primary_foreground,
-                    borderColor: currentTheme.border,
-                }
-            default:
-                const theme = themeColors.find((theme) => theme.name === variant)![themeScheme ?? defaultThemeScheme]
-                if (theme) {
-                    return {
-                        backgroundColor: theme.primary,
-                        color: theme.primary_foreground,
-                        borderColor: theme.border,
-                    }
-                }
-                return {
-                    backgroundColor: currentTheme.primary,
-                    color: currentTheme.primary_foreground,
-                    borderColor: currentTheme.border,
-                }
+- **`textStyle`**  
+  Custom styles for the button text.  
+  **Type**: `TextProps["style"]`  
+  **Default**: `undefined`  
 
-        }
-    }
+- **`textTextProps`**  
+  Additional props for the `Text` component.  
+  **Type**: `TextProps`  
+  **Default**: `undefined`  
 
-    const sizeVariant = () => {
-        switch (size) {
-            case "medium":
-                return {
-                    paddingVertical: 10,
-                    paddingHorizontal: 24,
-                    borderRadius: 12
-                }
-            case "large":
-                return {
-                    paddingVertical: 10,
-                    paddingHorizontal: 42,
-                    borderRadius: 14,
-                }
-            case "extraLarge":
-                return {
-                    paddingVertical: 10,
-                    paddingHorizontal: 50,
-                    borderRadius: 12,
-                }
-            default:
-                return {
-                    paddingVertical: 10,
-                    paddingHorizontal: 18,
-                    borderRadius: 12,
-                }
-        }
-    }
+- **`loadingStyle`**  
+  Custom styles for the loading spinner.  
+  **Type**: `ActivityIndicatorProps["style"]`  
+  **Default**: `undefined`  
 
-    const textStyleVariant = () => {
-        switch (size) {
-            case "medium":
-                return {
-                    fontSize: 14,
-                }
-            case "large":
-                return {
-                    fontSize: 16
-                }
-            case "extraLarge":
-                return {
-                    fontSize: 18
-                }
-            default:
-                return {
-                    fontSize: 14
-                }
-        }
-    }
+- **`loadingProps`**  
+  Additional props for the loading spinner.  
+  **Type**: `ActivityIndicatorProps`  
+  **Default**: `undefined`  
 
-    const buttonStyle = {
-        ...colorVariant(),
-        ...sizeVariant(),
-    };
+- **`size`**  
+  Defines the size of the button. Can be one of `"small"`, `"medium"`, `"large"`, or `"extraLarge"`.  
+  **Type**: `"small" | "medium" | "large" | "extraLarge"`  
+  **Default**: `"medium"`  
 
-    if (!currentTheme) return <></>
+- **`icon`**  
+  Adds an optional icon to the button.  
+  **Type**: `React.ReactNode`  
+  **Default**: `undefined`  
 
-    return (
-        <TouchableOpacity
-            activeOpacity={0.6}
-            disabled={disabled}
-            style={[{
-                alignItems: 'center',
-                justifyContent: 'center',
-                elevation: 0.4,
-                flexDirection: 'row',
-                gap: 5,
-                opacity: disabled ? 0.6 : 1,
-                borderWidth: 0.6,
-                flexWrap: 'wrap',
-            },
-                style,
-                buttonStyle,
-            ]}
-            {...otherProps}>
-            <ButtonContent children={children}
-                textStyle={[textStyle, textStyleVariant()]}
-                icon={icon}
-                textTextProps={textTextProps}
-                loadingStyle={loadingStyle}
-                loadingProps={loadingProps}
-                loading={loading}
-                buttonStyle={buttonStyle} />
-        </TouchableOpacity>
-    )
-})
+- **`loading`**  
+  When `true`, shows a loading spinner and disables interaction.  
+  **Type**: `boolean`  
+  **Default**: `false`  
 
-export default Button
+- **`disableMemo`**  
+  Disables memoization of the component for debugging purposes.  
+  **Type**: `boolean`  
+  **Default**: `false`  
 
-const ButtonContent = ({
-    children,
-    textStyle,
-    icon,
-    loading,
-    buttonStyle,
-    loadingStyle,
-    loadingProps,
-    textTextProps
-}: {
-    children: string | React.ReactNode,
-    icon: React.ReactNode,
-    loading: boolean,
-    textTextProps?: TextProps,
-    textStyle: TextProps["style"],
-    loadingProps?: ActivityIndicatorProps,
-    loadingStyle: ActivityIndicatorProps["style"],
-    buttonStyle: {
-        backgroundColor: string,
-        color: string,
-        borderColor: string,
-        paddingVertical: number,
-        paddingHorizontal: number,
-        borderRadius: number
-    }
-}) => {
-    if (loading) return <ActivityIndicator color={buttonStyle.color} style={[loadingStyle]} {...loadingProps} />
+- **`variant`**  
+  Controls the button style variant. Can be one of `"default"`, `"secondary"`, `"danger"`, `"warning"`, `"success"`, `"outline"`, or a custom `ThemeName`.  
+  **Type**: `"default" | "secondary" | "danger" | "warning" | "success" | "outline" | ThemeName`  
+  **Default**: `"default"`  
 
-    if (typeof children === "string") {
-        return <>
-            {icon ? icon : <></>}
-            <Text
-                {...textTextProps}
-                numberOfLines={1}
-                style={[{
-                    color: buttonStyle.color,
-                    textAlign: 'center',
-                    textAlignVertical: 'center',
-                    fontSize: 16,
-                    fontWeight: "700",
-                }, textStyle]}>
-                {children}
-            </Text>
-        </>
-    }
+- **`style`**  
+  Custom styles for the button container.  
+  **Type**: `TouchableOpacityProps["style"]`  
+  **Default**: `undefined`  
 
-    else if (typeof children === "object") {
-        //@ts-ignore
-        return children.map((child, index) => {
-            if (typeof child === "string") {
-                return <Text key={index} style={[{
-                    color: buttonStyle.color,
-                    textAlign: 'center',
-                    textAlignVertical: 'center',
-                    fontSize: 16,
-                    fontWeight: "700",
-                }, textStyle]}>
-                    {child}
-                </Text>
-            }
-            else {
-                return child
-            }
-        })
-    }
-    return (
-        <>
-            {children}
-        </>
-    )
-}`,
-            label: 'React Native',
-            language: 'tsx'
-        },
-    ]}
-    copyButton
-/>
+- **`disabled`**  
+  Disables the button interaction and applies a reduced opacity.  
+  **Type**: `boolean`  
+  **Default**: `false`  
 
----
+- **`...otherProps`**  
+  Additional props forwarded to the `TouchableOpacity` component.  
+  **Type**: `TouchableOpacityProps`  
+  **Default**: `undefined`  
 
-### **Conclusion**
 
-The `Button` component is a flexible and theme-aware component for React Native applications. It supports sizes, variants, loading states, and icons while ensuring a consistent and customizable design experience.
+
+### **Variants**
+
+The `variant` prop controls the button's color scheme and styling. It supports the following predefined values:
+
+- **`default`**: Uses the primary theme color.
+- **`secondary`**: Uses the secondary theme color.
+- **`danger`**: A red variant for destructive actions.
+- **`warning`**: A yellow variant for warnings.
+- **`success`**: A green variant for success actions.
+- **`outline`**: A transparent background with a border matching the theme color.
+- **Custom**: Pass a `ThemeName` for custom theming.

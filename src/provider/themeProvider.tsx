@@ -73,6 +73,14 @@ const ThemeProvider: React.FC<{
         });
 
         const toggleTheme = useCallback((_themeSchema?: ThemeSchema) => {
+            if (!_themeSchema) {
+                dispatch({ type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: {} });
+                return;
+            }
+            if (typeof _themeSchema !== "string" || !["dark", "light", "system"].includes(_themeSchema)) {
+                console.error("Invalid theme schema");
+                return;
+            }
             if (_themeSchema == "system") {
                 dispatch({
                     type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: {
@@ -80,7 +88,7 @@ const ThemeProvider: React.FC<{
                         colorScheme: Appearance.getColorScheme() as any
                     }
                 });
-                return
+                return;
             }
             dispatch({
                 type: 'TOGGLE_THEME_LIGHT_AND_DARK', payload: {
@@ -88,6 +96,7 @@ const ThemeProvider: React.FC<{
                     currentColorScheme: _themeSchema
                 }
             });
+            return;
         }, []);
 
         const changeTheme = useCallback((_themeName: ThemeName) => {

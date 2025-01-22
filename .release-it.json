@@ -1,12 +1,12 @@
 {
   "npm": {
-    "publish": true
+    "publish": false
   },
   "git": {
     "commitMessage": "chore: release ${version}",
     "requireBranch": "main",
     "tagName": "v${version}",
-    "push": true
+    "push": false
   },
   "github": {
     "release": false

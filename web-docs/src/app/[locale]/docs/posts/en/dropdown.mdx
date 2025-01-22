@@ -1,0 +1,116 @@
+---
+title: "DropDown"
+publishedAt: "2025-01-23"
+# image: "/images/gallery/img-02.jpg"
+summary: "Open a Terminal in your project's folder and run"
+tag: "Android IOS Web"
+---
+
+The `Dropdown` component is a customizable and animated dropdown menu built with React Native and Reanimated. It allows users to select an item from a list with smooth animation effects and theming support.
+
+## Installation
+
+* Open a Terminal in your project's folder and run:
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { Dropdown } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+### Required Props
+
+None of the props are strictly required as defaults are provided.
+
+### Basic Dropdown
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Dropdown } from 'hyper-native-ui';
+
+const App = () => {
+    const [selected, setSelected] = useState(null);
+
+    const items = [
+        { label: 'Option 1', value: 1 },
+        { label: 'Option 2', value: 2 },
+        { label: 'Option 3', value: 3 },
+    ];
+
+    return (
+        <View style={styles.container}>
+            <Dropdown
+                data={items}
+                onSelect={(item) => setSelected(item)}
+            />
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
+
+export default App;`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/dropdown-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+### Optional Props
+
+- **`data`** (`DropdownItem[]`, default: `[]`): Array of dropdown items where each item is an object with `label` and `value`.
+- **`placeholder`** (`string`, default: `"Select an option"`): Placeholder text displayed when no item is selected.
+- **`onSelect`** (`(item: DropdownItem) => void`, default: `undefined`): Callback function invoked when an item is selected.
+- **`dropdownStyle`** (`ViewStyle`, default: `{}`): Custom styles for the dropdown container.
+- **`itemStyle`** (`ViewStyle`, default: `{}`): Custom styles for each dropdown item.
+- **`itemTextStyle`** (`TextStyle`, default: `{}`): Custom styles for the text inside each dropdown item.
+- **`dropdownAnimationDuration`** (`number`, default: `300`): Duration of the dropdown expand/collapse animation in milliseconds.
+
+## Behavior
+
+1. **Dropdown Animation**:
+   - Uses `react-native-reanimated` for smooth height-based animations.
+   - The dropdown expands and collapses with customizable animation duration.
+
+2. **Dynamic Selection**:
+   - Displays a placeholder text until an item is selected.
+   - Updates the displayed text upon item selection.
+
+3. **Customization**:
+   - Customizable dropdown styles, item styles, and text styles.
+   - Supports themes via the `useTheme` hook.
+
+4. **Accessibility**:
+   - Automatically adjusts the list's height and visibility for a smooth user experience.

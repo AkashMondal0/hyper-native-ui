@@ -27,6 +27,8 @@ export { default as Modal } from "./components/Modal";
 export { default as Switch } from "./components/Switch";
 export { default as ThemedView } from "./components/View";
 export { default as Text } from "./components/Text";
+export { default as Dropdown } from "./components/Dropdown";
+
 
 export type {
     Theme as ThemeType,
