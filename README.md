@@ -1,4 +1,4 @@
-# React Native Ui Library
+# React Native Components Library
 <p align="center">
      <img src="https://raw.githubusercontent.com/AkashMondal0/hyper-native-ui/refs/heads/main/icon.png" height="250px" style="display:block"/>
 </p>

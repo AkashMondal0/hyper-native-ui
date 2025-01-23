@@ -1,5 +1,5 @@
 import React, { ReactNode, useRef, useState } from 'react';
-import { View, Dimensions, Image, ViewStyle, ImageProps, Button } from 'react-native';
+import { View, Dimensions, Image, ViewStyle, ImageProps, Text, Button } from 'react-native';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
@@ -7,7 +7,7 @@ import Animated, {
     interpolate,
     Extrapolate,
 } from 'react-native-reanimated';
-// import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import TriggerComponent from './TriggerComponent';
 
 const {

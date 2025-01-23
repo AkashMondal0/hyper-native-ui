@@ -3,7 +3,7 @@ import React from 'react';
 import { useTheme, themeColors, Button } from 'hyper-native-ui';
 
 export default function ThemesExampleDemo() {
-  const { currentTheme, changeTheme, toggleTheme } = useTheme();
+  const { currentTheme, changeTheme, toggleTheme, currentColorScheme } = useTheme();
 
   return (
     <ScrollView style={{
@@ -13,14 +13,20 @@ export default function ThemesExampleDemo() {
       <Text style={{
         color: currentTheme.foreground,
         fontSize: 24,
-        marginBottom: 10,
         textAlign: 'center',
-        padding: 20,
+        padding: 10,
         fontWeight: 'bold',
       }}>
         Themes Example Demo
       </Text>
-
+      <Text style={{
+        color: currentTheme.foreground,
+        textAlign: 'center',
+        padding: 10,
+        fontWeight: 'bold',
+      }}>
+        {currentColorScheme}
+      </Text>
       <View style={{
         display: 'flex',
         flexDirection: 'row',
@@ -51,8 +57,14 @@ export default function ThemesExampleDemo() {
           </TouchableOpacity>
         })}
       </View>
-      <Button onPress={()=>toggleTheme()} width={"80%"} center>
+      <Button onPress={() => toggleTheme()} width={"80%"} center>
         Toggle Mode
+      </Button>
+      <View style={{ height: 10 }} />
+      <Button onPress={() => {
+        toggleTheme("system")
+      }} width={"80%"} center>
+        System
       </Button>
     </ScrollView>
   );

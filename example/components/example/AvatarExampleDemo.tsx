@@ -6,14 +6,14 @@ import { Avatar, Button, themeColors, useTheme } from 'hyper-native-ui';
 export default function AvatarExampleDemo() {
   const { currentTheme, toggleTheme, themeScheme } = useTheme();
   const [touchable, setTouchable] = useState(false)
-  const url = 'https://nypost.com/wp-content/uploads/sites/2/2021/02/gina-carano-03.jpg'
+  const url = 'https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/08/ciri-the-witcher-season-3.jpg'
   return (
     <ScrollView style={{
       flex: 1,
       padding: 5,
-      backgroundColor:currentTheme.background
+      backgroundColor: currentTheme.background
     }}>
-      <Button onPress={()=>toggleTheme()} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>
+      <Button onPress={() => toggleTheme()} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>
         {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
       </Button>
       <Button onPress={() => { setTouchable(!touchable) }} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>

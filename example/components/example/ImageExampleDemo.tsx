@@ -6,7 +6,7 @@ import { Button, Image, useTheme } from 'hyper-native-ui';
 export default function ImageExampleDemo() {
   const { currentTheme, toggleTheme, themeScheme } = useTheme();
   const [touchable, setTouchable] = useState(false)
-  const url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzNSiBdF8NduudcXQBx-L3sZ4acmAyjCUDAb8Q2W_RpRYgGD59'
+  const url = 'https://4kwallpapers.com/images/walls/thumbs_3t/19763.jpg'
 
   return (
     <ScrollView style={{
@@ -37,8 +37,8 @@ export default function ImageExampleDemo() {
         </Text>
         <Image
           isTouchableOpacity={touchable}
-          width={380}
-          height={380}
+          width={200}
+          height={200}
           borderRadius={30}
           src={url} />
         <View style={{ height: 20 }} />
@@ -51,8 +51,8 @@ export default function ImageExampleDemo() {
         <View style={{ height: 20 }} />
         <Image
           isTouchableOpacity={touchable}
-          width={200}
-          height={200}
+          width={380}
+          height={380}
           borderRadius={30}
           src={url} />
       </View>

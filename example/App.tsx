@@ -17,6 +17,7 @@ import ModalExampleDemo from './components/example/ModalExample';
 import ComponentList from './ComponentList';
 import StatusBarExampleDemo from './components/example/StatusBarExampleDemo';
 import DropdownMenuComponent from './components/example/DropdownMenuExampleDemo';
+import CarouselExample from './components/example/CarouselExample';
 
 const options = {
   contentStyle: {
@@ -33,6 +34,10 @@ const RootStack = createNativeStackNavigator({
     Home: {
       screen: ComponentList,
       options: { headerShown: false, ...options }
+    },
+    CarouselExample: {
+      screen: CarouselExample,
+      options
     },
     DropdownMenuExample: {
       screen: DropdownMenuComponent,
