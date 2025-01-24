@@ -1,0 +1,123 @@
+---
+title: "TouchableOpacity"
+publishedAt: "2024-12-19"
+summary: "Guide to implementing TouchableOpacity in your React Native application."
+tag: "Android IOS Web"
+---
+
+The `TouchableOpacity` is a customizable and theme-aware wrapper for React Native's `TouchableOpacity`. It changes its background color dynamically when pressed, based on the app's current theme.
+
+### Step 1: Install [`Hyper-Native-Ui`](https://www.npmjs.com/package/hyper-native-ui)
+
+* Open a Terminal in your project's folder and run: `hyper-native-ui`
+
+## Import Component
+
+<CodeBlock className="my-24" 
+    compact
+    codeInstances={[{
+        code: `import TouchableOpacity from 'hyper-native-ui';`,
+        label: 'React Native',
+        language: 'bash'
+    }]}
+    copyButton
+/>
+
+## Basic Usage
+<CodeBlock className="my-24" 
+    compact
+    codeInstances={[{
+        code: `import React from 'react';
+import { StyleSheet, Text } from 'react-native';
+import TouchableOpacity from 'hyper-native-ui';
+
+const App = () => {
+    return (
+        <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Press Me</Text>
+        </TouchableOpacity>
+    );
+};
+
+const styles = StyleSheet.create({
+    button: {
+        padding: 15,
+        borderRadius: 10,
+        alignItems: 'center',
+    },
+    text: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+});
+
+export default App;`,
+        label: 'React Native',
+        language: 'bash'
+    }]}
+    copyButton
+/>
+### Theme-Aware Styling
+
+<CodeBlock className="my-24" 
+    compact
+    codeInstances={[{
+        code: `import React from 'react';
+import { StyleSheet, Text } from 'react-native';
+import TouchableOpacityComponent from 'hyper-native-uiComponent';
+
+const App = () => {
+    return (
+        <TouchableOpacityComponent
+            lightColor="#FFFFFF"
+            darkColor="#333333"
+            style={styles.button}
+        >
+            <Text style={styles.text}>Themed Button</Text>
+        </TouchableOpacityComponent>
+    );
+};
+
+const styles = StyleSheet.create({
+    button: {
+        padding: 15,
+        borderRadius: 10,
+        alignItems: 'center',
+    },
+    text: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+});
+
+export default App;`,
+        label: 'React Native',
+        language: 'bash'
+    }]}
+    copyButton
+/>
+
+### Custom Props
+
+- **`variant`** (`any`): Placeholder for future variants or styles. Currently unused.
+- **`lightColor`** (`string`): A color to use in light mode (optional).
+- **`darkColor`** (`string`): A color to use in dark mode (optional).
+
+### All TouchableOpacity Props
+
+This component also accepts all props that can be passed to React Native's `TouchableOpacity`. Refer to the [TouchableOpacity documentation](https://reactnative.dev/docs/touchableopacity) for details.
+
+## Features
+
+1. **Theme-Aware Styling**:
+   - Automatically adjusts background color based on the active theme.
+   - Supports custom light and dark colors via the `lightColor` and `darkColor` props.
+
+2. **Press Feedback**:
+   - Changes the background color when pressed, providing visual feedback.
+
+3. **Customizable**:
+   - Fully compatible with `TouchableOpacity` props, allowing for advanced usage.
+
+4. **Delay on Press**:
+   - Includes a slight delay (`delayPressIn`) to ensure smooth transitions during press actions.
