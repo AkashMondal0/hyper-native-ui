@@ -1,0 +1,187 @@
+---
+title: "Carousel"
+publishedAt: "2025-01-24"
+# image: "/images/gallery/img-02.jpg"
+summary: "Open a Terminal in your project's folder and run"
+tag: "Android IOS"
+---
+The `Carousel` component is a versatile, animated carousel built with React Native and `react-native-reanimated`. It supports horizontal and vertical scrolling, various animation effects, autoplay, and customizable styles.
+## Installation
+
+* Open a Terminal in your project's folder and run:
+
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { Carousel } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'bash'
+        },
+    ]}
+    copyButton
+/>
+
+
+### Required Props
+
+- **`data`**: An array of items to display in the carousel. Each item should have:
+  - `image` (string): URL for the image.
+  - `component` (optional, ReactNode): A custom React component to display.
+
+### Basic Usage Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React from 'react';
+import { StyleSheet } from 'react-native';
+import Carousel from 'hyper-native-ui';
+
+const App = () => {
+    const data = [
+    { image: 'https://4kwallpapers.com/images/walls/thumbs_3t/7063.jpg' },
+    { image: 'https://4kwallpapers.com/images/walls/thumbs_3t/3794.jpg' },
+    { image: 'https://4kwallpapers.com/images/walls/thumbs_3t/4577.jpg' },
+    { image: 'https://4kwallpapers.com/images/walls/thumbs_3t/19763.jpg' },
+    ];
+
+    return <Carousel data={data} />;
+};
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
+
+export default App;`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+### Carousel with Custom Buttons and Vertical Scrolling
+* Boolean indicating whether the carousel scrolls vertically. Default is `false`.
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React from 'react';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import Carousel from 'hyper-native-ui';
+
+const App = () => {
+   const data = [
+    { image: 'https://4kwallpapers.com/images/walls/thumbs_3t/19102.jpg' },
+    { image: 'https://4kwallpapers.com/images/walls/thumbs_3t/5120.jpg' },
+    { image: 'https://4kwallpapers.com/images/walls/thumbs_3t/6156.jpg' },
+    { image: 'https://4kwallpapers.com/images/walls/thumbs_3t/17992.jpg' },
+    { image: 'https://4kwallpapers.com/images/walls/thumbs_3t/12848.jpg' },
+    ];
+
+    const NextButton = () => (
+        <TouchableOpacity style={styles.button}>
+            <Text>Next</Text>
+        </TouchableOpacity>
+    );
+
+    const PreviousButton = () => (
+        <TouchableOpacity style={styles.button}>
+            <Text>Previous</Text>
+        </TouchableOpacity>
+    );
+
+    return (
+        <Carousel
+            data={data}
+            isVertical={true}
+            nextButton={<NextButton />}
+            previousButton={<PreviousButton />}
+        />
+    );
+};
+
+const styles = StyleSheet.create({
+    button: {
+        padding: 10,
+        backgroundColor: 'blue',
+        borderRadius: 5,
+        alignItems: 'center',
+    },
+});
+
+export default App;`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/carousel-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+### Optional Props
+
+- **`containerStyle`**: Custom styles for the outer container of the carousel.
+- **`itemStyle`**: Custom styles for individual carousel items.
+- **`imageProps`**: Additional properties to pass to the `Image` component.
+- **`width`**: Width of the carousel items, either a percentage (e.g., `"80%"`) or a fixed number (e.g., `300`). Default is `"100%"`.
+- **`height`**: Height of the carousel items, either a percentage or a fixed number. Default is `600`.
+- **`spacing`**: Space between items in the carousel. Default is `10`.
+- **`animationType`**: The type of animation applied to carousel items. Options are `"scale"`, `"opacity"`, or `"none"`. Default is `"scale"`.
+- **`decelerationRate`**: Scrolling deceleration rate. Options are `"fast"` or `"normal"`. Default is `"normal"`.
+- **`isVertical`**: Boolean indicating whether the carousel scrolls vertically. Default is `false`.
+- **`showNextPrevious`**: Boolean indicating whether next/previous navigation buttons are displayed. Default is `true`.
+- **`visibleItemIndex`**: A callback function that receives the index of the currently visible item.
+- **`visibleIndex`**: Index of the initially visible item. Default is `0`.
+- **`nextPreviousContainerStyle`**: Custom styles for the container holding next/previous buttons.
+- **`nextButton`**: A custom React component for the "next" button.
+- **`previousButton`**: A custom React component for the "previous" button.
+- **`borderRadius`**: Border radius for carousel items. Default is `20`.
+- **`nestedScrollEnabled`**: Boolean indicating whether nested scrolling is enabled. Default is `true`.
+- **`autoPlay`**: Boolean indicating whether autoplay is enabled. Default is `false`.
+- **`autoPlayInterval`**: Interval for autoplay in milliseconds. Default is `5000`.
+- **`autoPlayCounter`**: Number of autoplay cycles before stopping, or `"infinite"` for continuous autoplay. Default is `2`.
+
+## Features
+
+1. **Horizontal and Vertical Scrolling**:
+   - The carousel supports both horizontal and vertical scrolling modes.
+
+2. **Animations**:
+   - Includes scale and opacity-based animations for smooth transitions.
+   - The animations can be disabled with the `"none"` option.
+
+3. **Customizability**:
+   - Fully customizable styles for container, items, buttons, and more.
+   - Custom buttons can replace the default next/previous buttons.
+
+4. **Autoplay**:
+   - Automatically scrolls through items with a configurable interval.
+   - Supports finite or infinite autoplay cycles.
+
+5. **Responsive Design**:
+   - Accepts percentage-based or fixed dimensions for responsive layouts.

@@ -51,7 +51,7 @@ function ButtonExample() {
 - Compatible with `Expo`.
 - Accessibility support.
 - Written in `TypeScript`.
-- [Read more](https://hyper-native-ui.vercel.app/feature).
+- [Read more](https://hyper-native-ui.vercel.app).
 
 ## Getting Started
 
