@@ -1,4 +1,4 @@
-# React Native Ui Library
+# React Native Components Library
 <p align="center">
      <img src="https://raw.githubusercontent.com/AkashMondal0/hyper-native-ui/refs/heads/main/icon.png" height="250px" style="display:block"/>
 </p>
@@ -51,7 +51,7 @@ function ButtonExample() {
 - Compatible with `Expo`.
 - Accessibility support.
 - Written in `TypeScript`.
-- [Read more](https://hyper-native-ui.vercel.app/feature).
+- [Read more](https://hyper-native-ui.vercel.app).
 
 ## Getting Started
 

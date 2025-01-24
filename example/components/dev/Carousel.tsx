@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect, useRef, useState } from 'react';
-import { View, Dimensions, Image, ViewStyle, ImageProps, Button } from 'react-native';
+import { View, Dimensions, Image, ViewStyle, ImageProps, Text, Button } from 'react-native';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, TouchableOpacity } from 'react-native';
+import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { Button, Text, useTheme } from 'hyper-native-ui';
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,31 +13,28 @@ const routes = [
     "ImageExample",
     "ModalExample",
     "StatusBarExample",
-    "DropdownMenuExample"
+    "DropdownMenuExample",
+    "CarouselExample",
 ].sort()
 export default function ComponentList() {
     const navigation = useNavigation();
-    const { currentTheme, toggleTheme, currentColorScheme } = useTheme();
+    const { currentTheme, toggleTheme } = useTheme();
     return (
         <ScrollView style={{
-            padding: 20,
+            padding: 30,
             backgroundColor: currentTheme.background
         }}>
-            <Button onPress={() => {
-
-            }}>
-                system {currentColorScheme}
-            </Button>
+            <Text variant="H4" center bold="bold">Component List</Text>
+            <View style={{ height: 20 }} />
             <Button onPress={() => { toggleTheme() }}>
                 toggle
             </Button>
-
-            <Text variant="H4" center bold="bold">Component List</Text>
+            <View style={{ height: 20 }} />
             {routes.map((route, i) => {
                 return (
                     <TouchableOpacity
                         key={i}
-                        activeOpacity={0.4}
+                        activeOpacity={0.8}
                         onPress={() => navigation.navigate(route)}
                         style={{
                             height: 60,
@@ -52,6 +49,7 @@ export default function ComponentList() {
                         <Text variant="H6" bold={"semibold"}>{route.replace("Example", "")}</Text>
                     </TouchableOpacity>)
             })}
+            <View style={{ height: 50 }} />
         </ScrollView>
     );
 }
