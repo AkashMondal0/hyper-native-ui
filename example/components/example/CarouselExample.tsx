@@ -1,6 +1,5 @@
 import React from 'react';
-import Carousel from '../dev/Carousel';
-import { ThemedView, Text } from 'hyper-native-ui';
+import { ThemedView, Text, Carousel } from 'hyper-native-ui';
 import { ScrollView, View } from 'react-native';
 
 const DATA = [
@@ -20,7 +19,6 @@ const visibleItemIndex = (index: number) => {
 }
 
 const CarouselExample = () => {
-
     return (
         <ThemedView style={{
             flex: 1,
@@ -32,6 +30,16 @@ const CarouselExample = () => {
                 width: '100%',
             }}>
                 <Text variant="H5" bold={"500"} center>
+                    Carousel Example (Vertical)
+                </Text>
+                <Carousel
+                    data={DATA}
+                    isVertical
+                    height={400}
+                    visibleItemIndex={visibleItemIndex}
+                />
+                <View style={{ height: 20 }} />
+                <Text variant="H5" bold={"500"} center>
                     Carousel Example (Horizontal)
                 </Text>
                 <Carousel
@@ -41,12 +49,12 @@ const CarouselExample = () => {
                 />
                 <View style={{ height: 20 }} />
                 <Text variant="H5" bold={"500"} center>
-                    Carousel Example (Vertical)
+                    Carousel Example AutoPlay
                 </Text>
                 <Carousel
                     data={DATA}
-                    isVertical
-                    height={400}
+                    height={250}
+                    autoPlay={true}
                     visibleItemIndex={visibleItemIndex}
                 />
             </ScrollView>

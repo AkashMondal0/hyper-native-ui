@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { View, Dimensions, Image, ViewStyle, ImageProps, Button } from 'react-native';
 import Animated, {
     useSharedValue,
@@ -35,6 +35,9 @@ interface CarouselProps {
     visibleIndex?: number;
     borderRadius?: number;
     nestedScrollEnabled?: boolean;
+    autoPlay?: boolean;
+    autoPlayInterval?: number;
+    autoPlayCounter?: number | 'infinite';
 }
 
 const Carousel: React.FC<CarouselProps> = ({
@@ -48,7 +51,7 @@ const Carousel: React.FC<CarouselProps> = ({
     animationType = "scale",
     decelerationRate = 'normal',
     isVertical = false,
-    showNextPrevious = false,
+    showNextPrevious = true,
     visibleItemIndex,
     visibleIndex = 0,
     nextPreviousContainerStyle,
@@ -56,9 +59,14 @@ const Carousel: React.FC<CarouselProps> = ({
     previousButton,
     borderRadius = 20,
     nestedScrollEnabled = true,
+    autoPlay = false,
+    autoPlayInterval = 5000,
+    autoPlayCounter = 2,
 }) => {
     const [currentIndex, setCurrentIndex] = useState(visibleIndex);
     const scrollViewRef = useRef<Animated.ScrollView>(null);
+    const counterRef = useRef(0);
+
     const ptpWidth = (typeof width === 'string' && width.includes('%'))
         ? (parseFloat(width) / 100) * FULL_ITEM_WIDTH
         : (typeof width === 'number' ? width : FULL_ITEM_WIDTH);
@@ -101,6 +109,26 @@ const Carousel: React.FC<CarouselProps> = ({
 
     const previous = () => scrollToIndex(Math.max(currentIndex - 1, 0));
     const next = () => scrollToIndex(Math.min(currentIndex + 1, data.length - 1));
+
+    // auto play
+    useEffect(() => {
+        let interval: any;
+        if (autoPlay) {
+            interval = setInterval(() => {
+                if (currentIndex < data.length - 1) {
+                    next();
+                } else {
+                    clearInterval(interval);
+                }
+                counterRef.current++;
+            }, autoPlayInterval);
+
+            if (autoPlayCounter !== "infinite" && counterRef.current === autoPlayCounter) {
+                clearInterval(interval);
+            }
+        }
+        return () => clearInterval(interval);
+    }, [currentIndex]);
 
     const renderItem = (item: { image: string }, index: number) => {
         return (
@@ -191,19 +219,43 @@ const Carousel: React.FC<CarouselProps> = ({
                     })}
                 </Animated.ScrollView>
                 {/* NextPreviousContainer */}
-                {showNextPrevious ? <View style={[{
+                {showNextPrevious && !isVertical ? <View style={[{
                     flexDirection: 'row',
                     marginTop: 10,
-                    position: "absolute"
+                    position: "absolute",
+                    width: "85%",
+                    justifyContent: 'space-between',
                 }, nextPreviousContainerStyle]}>
                     <TriggerComponent next={previous}>
                         {nextButton ? nextButton : <View>
-                            <Button title="previous" />
+                            <Button title="<" color={"black"} />
                         </View>}
                     </TriggerComponent>
                     <TriggerComponent next={next}>
                         {previousButton ? previousButton : <View>
-                            <Button title="next" />
+                            <Button title=">" color={"black"} />
+                        </View>}
+                    </TriggerComponent>
+                </View> : <></>}
+                {showNextPrevious && isVertical ? <View style={[{
+                    flexDirection: "column",
+                    marginTop: 10,
+                    position: "absolute",
+                    height: "85%",
+                    justifyContent: 'space-between',
+                }, nextPreviousContainerStyle]}>
+                    <TriggerComponent next={previous}>
+                        {nextButton ? nextButton : <View style={{
+                            transform: [{ rotate: "90deg" }]
+                        }}>
+                            <Button title="<" color={"black"} />
+                        </View>}
+                    </TriggerComponent>
+                    <TriggerComponent next={next}>
+                        {previousButton ? previousButton : <View style={{
+                            transform: [{ rotate: "90deg" }]
+                        }}>
+                            <Button title=">" color={"black"} />
                         </View>}
                     </TriggerComponent>
                 </View> : <></>}
