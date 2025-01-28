@@ -9,6 +9,7 @@ import Animated, {
 } from 'react-native-reanimated';
 // import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import TriggerComponent from './TriggerComponent';
+import Text from './Text';
 
 const {
     width: FULL_ITEM_WIDTH,
@@ -22,6 +23,8 @@ interface CarouselProps {
     imageProps?: ImageProps;
     nextPreviousContainerStyle?: ViewStyle;
     showNextPrevious?: boolean;
+    showIndexIndicator?: boolean;
+    showIndexCounter?: boolean;
     nextButton?: ReactNode;
     previousButton?: ReactNode;
     width?: ViewStyle['width'];
@@ -51,7 +54,9 @@ const Carousel: React.FC<CarouselProps> = ({
     animationType = "scale",
     decelerationRate = 'normal',
     isVertical = false,
-    showNextPrevious = true,
+    showNextPrevious = false,
+    showIndexIndicator = false,
+    showIndexCounter = false,
     visibleItemIndex,
     visibleIndex = 0,
     nextPreviousContainerStyle,
@@ -167,6 +172,28 @@ const Carousel: React.FC<CarouselProps> = ({
                 width,
                 height,
             }, containerStyle]}>
+                {/* index indicator */}
+                <>
+                    {showIndexCounter && data.length > 1 ? <View style={{
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                        backgroundColor: "rgba(0,0,0,0.6)",
+                        zIndex: 10,
+                        borderRadius: 10,
+                        paddingHorizontal: 4,
+                        margin: 16,
+                    }}>
+                        <Text variant="H6" style={{
+                            fontWeight: "400",
+                            color: "white",
+                            padding: 5,
+                            fontSize: 16
+                        }}>
+                            {currentIndex + 1}/{data.length}
+                        </Text>
+                    </View> : <View />}
+                </>
                 <Animated.ScrollView
                     ref={scrollViewRef}
                     nestedScrollEnabled={nestedScrollEnabled}
@@ -259,6 +286,29 @@ const Carousel: React.FC<CarouselProps> = ({
                         </View>}
                     </TriggerComponent>
                 </View> : <></>}
+                {showIndexIndicator && data.length > 1 ? <View style={{
+                    position: "absolute",
+                    bottom: 0,
+                    right: 0,
+                    zIndex: 10,
+                    width: "100%",
+                    borderRadius: 10,
+                    marginVertical: 10,
+                    padding: 4,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "row",
+                }}>
+                    {Array.from({ length: data.length }).map((_, index) => (
+                        <View key={index} style={{
+                            width: 7,
+                            height: 7,
+                            borderRadius: 14,
+                            backgroundColor: index === currentIndex ? "#000" : "#fff",
+                            margin: 2
+                        }} />
+                    ))}
+                </View> : <View />}
             </View>
         </>
     );
