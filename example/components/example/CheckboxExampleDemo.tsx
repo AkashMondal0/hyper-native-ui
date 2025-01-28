@@ -1,14 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useTheme, Button, themeColors, CheckBox } from 'hyper-native-ui';
 
 export default function CheckboxExampleDemo() {
   const { currentTheme, toggleTheme, themeScheme, themeName } = useTheme();
   const [disabled, setDisabled] = React.useState(false);
-  const [isChecked, setIsChecked] = React.useState({
-    check: false,
-    name: "NID"
-  });
 
   return (
     <ScrollView style={{
@@ -41,6 +37,7 @@ export default function CheckboxExampleDemo() {
         <Button onPress={() => setDisabled(!disabled)}>
           {disabled ? 'Enabled' : 'Disabled'}
         </Button>
+        <CheckboxExample2 />
         <View style={{
           flexDirection: 'row',
           justifyContent: 'center',
@@ -52,19 +49,13 @@ export default function CheckboxExampleDemo() {
           {themeColors.map((color, i) => (
             <TouchableOpacity
               key={i}
-              onPress={() => {
-                setIsChecked({
-                  name: color.name,
-                  check: !isChecked.check
-                })
-              }}
               activeOpacity={0.8}
               style={{
                 width: "48%",
                 padding: 10,
                 borderWidth: 1,
                 borderRadius: 20,
-                borderColor: isChecked.name === color.name ? currentTheme.primary : currentTheme.border,
+                // borderColor: isChecked.name === color.name ? currentTheme.primary : currentTheme.border,
               }}>
               <Text style={{
                 color: currentTheme.foreground,
@@ -83,11 +74,8 @@ export default function CheckboxExampleDemo() {
                 }}>
                   small
                 </Text>
-                {/* @ts-ignore */}
-                <CheckBox variant={color.name}
-                  isChecked={isChecked.name === color.name ? true : false}
-                  size={25}
-                  disabled={disabled} />
+                <CheckboxExample disabled={disabled} name={color.name} size={30} />
+
                 <Text style={{
                   color: currentTheme.foreground,
                   fontSize: 16,
@@ -95,11 +83,8 @@ export default function CheckboxExampleDemo() {
                 }}>
                   medium
                 </Text>
-                {/* @ts-ignore */}
-                <CheckBox variant={color.name}
-                  size={40}
-                  isChecked={isChecked.name === color.name ? true : false}
-                  disabled={disabled} />
+                <CheckboxExample disabled={disabled} name={color.name} size={40} />
+
                 <Text style={{
                   color: currentTheme.foreground,
                   fontSize: 16,
@@ -107,11 +92,7 @@ export default function CheckboxExampleDemo() {
                 }}>
                   large
                 </Text>
-                {/* @ts-ignore */}
-                <CheckBox variant={color.name}
-                  isChecked={isChecked.name === color.name ? true : false}
-                  size={60}
-                  disabled={disabled} />
+                <CheckboxExample disabled={disabled} name={color.name} size={60} />
               </View>
             </TouchableOpacity>
           ))}
@@ -119,4 +100,47 @@ export default function CheckboxExampleDemo() {
       </View>
     </ScrollView>
   );
+}
+
+
+const CheckboxExample = (
+  { name, size, disabled }: { name: string, size: number, disabled: boolean }
+) => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxToggle = (newSelection: boolean) => {
+    setIsChecked(newSelection);
+    console.log("Checkbox is now", newSelection ? "checked" : "unchecked");
+  };
+
+  return (
+    <CheckBox
+      // label="Agree to Terms"
+      disabled={disabled}
+      isSelected={isChecked}
+      onToggle={handleCheckboxToggle}
+      size={size}
+      radius={50}
+      variant={name as any}
+    />
+  )
+}
+
+const CheckboxExample2 = () => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxToggle = (newSelection: boolean) => {
+    setIsChecked(newSelection);
+    console.log("Checkbox is now", newSelection ? "checked" : "unchecked");
+  };
+
+  return (
+    <CheckBox
+      label="Agree to Terms"
+      isSelected={isChecked}
+      onToggle={handleCheckboxToggle}
+      size={30}
+      variant={"default"}
+    />
+  )
 }

@@ -96,8 +96,8 @@ const SkeletonExample = () => {
                         gap: 14
                     }}>
                         {Array(10).fill(0).map((_, i) => {
-                            return <>
-                                <View key={i}
+                            return <View key={i}>
+                                <View
                                     style={{
                                         gap: 8,
                                         flexDirection: "row",
@@ -114,7 +114,7 @@ const SkeletonExample = () => {
                                         <Skeleton width={150} height={16} borderRadius={20} />
                                     </View>
                                 </View>
-                            </>
+                            </View>
                         })}
                     </View>
                 </>

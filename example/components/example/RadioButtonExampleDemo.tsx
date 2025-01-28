@@ -1,8 +1,6 @@
 import { View, Text, ScrollView } from 'react-native';
 import React, { useState } from 'react';
-import { useTheme, Button } from 'hyper-native-ui';
-import RadioButton from '../dev/RadioButton';
-import BouncyCheckbox from '../dev/Checkbox';
+import { useTheme, Button, RadioButton, themeColors } from 'hyper-native-ui';
 
 export default function RadioButtonExampleDemo() {
   const { currentTheme, toggleTheme, themeScheme, themeName } = useTheme();
@@ -14,13 +12,6 @@ export default function RadioButtonExampleDemo() {
     setSelectedOption(value);
     console.log("Selected option:", value);
   };
-
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxToggle = (newSelection: boolean) => {
-    setIsChecked(newSelection);
-    console.log("Checkbox is now", newSelection ? "checked" : "unchecked");
-  }
 
   // Define the options
   const options = [
@@ -64,24 +55,46 @@ export default function RadioButtonExampleDemo() {
           {disabled ? 'Enabled' : 'Disabled'}
         </Button>
         {/*  */}
-        <RadioButton
-          options={options}
-          selectedValue={selectedOption}
-          onSelect={handleSelect}
-          size={26}
-          variant="default"
-          animationDuration={400}
-        />
-        <BouncyCheckbox
-          label="Agree to Terms"
-          isSelected={isChecked}
-          onToggle={handleCheckboxToggle}
-          size={30}
-          // radius={20}
-          disabled={disabled}
-          variant="default"
-        />
+        <View style={{
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          marginTop: 16,
+          rowGap: 10,
+          gap: 10
+        }}>
+          {themeColors.map((color, i) => (
+            <View key={i} style={{
+              width: "45%",
+              justifyContent: "center",
+              alignItems: "center",
+              borderWidth: 1,
+              borderColor: color.light.primary,
+              borderRadius: 20
+            }}>
+              <Text style={{
+                color: currentTheme.foreground,
+                fontSize: 20,
+                marginVertical: 16,
+                fontWeight: "500",
+                textAlign: 'center',
+              }}>
+                {color.name}
+              </Text>
+              <RadioButton
+                options={options}
+                selectedValue={selectedOption}
+                onSelect={handleSelect}
+                size={26}
+                variant={color.name}
+                animationDuration={400}
+              />
+            </View>
+          ))}
+        </View>
       </View>
+      <View style={{ height: 20 }} />
     </ScrollView>
   );
 }

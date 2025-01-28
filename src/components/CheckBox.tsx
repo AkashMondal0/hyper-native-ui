@@ -9,7 +9,7 @@ import { themeColors, ThemeName } from "../constants/Colors";
 import useTheme from "../hooks/useTheme";
 
 interface BouncyCheckboxProps {
-    label: string;
+    label?: string;
     isSelected: boolean;
     onToggle: (isSelected: boolean) => void;
     size?: number;
@@ -134,7 +134,7 @@ const BouncyCheckbox: React.FC<BouncyCheckboxProps> = ({
                             ]}>
                             {innerComponent ? innerComponent : <Text style={{
                                 fontWeight: "700",
-                                fontSize: 20,
+                                fontSize: size ? size / 2 : 20,
                                 color: colorStyle.color
                             }}>✓</Text>}
                         </Animated.View>
