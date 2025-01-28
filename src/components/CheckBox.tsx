@@ -8,7 +8,7 @@ import Animated, {
 import { themeColors, ThemeName } from "../constants/Colors";
 import useTheme from "../hooks/useTheme";
 
-interface BouncyCheckboxProps {
+interface CheckboxProps {
     label?: string;
     isSelected: boolean;
     onToggle: (isSelected: boolean) => void;
@@ -22,7 +22,7 @@ interface BouncyCheckboxProps {
     labelTextStyle?: TextStyle
 }
 
-const BouncyCheckbox: React.FC<BouncyCheckboxProps> = ({
+const Checkbox: React.FC<CheckboxProps> = ({
     label,
     isSelected,
     onToggle,
@@ -151,4 +151,4 @@ const BouncyCheckbox: React.FC<BouncyCheckboxProps> = ({
     );
 };
 
-export default BouncyCheckbox;
+export default Checkbox;
