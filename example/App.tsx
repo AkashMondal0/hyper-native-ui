@@ -19,6 +19,7 @@ import StatusBarExampleDemo from './components/example/StatusBarExampleDemo';
 import DropdownMenuComponent from './components/example/DropdownMenuExampleDemo';
 import CarouselExample from './components/example/SkeletonExample';
 import SkeletonExample from './components/example/SkeletonExample';
+import RadioButtonExampleDemo from './components/example/RadioButtonExampleDemo';
 
 const options = {
   contentStyle: {
@@ -35,6 +36,10 @@ const RootStack = createNativeStackNavigator({
     Home: {
       screen: ComponentList,
       options: { headerShown: false, ...options }
+    },
+    RadioButtonExample: {
+      screen: RadioButtonExampleDemo,
+      options
     },
     SkeletonExample: {
       screen: SkeletonExample,

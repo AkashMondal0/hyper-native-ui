@@ -15,7 +15,8 @@ const routes = [
     "StatusBarExample",
     "DropdownMenuExample",
     "CarouselExample",
-    "SkeletonExample"
+    "SkeletonExample",
+    "RadioButtonExample"
 ].sort()
 export default function ComponentList() {
     const navigation = useNavigation();

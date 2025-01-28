@@ -1,3 +1,4 @@
+import { themeColors, ThemeNameType, useTheme } from "hyper-native-ui";
 import React, { ReactNode, useMemo } from "react";
 import { View, Text, TouchableWithoutFeedback, TextStyle } from "react-native";
 import Animated, {
@@ -5,8 +6,6 @@ import Animated, {
     useAnimatedStyle,
     withSpring,
 } from "react-native-reanimated";
-import { themeColors, ThemeName } from "../constants/Colors";
-import useTheme from "../hooks/useTheme";
 
 interface BouncyCheckboxProps {
     label: string;
@@ -15,7 +14,7 @@ interface BouncyCheckboxProps {
     size?: number;
     bounceIntensity?: number;
     themeScheme?: "light" | "dark";
-    variant?: "default" | "secondary" | ThemeName;
+    variant?: "default" | "secondary" | ThemeNameType;
     innerComponent?: ReactNode
     disabled?: boolean
     radius?: number
