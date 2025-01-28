@@ -1,3 +1,4 @@
+import { themeColors, ThemeNameType, useTheme } from "hyper-native-ui";
 import React, { ReactNode, useMemo } from "react";
 import { View, Text, TouchableWithoutFeedback, TextStyle } from "react-native";
 import Animated, {
@@ -5,24 +6,22 @@ import Animated, {
     useAnimatedStyle,
     withSpring,
 } from "react-native-reanimated";
-import { themeColors, ThemeName } from "../constants/Colors";
-import useTheme from "../hooks/useTheme";
 
-interface CheckboxProps {
-    label?: string;
+interface BouncyCheckboxProps {
+    label: string;
     isSelected: boolean;
     onToggle: (isSelected: boolean) => void;
     size?: number;
     bounceIntensity?: number;
     themeScheme?: "light" | "dark";
-    variant?: "default" | "secondary" | ThemeName;
+    variant?: "default" | "secondary" | ThemeNameType;
     innerComponent?: ReactNode
     disabled?: boolean
     radius?: number
     labelTextStyle?: TextStyle
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({
+const BouncyCheckbox: React.FC<BouncyCheckboxProps> = ({
     label,
     isSelected,
     onToggle,
@@ -134,7 +133,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                             ]}>
                             {innerComponent ? innerComponent : <Text style={{
                                 fontWeight: "700",
-                                fontSize: size ? size / 2 : 20,
+                                fontSize: 20,
                                 color: colorStyle.color
                             }}>✓</Text>}
                         </Animated.View>
@@ -151,4 +150,4 @@ const Checkbox: React.FC<CheckboxProps> = ({
     );
 };
 
-export default Checkbox;
+export default BouncyCheckbox;
