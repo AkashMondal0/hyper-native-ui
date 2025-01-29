@@ -1,5 +1,5 @@
-import React, { ReactNode, useMemo } from "react";
-import { View, Text, TouchableWithoutFeedback, TextStyle } from "react-native";
+import React, { ReactNode, useMemo, useState } from "react";
+import { Text, TextStyle, TouchableOpacity } from "react-native";
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
@@ -10,8 +10,8 @@ import useTheme from "../hooks/useTheme";
 
 interface CheckboxProps {
     label?: string;
-    isSelected: boolean;
-    onToggle: (isSelected: boolean) => void;
+    isSelected?: boolean;
+    onToggle?: (isSelected: boolean) => void;
     size?: number;
     bounceIntensity?: number;
     themeScheme?: "light" | "dark";
@@ -24,7 +24,7 @@ interface CheckboxProps {
 
 const Checkbox: React.FC<CheckboxProps> = ({
     label,
-    isSelected,
+    isSelected = false,
     onToggle,
     size = 24,
     variant = "default",
@@ -39,6 +39,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     // Shared values for animated styles
     const scale = useSharedValue(isSelected ? 1 : 0.9);
     const borderWidth = useSharedValue(isSelected ? 2 : 1.6);
+    const [isChecked, setIsChecked] = useState(isSelected);
 
     const colorStyle = useMemo(() => {
         if (variant === 'default') {
@@ -76,35 +77,35 @@ const Checkbox: React.FC<CheckboxProps> = ({
 
     const handlePress = () => {
         if (disabled) return;
-        // Toggle selection and animate checkbox with bouncy effect
-        const newSelection = !isSelected;
 
-        // Apply the bouncy spring animation for scale
-        scale.value = withSpring(newSelection ? 1 : 0.9, {
-            damping: bounceIntensity, // Control bounce intensity
-            stiffness: 150, // Stiffness for bounce
-            overshootClamping: true, // Prevent overshoot after bounce
-        });
+        const newSelection = !isChecked;
 
-        // Apply spring animation for border width for smooth transition
-        borderWidth.value = withSpring(newSelection ? 2 : 1.6, {
-            damping: bounceIntensity, // Control bounce intensity
-            stiffness: 100, // Adjust stiffness of the border width animation
-            overshootClamping: true, // Prevent overshoot of border width
-        });
+        // Apply the bouncy spring animation for scale and border width
+        const springConfig = {
+            damping: bounceIntensity,
+            stiffness: 150,
+            overshootClamping: true,
+        };
 
-        // Pass the new selection back to the parent
-        onToggle(newSelection);
+        scale.value = withSpring(newSelection ? 1 : 0.9, springConfig);
+        borderWidth.value = withSpring(newSelection ? 2 : 1.6, { ...springConfig, stiffness: 100 });
+
+        setIsChecked(newSelection);
+        onToggle?.(newSelection);
     };
 
     return (
-        <TouchableWithoutFeedback onPress={handlePress} disabled={disabled}>
-            <View style={{
-                flexDirection: "row",
-                alignItems: "center",
-                marginVertical: 8,
-                opacity: disabled ? 0.5 : 1
-            }}>
+        <>
+            <TouchableOpacity onPress={handlePress}
+                activeOpacity={0.8}
+                disabled={disabled}
+                style={[{
+                    width: label ? "auto" : size,
+                    height: label ? "auto" : size,
+                    borderRadius: radius ?? size / 4,
+                    flexDirection: "row",
+                    alignItems: "center",
+                }]}>
                 <Animated.View
                     style={[
                         {
@@ -118,7 +119,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
                         animatedCheckboxStyle,
                     ]}
                 >
-                    {isSelected && (
+                    {isChecked && (
                         <Animated.View
                             style={[
                                 { backgroundColor: colorStyle.backgroundColor },
@@ -140,14 +141,14 @@ const Checkbox: React.FC<CheckboxProps> = ({
                         </Animated.View>
                     )}
                 </Animated.View>
-                <Text style={[{
+                {label ? <Text style={[{
                     marginLeft: 12,
                     fontSize: 16,
                     color: currentTheme.foreground,
                     opacity: disabled ? 0.5 : 1
-                }, labelTextStyle]}>{label}</Text>
-            </View>
-        </TouchableWithoutFeedback>
+                }, labelTextStyle]}>{label}</Text> : <></>}
+            </TouchableOpacity>
+        </>
     );
 };
 

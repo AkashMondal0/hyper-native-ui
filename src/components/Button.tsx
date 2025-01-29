@@ -151,7 +151,7 @@ const Button = memo(function Button({
             style={[{
                 alignItems: 'center',
                 justifyContent: 'center',
-                elevation: 0.4,
+                elevation: 0,
                 flexDirection: 'row',
                 gap: 5,
                 opacity: disabled ? 0.6 : 1,
