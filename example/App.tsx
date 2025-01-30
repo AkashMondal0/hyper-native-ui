@@ -17,7 +17,7 @@ import ModalExampleDemo from './components/example/ModalExample';
 import ComponentList from './ComponentList';
 import StatusBarExampleDemo from './components/example/StatusBarExampleDemo';
 import DropdownMenuComponent from './components/example/DropdownMenuExampleDemo';
-import CarouselExample from './components/example/SkeletonExample';
+import CarouselExample from './components/example/CarouselExample';
 import SkeletonExample from './components/example/SkeletonExample';
 import RadioButtonExampleDemo from './components/example/RadioButtonExampleDemo';
 

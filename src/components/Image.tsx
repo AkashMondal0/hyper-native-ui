@@ -7,10 +7,10 @@ import {
     TouchableOpacity,
     View,
     TouchableOpacityProps,
-    ActivityIndicator,
     ActivityIndicatorProps
 } from 'react-native';
 import useTheme from '../hooks/useTheme';
+import Skeleton from './Skeleton'
 
 export type Props = ImageProps & {
     src: string | null | undefined;
@@ -109,13 +109,11 @@ const Image = ({
                 height: "100%",
                 display: isActivityIndicator ? state === "normal" ? "none" : "flex" : "none",
             }]}>
-                <ActivityIndicator
-                    color={currentTheme.primary} size={40}
-                    {...activityIndicatorProps} />
+                <Skeleton  {...otherProps} />
             </View>
             <ImageComponent />
         </TouchableOpacity>
     )
 }
 
-export default Image
+export default Image;
