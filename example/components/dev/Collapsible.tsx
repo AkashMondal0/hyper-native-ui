@@ -1,5 +1,5 @@
-import useTheme from "../hooks/useTheme";
-import React, { useState, useCallback, ReactNode } from "react";
+import { useTheme } from "hyper-native-ui";
+import React, { useState, useCallback, ReactNode, useRef } from "react";
 import { View, TouchableOpacity, Text, ViewStyle, TextStyle } from "react-native";
 import Animated, {
     useSharedValue,

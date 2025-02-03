@@ -15,7 +15,6 @@ import Animated, {
 
 const {
     width: FULL_ITEM_WIDTH,
-    // height: FULL_ITEM_HEIGHT,
 } = Dimensions.get('window');
 
 export type Props = ViewProps & {
@@ -32,6 +31,7 @@ export type Props = ViewProps & {
     highlightColor?: ViewStyle["backgroundColor"],
     square?: boolean
 };
+
 const Skeleton = ({
     width = 100,
     height = 100,
@@ -40,7 +40,8 @@ const Skeleton = ({
     animationType = "pulse",
     animationDirection = "leftToRight",
     variant = "default",
-    square
+    square,
+    ...otherProps
 }: Props) => {
     const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
     const ptpWidth = (typeof width === 'string' && width.includes('%'))
@@ -128,11 +129,16 @@ const Skeleton = ({
     });
 
     return (
-        <View style={[{
-            overflow: "hidden",
-            position: "relative",
-            aspectRatio: square ? 1 / 1 : undefined,
-        }, { width, height, borderRadius, backgroundColor: colorStyle.backgroundColor }]}>
+        <View
+            style={[{
+                overflow: "hidden",
+                position: "relative",
+                aspectRatio: square ? 1 / 1 : undefined,
+                backgroundColor: colorStyle.backgroundColor
+            }, {
+                borderRadius,
+                width, height,
+            }]} {...otherProps}>
             <Animated.View
                 style={[
                     animatedStyle,
@@ -146,9 +152,56 @@ const Skeleton = ({
                         height: "100%",
                         backgroundColor: colorStyle.highlightColor,
                     },
-                ]}
-            />
+                ]} />
         </View>
     );
 };
 export default Skeleton;
+
+export const SkeletonWithoutAnimation = ({
+    width = 100,
+    height = 100,
+    borderRadius = 8,
+    themeScheme,
+    variant = "default",
+    ...otherProps
+}: {
+    themeScheme?: "light" | "dark";
+    children?: string | React.ReactNode;
+    variant?: "default" | "secondary" | ThemeName;
+    width?: ViewStyle['width'];
+    height?: ViewStyle['height'];
+    borderRadius?: ViewStyle["borderRadius"]
+}) => {
+    const { currentTheme, themeScheme: defaultThemeScheme } = useTheme();
+    const colorStyle = useMemo(() => {
+        if (variant === 'default') {
+            return {
+                backgroundColor: currentTheme.input,
+                highlightColor: currentTheme.border,
+            };
+        }
+
+        if (variant === 'secondary') {
+            return {
+                backgroundColor: currentTheme.muted,
+                highlightColor: currentTheme.muted_foreground,
+            };
+        }
+
+        const theme = themeColors.find((t) => t.name === variant)?.[themeScheme ?? defaultThemeScheme];
+        return {
+            backgroundColor: theme?.muted_foreground || currentTheme.muted_foreground,
+            highlightColor: theme?.border || currentTheme.border,
+        };
+    }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
+
+    return (
+        <View
+            style={{
+                borderRadius,
+                width, height,
+                backgroundColor: colorStyle.backgroundColor
+            }} {...otherProps} />
+    );
+};
