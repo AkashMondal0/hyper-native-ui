@@ -1,0 +1,93 @@
+---
+title: "Skeleton"
+publishedAt: "2025-01-28"
+# image: "/images/gallery/img-02.jpg"
+summary: "Open a Terminal in your project's folder and run"
+tag: "Android IOS Web"
+---
+
+The `Skeleton` component is a placeholder UI that indicates loading states. It provides animated shimmer or pulse effects to mimic content loading, making the user experience visually engaging.
+
+### Step 1: Install [`React-Native-Reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/)
+
+To use this component, you need to install the `react-native-reanimated` library. Follow the steps below:
+
+### Step 2: Install [`Hyper-Native-Ui`](https://www.npmjs.com/package/hyper-native-ui)
+
+* Open a Terminal in your project's folder and run: `hyper-native-ui`
+
+### Usage Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React from "react";
+import Skeleton from "hyper-native-ui";
+
+const App = () => {
+    return (
+        <Skeleton width={200} height={50} />
+    );
+};
+
+export default App;`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+---
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/skeleton-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+### Custom Props
+
+- **`width`** (`ViewStyle['width']`, default: `100`): Specifies the width of the skeleton component.
+- **`height`** (`ViewStyle['height']`, default: `100`): Specifies the height of the skeleton component.
+- **`borderRadius`** (`ViewStyle['borderRadius']`, default: `8`): Rounds the corners of the skeleton.
+- **`themeScheme`** (`"light" | "dark"`): Overrides the default theme for the component.
+- **`animationType`** (`"shiver" | "pulse"`, default: `"pulse"`): Determines the type of animation applied to the skeleton.
+- **`animationDirection`** (`"leftToRight" | "rightToLeft" | "topToBottom" | "bottomToTop"`, default: `"leftToRight"`): Specifies the direction of the shimmer animation (applies only when `animationType` is `"shiver"`).
+- **`variant`** (`"default" | "secondary" | ThemeName`, default: `"default"`): Sets the color variant of the skeleton.
+- **`square`** (`boolean`, default: `false`): If true, forces the skeleton to have a 1:1 aspect ratio.
+- **`backgroundColor`** (`ViewStyle['backgroundColor']`): Overrides the background color.
+- **`highlightColor`** (`ViewStyle['backgroundColor']`): Overrides the highlight (shimmer) color.
+
+### Animated Properties
+
+- **Pulse Animation**:
+  - Alternates the opacity of the skeleton between 1 and 0.5.
+- **Shiver Animation**:
+  - Moves a shimmer effect across the skeleton in the specified direction.
+
+### Theming
+
+The component uses the `useTheme` hook to adapt dynamically to the current theme. It can also be customized via the `themeScheme` or `variant` props.
+
+## Features
+
+1. **Shimmer and Pulse Animations**:
+   - Provides two types of loading effects for flexibility.
+2. **Dynamic Sizing**:
+   - Supports custom dimensions and square aspect ratios.
+3. **Theme Awareness**:
+   - Automatically adapts colors based on the current theme.
+4. **Customizable Colors**:
+   - Allows custom background and highlight colors.
+5. **Directional Control**:
+   - Shimmer animation can move in any specified direction.

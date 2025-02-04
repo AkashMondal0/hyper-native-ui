@@ -1,0 +1,112 @@
+---
+title: "ParallaxScrollView"
+publishedAt: "2025-02-04"
+# image: "/images/gallery/img-02.jpg"
+summary: "Open a Terminal in your project's folder and run"
+tag: "Android IOS"
+---
+
+The `ParallaxScrollView` component provides a smooth scrolling experience with a parallax image header.
+
+### Step 1: Install [`React-Native-Reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/)
+
+To use this component, you need to install the `react-native-reanimated` library. Follow the steps below:
+
+### Step 2: Install [`Hyper-Native-Ui`](https://www.npmjs.com/package/hyper-native-ui)
+
+* Open a Terminal in your project's folder and run: `hyper-native-ui`
+
+## Import Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { ParallaxScrollView } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+### Usage Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<SafeAreaView style={{ flex: 1 }}>
+      <ParallaxScrollView
+        imageStyle={{
+          borderRadius: 20,
+        }}
+        imageUrl="https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/08/ciri-the-witcher-season-3.jpg">
+        <View style={{ height: 900 }} />
+      </ParallaxScrollView>
+    </SafeAreaView>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+---
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/parallaxscrollview-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+## Props
+
+### `imageUrl`
+- **Type:** `string`
+- **Required:** ✅
+- **Description:** The URL of the image used in the parallax header.
+
+### `imageHeight`
+- **Type:** `number`
+- **Default:** `500`
+- **Description:** The height of the parallax image header.
+
+### `headerComponent`
+- **Type:** `ReactNode`
+- **Required:** ❌
+- **Description:** Custom component to replace the default image header.
+
+### `imageStyle`
+- **Type:** `ImageStyle`
+- **Required:** ❌
+- **Description:** Custom styling for the image.
+
+### `imageProps`
+- **Type:** `ImageProps`
+- **Required:** ❌
+- **Description:** Additional props to pass to the `Image` component.
+
+### `childrenStyle`
+- **Type:** `ViewStyle`
+- **Required:** ❌
+- **Description:** Custom styling for the children container.
+
+## Animated Behavior
+
+The parallax effect is achieved using `react-native-reanimated`. The image smoothly scales and translates as the user scrolls, providing a visually appealing effect.
+
+## Notes
+- The component is styled using the theme context from `useTheme()`.
+- The `scrollOffset` is managed using `useScrollViewOffset` from `react-native-reanimated`.
+
+## Summary
+The `ParallaxScrollView` is a flexible and customizable component that enhances user experience with smooth scrolling and animated parallax effects. It supports various props for customization, allowing you to create stunning UI layouts effortlessly.

@@ -15,6 +15,8 @@ export { default as Collapsible } from "./components/Collapsible";
 //
 export { default as Icon } from "./components/Icon";
 export { default as Skeleton } from "./components/Skeleton";
+export { SkeletonWithoutAnimation } from "./components/Skeleton";
+
 export { default as Loader } from "./components/Loader";
 export { default as Alert } from "./components/Alert";
 export { default as ActionSheet } from "./components/ActionSheet";
@@ -29,6 +31,7 @@ export { default as ThemedView } from "./components/View";
 export { default as Text } from "./components/Text";
 export { default as Dropdown } from "./components/Dropdown";
 export { default as RadioButton } from "./components/RadioButton";
+export { default as ParallaxScrollView } from "./components/ParallaxScrollView";
 
 
 export type {

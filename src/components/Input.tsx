@@ -6,8 +6,6 @@ import useTheme from '../hooks/useTheme';
 export type ThemeName = "Zinc" | "State" | "Stone" | "Grey" | "Neutral" | "Red" | "Rose" | "Orange" | "Yellow" | "Green";
 
 export type Props = TextInputProps & {
-    lightColor?: string;
-    darkColor?: string;
     disabled?: boolean;
     themeScheme?: "light" | "dark";
     rightSideComponent?: React.ReactNode;

@@ -1,0 +1,133 @@
+---
+title: "RadioButton"
+publishedAt: "2025-01-28"
+# image: "/images/gallery/img-02.jpg"
+summary: "Open a Terminal in your project's folder and run"
+tag: "Android IOS Web"
+---
+The `RadioButton` component provides a visually appealing and interactive radio button group, allowing users to select one option from a list. It supports animations, theming, and various customizations.
+
+### Step 1: Install [`React-Native-Reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/)
+
+To use this component, you need to install the `react-native-reanimated` library. Follow the steps below:
+
+### Step 2: Install [`Hyper-Native-Ui`](https://www.npmjs.com/package/hyper-native-ui)
+
+* Open a Terminal in your project's folder and run: `hyper-native-ui`
+
+### Usage Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import RadioButton from 'hyper-native-ui';
+
+const options = [
+    { label: 'Option 1', value: 'opt1' },
+    { label: 'Option 2', value: 'opt2', disabled: true },
+    { label: 'Option 3', value: 'opt3' },
+];
+
+export default function App() {
+    const [selected, setSelected] = useState('opt1');
+
+    return (
+        <RadioButton
+            options={options}
+            selectedValue={selected}
+            onSelect={(value) => setSelected(value)}
+            size={28}
+            animationDuration={500}
+            radioOptionTextStyle={{ fontWeight: 'bold', fontSize: 16 }}
+        />
+    );
+}`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+---
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/radiobutton-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+### RadioButton Props
+
+- **`options`**: `Option[]`  
+  Array of option objects for the radio buttons.  
+
+- **`selectedValue`**: `string | number`  
+  The currently selected value.
+
+- **`onSelect`**: `(value: string | number) => void`  
+  Callback function triggered when a selection is made.
+
+- **`size`**: `number`  
+  Diameter of the radio button circle. Default: `24`.
+
+- **`themeScheme`**: `"light" | "dark"`  
+  Overrides the default theme scheme.
+
+- **`variant`**: `"default" | "secondary" | ThemeName`  
+  Sets the color variant of the radio buttons. Default: `"default"`.
+
+- **`animationDuration`**: `number`  
+  Duration of the animation in milliseconds. Default: `300`.
+
+- **`radioOptionTextStyle`**: `TextStyle`  
+  Custom text style for the radio option labels.
+
+### Option Type
+
+- **`label`**: `string`  
+  The text displayed alongside the radio button.
+
+- **`value`**: `string | number`  
+  The value of the radio button.
+
+- **`disabled`**: `boolean`  
+  If true, the option is not selectable.
+
+### RadioOption Props
+
+- **`label`**: `string`  
+  The text displayed alongside the radio button.
+
+- **`value`**: `string | number`  
+  The value of the radio button.
+
+- **`isSelected`**: `boolean`  
+  Determines if the radio button is currently selected.
+
+- **`onPress`**: `(value: string | number) => void`  
+  Function triggered when the radio button is pressed.
+
+- **`size`**: `number`  
+  Diameter of the radio button circle.
+
+- **`color`**: `string`  
+  Color of the selected radio button.
+
+- **`textColor`**: `string`  
+  Text color for the label.
+
+- **`disabled`**: `boolean`  
+  Indicates if the option is not selectable.
+
+- **`radioOptionTextStyle`**: `TextStyle`  
+  Custom text style for the radio option labels.

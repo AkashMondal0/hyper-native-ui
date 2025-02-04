@@ -7,13 +7,18 @@ import {
     TextStyle,
     ScrollView,
 } from 'react-native';
-import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withTiming
+} from 'react-native-reanimated';
 import useTheme from '../hooks/useTheme';
 import TouchableOpacity from './TouchableOpacity';
 
 interface DropdownItem {
     label: string;
     value: string | number;
+    onPres?: () => void
 }
 
 interface AnimatedDropdownProps {
@@ -24,6 +29,7 @@ interface AnimatedDropdownProps {
     itemStyle?: ViewStyle;
     itemTextStyle?: TextStyle;
     dropdownAnimationDuration?: number,
+    itemHeight?: number
 }
 
 const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
@@ -33,7 +39,8 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
     dropdownStyle = {},
     itemStyle = {},
     itemTextStyle,
-    dropdownAnimationDuration = 300
+    dropdownAnimationDuration = 300,
+    itemHeight = 51,
 }) => {
     const [selectedValue, setSelectedValue] = useState<DropdownItem | null>(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -43,9 +50,8 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
 
     const toggleDropdown = () => {
         setIsVisible(!isVisible);
-        dropdownHeight.value = isVisible
-            ? withTiming(0, { duration: dropdownAnimationDuration })
-            : withTiming(200, { duration: dropdownAnimationDuration }); // Adjust the target height as needed
+        const targetHeight = isVisible ? 0 : Math.min(data.length * itemHeight, 200); // Adjust the max height as needed
+        dropdownHeight.value = withTiming(targetHeight, { duration: dropdownAnimationDuration });
     };
 
     const handleSelect = (item: DropdownItem) => {
@@ -105,12 +111,14 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
                     bounces={false}>
                     {data.map((item, index) => (
                         <TouchableOpacity
+                            activeOpacity={0.4}
                             key={index}
                             style={[{
                                 padding: 12,
-                                borderBottomWidth: 0.5,
+                                borderBottomWidth: index + 1 === data.length ? 0 : 0.6,
                                 borderBottomColor: currentTheme.muted_foreground,
                                 backgroundColor: currentTheme.muted,
+                                height: itemHeight, // Set the item height
                             }, itemStyle]}
                             onPress={() => handleSelect(item)}>
                             <Text
@@ -119,6 +127,7 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
                                     fontSize: 16,
                                     color: currentTheme.accent_foreground,
                                     fontWeight: "500",
+                                    textAlign: "center"
                                 }, itemTextStyle]}>
                                 {item.label}
                             </Text>

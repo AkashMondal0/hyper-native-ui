@@ -1,20 +1,12 @@
+import { themeColors, ThemeNameType, useTheme } from "hyper-native-ui";
 import React, { useState, useCallback, ReactNode, useMemo } from "react";
-import {
-    View,
-    TouchableOpacity,
-    Text,
-    ViewStyle,
-    TextStyle,
-    TouchableOpacityProps
-} from "react-native";
+import { View, TouchableOpacity, Text, ViewStyle, TextStyle, TouchableOpacityProps } from "react-native";
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
     withSpring,
     withTiming,
 } from "react-native-reanimated";
-import { themeColors, ThemeName } from "../constants/Colors";
-import useTheme from "../hooks/useTheme";
 
 const Collapsible = ({
     title,
@@ -40,7 +32,7 @@ const Collapsible = ({
     backgroundColor?: string;
     animationType?: "spring" | "normal";
     themeScheme?: "light" | "dark";
-    variant?: "default" | "secondary" | ThemeName;
+    variant?: "default" | "secondary" | ThemeNameType;
     width?: ViewStyle["width"]
     style?: {
         backgroundColor?: string,
