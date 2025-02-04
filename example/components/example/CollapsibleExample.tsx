@@ -1,43 +1,53 @@
 import React from "react";
 import { ScrollView, Text, View } from "react-native";
-import Collapsible from "../dev/Collapsible";
-import { ThemedView, Image } from "hyper-native-ui";
+import { ThemedView, Image, useTheme, Button, Collapsible } from "hyper-native-ui";
 
-const App = () => {
+const CollapsibleExample = () => {
     const url = 'https://4kwallpapers.com/images/walls/thumbs_3t/19763.jpg'
+    const { toggleTheme, themeScheme, currentTheme } = useTheme();
 
     return (
         <ThemedView style={{ flex: 1, padding: 10 }}>
             <ScrollView>
-                <Collapsible title={"Collapsible Animation Spring"} animationType="spring">
-                    <Text style={{ padding: 16 }}>
-                        Lorem ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique  ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique  ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique  ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique possimus consectetur eligendi nulla illum praesentium saepe pariatur.
-                    </Text>
+                <Text style={{
+                    color: currentTheme.foreground,
+                    fontSize: 24,
+                    marginBottom: 10,
+                    textAlign: 'center',
+                    padding: 20,
+                    fontWeight: 'bold',
+                }}>
+                    Collapsible Example
+                </Text>
+                <View style={{ height: 20 }} />
+                <Button onPress={() => toggleTheme()}>
+                    {`Switch to ${themeScheme === 'light' ? 'Dark' : 'Light'} mode`}
+                </Button>
+                <View style={{ height: 20 }} />
+                <Collapsible
+                    containerStyle={{
+                        width: "60%"
+                    }}
+                    title={"Collapsible width 60%"} animationType="spring" variant="secondary">
+                    Lorem ipsum dolor,
+                    sit amet consectetur adipisicing elit. Reprehenderit,
+                    magnam quis. Similique  ipsum dolor,
+                    sit amet consectetur tium saepe pariatur.
                 </Collapsible>
                 <View style={{ height: 10 }} />
-                <Collapsible title={"Collapsible Animation Normal"} animationType="normal">
-                    <Text style={{ padding: 16 }}>
-                        Lorem ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique  ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique  ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique  ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique possimus consectetur eligendi nulla illum praesentium saepe pariatur.
-                    </Text>
+                <Collapsible title={"Collapsible Animation Normal"} variant="Rose" animationType="normal">
+                    Lorem ipsum dolor,
+                    sit amet consectetur adipisicing elit. Reprehenderit,
+                    magnam quis. Similique  ipsum dolor,
+                    sit amet consectetur adipisicing elit. Reprehenderit,
+                    magnam quis. Similique  ipsum dolor,
+                    sit amet consectetur adipisicing elit. Reprehenderit,
+                    magnam quis. Similique  ipsum dolor,
+                    sit amet consectetur adipisicing elit. Reprehenderit,
+                    magnam quis. Similique possimus consectetur eligendi nulla illum praesentium saepe pariatur.
                 </Collapsible>
                 <View style={{ height: 10 }} />
-                <Collapsible title={"Open Collapsible Image"}>
+                <Collapsible title={"Collapsible Image"}>
                     <View style={{
                         width: "100%",
                         justifyContent: "center",
@@ -52,21 +62,19 @@ const App = () => {
                 </Collapsible>
                 <View style={{ height: 10 }} />
                 <Collapsible title={"Collapsible"} animationType="spring">
-                    <Text style={{ padding: 16 }}>
-                        Lorem ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique  ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique  ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique  ipsum dolor,
-                        sit amet consectetur adipisicing elit. Reprehenderit,
-                        magnam quis. Similique possimus consectetur eligendi nulla illum praesentium saepe pariatur.
-                    </Text>
+                    Lorem ipsum dolor,
+                    sit amet consectetur adipisicing elit. Reprehenderit,
+                    magnam quis. Similique  ipsum dolor,
+                    sit amet consectetur adipisicing elit. Reprehenderit,
+                    magnam quis. Similique  ipsum dolor,
+                    sit amet consectetur adipisicing elit. Reprehenderit,
+                    magnam quis. Similique  ipsum dolor,
+                    sit amet consectetur adipisicing elit. Reprehenderit,
+                    magnam quis. Similique possimus consectetur eligendi nulla illum praesentium saepe pariatur.
                 </Collapsible>
             </ScrollView>
         </ThemedView>
     );
 };
 
-export default App;
+export default CollapsibleExample;

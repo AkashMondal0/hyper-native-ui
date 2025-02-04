@@ -20,6 +20,9 @@ import DropdownMenuComponent from './components/example/DropdownMenuExampleDemo'
 import CarouselExample from './components/example/CarouselExample';
 import SkeletonExample from './components/example/SkeletonExample';
 import RadioButtonExampleDemo from './components/example/RadioButtonExampleDemo';
+import CollapsibleExample from './components/example/CollapsibleExample';
+import ParallaxScrollViewExample from './components/example/ParallaxImageScrollExample';
+
 
 const options = {
   contentStyle: {
@@ -39,6 +42,14 @@ const RootStack = createNativeStackNavigator({
     },
     RadioButtonExample: {
       screen: RadioButtonExampleDemo,
+      options
+    },
+    CollapsibleExample: {
+      screen: CollapsibleExample,
+      options
+    },
+    ParallaxScrollViewExample: {
+      screen: ParallaxScrollViewExample,
       options
     },
     SkeletonExample: {

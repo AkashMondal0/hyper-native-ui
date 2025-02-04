@@ -14,7 +14,6 @@ import Animated, {
 } from 'react-native-reanimated';
 import useTheme from '../hooks/useTheme';
 import TouchableOpacity from './TouchableOpacity';
-const ITEM_HEIGHT = 51
 
 interface DropdownItem {
     label: string;
@@ -30,6 +29,7 @@ interface AnimatedDropdownProps {
     itemStyle?: ViewStyle;
     itemTextStyle?: TextStyle;
     dropdownAnimationDuration?: number,
+    itemHeight?: number
 }
 
 const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
@@ -39,7 +39,8 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
     dropdownStyle = {},
     itemStyle = {},
     itemTextStyle,
-    dropdownAnimationDuration = 300
+    dropdownAnimationDuration = 300,
+    itemHeight = 51,
 }) => {
     const [selectedValue, setSelectedValue] = useState<DropdownItem | null>(null);
     const [isVisible, setIsVisible] = useState(false);
@@ -49,7 +50,7 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
 
     const toggleDropdown = () => {
         setIsVisible(!isVisible);
-        const targetHeight = isVisible ? 0 : Math.min(data.length * ITEM_HEIGHT, 200); // Adjust the max height as needed
+        const targetHeight = isVisible ? 0 : Math.min(data.length * itemHeight, 200); // Adjust the max height as needed
         dropdownHeight.value = withTiming(targetHeight, { duration: dropdownAnimationDuration });
     };
 
@@ -117,7 +118,7 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
                                 borderBottomWidth: index + 1 === data.length ? 0 : 0.6,
                                 borderBottomColor: currentTheme.muted_foreground,
                                 backgroundColor: currentTheme.muted,
-                                height: ITEM_HEIGHT, // Set the item height
+                                height: itemHeight, // Set the item height
                             }, itemStyle]}
                             onPress={() => handleSelect(item)}>
                             <Text

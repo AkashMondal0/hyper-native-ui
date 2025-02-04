@@ -6,10 +6,13 @@ summary: "Open a Terminal in your project's folder and run"
 tag: "Android IOS Web"
 ---
 
-The `CheckBox` component is a flexible and customizable checkbox built on top of [react-native-bouncy-checkbox](https://www.npmjs.com/package/react-native-bouncy-checkbox) .
- It supports a variety of themes and variants, allowing it to integrate seamlessly into diverse design systems.
- 
-### Step 1: Install [`Hyper-Native-Ui`](https://www.npmjs.com/package/hyper-native-ui)
+The `Checkbox` component is a customizable, theme-aware, and animated checkbox for React Native. It supports dynamic styling, bounce animations, and various configuration options to suit your app's design and functionality.
+
+### Step 1: Install [`React-Native-Reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/)
+
+To use this component, you need to install the `react-native-reanimated` library. Follow the steps below:
+
+### Step 2: Install [`Hyper-Native-Ui`](https://www.npmjs.com/package/hyper-native-ui)
 
 * Open a Terminal in your project's folder and run: `hyper-native-ui`
 
@@ -32,7 +35,29 @@ The `CheckBox` component is a flexible and customizable checkbox built on top of
     compact
     codeInstances={[
         {
-            code: `<CheckBox />`,
+            code: `import React, { useState } from "react";
+import Checkbox from "hyper-native-ui";
+
+const App = () => {
+    const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxToggle = (newSelection: boolean) => {
+    setIsChecked(newSelection);
+    console.log("Checkbox is now", newSelection ? "checked" : "unchecked");
+  };
+
+  return (
+    <CheckBox
+      label="Agree to Terms"
+      isSelected={isChecked}
+      onToggle={handleCheckboxToggle}
+      size={30}
+      variant={"default"}
+    />
+  )
+};
+
+export default App;`,
             label: 'React Native',
             language: 'jsx'
         },
@@ -56,87 +81,40 @@ style={{
 }}></div>
 <script async src="https://snack.expo.dev/embed.js"></script>
 
-## Props
+### Custom Props
 
-### `themeScheme`
+- **`label`** (`string`): The text displayed next to the checkbox.
+- **`isSelected`** (`boolean`, **required**): Indicates whether the checkbox is selected or not.
+- **`onToggle`** (`(isSelected: boolean) => void`, **required**): A callback function that is triggered when the checkbox is toggled.
+- **`size`** (`number`, default: `24`): Specifies the width and height of the checkbox in pixels.
+- **`bounceIntensity`** (`number`, default: `8`): Controls the intensity of the bounce animation when toggled.
+- **`themeScheme`** (`"light" | "dark"`): Allows overriding the theme scheme for the component.
+- **`variant`** (`"default" | "secondary" | ThemeName`, default: `"default"`): Determines the color theme for the checkbox.
+- **`innerComponent`** (`ReactNode`): A custom component rendered inside the checkbox when selected.
+- **`disabled`** (`boolean`): Disables the checkbox, making it unclickable and dimmed.
+- **`radius`** (`number`): Adjusts the border radius of the checkbox. Defaults to `size / 4` if not provided.
+- **`labelTextStyle`** (`TextStyle`): Customizes the style of the label text.
 
-- **Type**: `"light" | "dark"`
-- **Optional**
-- **Description**: Specifies the theme scheme for the checkbox. If not provided, it defaults to the current theme scheme retrieved from the `useTheme` hook.
+### Animated Properties
 
-### `variant`
+The checkbox uses React Native Reanimated for smooth transitions and animations. These include:
 
-- **Type**: `"default" | "secondary" | "danger" | "warning" | "success" | "outline" | "Zinc" | "State" | "Stone" | "Grey" | "Neutral" | "Red" | "Rose" | "Orange" | "Yellow" | "Green"`
-- **Optional**
-- **Default**: `"default"`
-- **Description**: Specifies the visual style variant of the checkbox. Custom theme colors are applied based on the provided `variant`.
+- **Scale**: The checkbox bounces when toggled.
+- **Border Width**: The border smoothly transitions based on the selection state.
 
-### `size`
+### Theming
 
-- **Type**: `number`
-- **Optional**
-- **Default**: `25`
-- **Description**: Specifies the size of the checkbox (in pixels).
+The component relies on the `useTheme` hook for theme-awareness. It adapts its colors dynamically based on the current theme.
 
-### `...props`
+## Features
 
-- **Type**: `BouncyCheckboxProps`
-- **Optional**
-- **Description**: Additional props to be passed down to the `BouncyCheckbox` component. Refer to the `react-native-bouncy-checkbox` documentation for a list of all supported props.
-
-## How It Works
-
-The component determines its appearance based on the provided `variant` and `themeScheme`. If a variant matches a predefined theme name, the corresponding colors are applied. Otherwise, it falls back to the `default` styling.
-
-The `useTheme` hook provides the `currentTheme` and `defaultThemeScheme` for seamless integration with your app's global theme.
-
-### Theme Color Resolution Logic
-
-1. If the `variant` is `"default"` or `"secondary"`, the current theme colors are applied.
-2. If a custom `variant` (e.g., `"Red"`, `"Orange"`) is provided, the component uses matching theme colors from `themeColors`.
-3. Fallback colors are applied when no matching theme or variant is found.
-
-## Example Usage
-<CodeBlock className="my-24"
-    compact
-    codeInstances={[
-        {
-            code: `import React from 'react';
-import { View } from 'react-native';
-import CheckBox from './CheckBox';
-
-const App = () => {
-  return (
-    <View>
-      {/* Light-themed success variant checkbox */}
-      <CheckBox
-        size={30}
-        variant="success"
-        themeScheme="light"
-        isChecked={true}
-        onPress={(isChecked: boolean) => {
-          console.log("Checkbox is now:", isChecked);
-        }}
-      />
-
-      {/* Dark-themed warning variant checkbox */}
-      <CheckBox
-        size={30}
-        variant="warning"
-        themeScheme="dark"
-        isChecked={false}
-        onPress={(isChecked: boolean) => {
-          console.log("Checkbox is now:", isChecked);
-        }}
-      />
-    </View>
-  );
-};
-
-export default App;`,
-            label: 'React Native',
-            language: 'jsx'
-        },
-    ]}
-    copyButton
-/>
+1. **Dynamic Styling**:
+   - Adjusts colors and borders according to the selected theme or provided props.
+2. **Bounce Animation**:
+   - Adds a spring animation effect when toggling.
+3. **Customizable**:
+   - Supports custom components, sizes, radii, and labels.
+4. **Theme-Aware**:
+   - Automatically adjusts appearance based on light or dark mode.
+5. **Disabled State**:
+   - Dims the component and disables interaction when `disabled` is `true`.

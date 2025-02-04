@@ -1,0 +1,159 @@
+---
+title: "Collapsible"
+publishedAt: "2025-02-04"
+# image: "/images/gallery/img-02.jpg"
+summary: "Open a Terminal in your project's folder and run"
+tag: "Android IOS"
+---
+
+The `Collapsible` component provides an expandable and collapsible section with animated transitions. It allows customization of themes, animations, and trigger components.
+
+### Step 1: Install [`React-Native-Reanimated`](https://docs.swmansion.com/react-native-reanimated/docs/fundamentals/getting-started/)
+
+To use this component, you need to install the `react-native-reanimated` library. Follow the steps below:
+
+### Step 2: Install [`Hyper-Native-Ui`](https://www.npmjs.com/package/hyper-native-ui)
+
+* Open a Terminal in your project's folder and run: `hyper-native-ui`
+
+## Import Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { Collapsible } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+### Usage Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<Collapsible title={'Collapsible'} animationType="spring">
+      {...content}
+    </Collapsible>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+---
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/collapsible-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+### Required Props
+
+- `children`: (ReactNode) - The content inside the collapsible section.
+
+### Optional Props
+
+- `title`: (string) - The text displayed in the trigger button if no `triggerComponent` is provided.
+- `titleStyle`: (TextStyle) - Custom styles for the title text.
+- `triggerComponent`: (ReactNode) - A custom component that serves as the trigger.
+- `containerStyle`: (ViewStyle) - Custom styles for the collapsible container.
+- `touchableOpacityStyle`: (TouchableOpacityProps["style"]) - Styles for the touchable area.
+- `backgroundColor`: (string) - Background color of the collapsible section.
+- `animationType`: ("spring" | "normal") - Defines the animation type used for expanding/collapsing.
+- `themeScheme`: ("light" | "dark") - Defines whether the theme should be light or dark.
+- `variant`: ("default" | "secondary" | ThemeName) - Defines the theme variant.
+- `width`: (ViewStyle["width"]) - Sets the width of the collapsible container.
+- `defaultValue`: (boolean) - Whether the collapsible should be open initially. Default is `false`.
+- `style`: (object) - Custom styles including:
+  - `backgroundColor`: (string) - Background color.
+  - `color`: (string) - Text color.
+  - `borderColor`: (string) - Border color.
+  - `isFocused`: (string) - Color when focused.
+
+## Usage
+
+### Basic Example
+
+```tsx
+import { Collapsible } from 'hyper-native-ui';
+import { Text } from "react-native";
+
+export default function Example() {
+    return (
+        <Collapsible title="Click to Expand">
+            This is the collapsible content.
+        </Collapsible>
+    );
+}
+```
+
+### Using a Custom Trigger Component
+
+```tsx
+import { Collapsible } from 'hyper-native-ui';
+import { Text, View } from "react-native";
+
+export default function Example() {
+    return (
+        <Collapsible
+            triggerComponent={<View><Text>Tap Me</Text></View>}
+        >
+            Custom trigger example.
+        </Collapsible>
+    );
+}
+```
+
+### Custom Styles and Animation Type
+
+```tsx
+<Collapsible
+    title="Styled Collapsible"
+    titleStyle={{ fontSize: 18, fontWeight: 'bold' }}
+    containerStyle={{ padding: 10, borderWidth: 1, borderColor: '#ccc' }}
+    animationType="spring"
+>
+    Styled collapsible content.
+</Collapsible>
+```
+
+## Theming
+
+This component supports theme variants and custom styling. The `variant` prop changes the theme styling dynamically.
+
+```tsx
+<Collapsible title="Dark Theme" variant="secondary" themeScheme="dark">
+    Dark theme content.
+</Collapsible>
+```
+
+## Accessibility
+
+- The trigger component is a `TouchableOpacity`, ensuring accessibility for screen readers.
+- Proper color contrast is maintained via theming.
+- Animations are smooth and optimized for user interaction.
+
+## Notes
+
+- Uses `react-native-reanimated` for performance-optimized animations.
+- Default animation is `spring`, but it can be set to `normal`.
+- Works with both `text` and `ReactNode` children.
+
+## Conclusion
+
+The `Collapsible` component is a flexible and customizable UI element for creating expandable sections with smooth animations and theme support.

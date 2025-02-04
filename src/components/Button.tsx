@@ -169,7 +169,7 @@ const Button = memo(function Button({
             <ButtonContent children={children}
                 textStyle={[textStyle, sizeVariant]}
                 icon={icon}
-                textTextProps={textTextProps}
+                textProps={textTextProps}
                 loadingStyle={loadingStyle}
                 loadingProps={loadingProps}
                 loading={loading}
@@ -187,13 +187,13 @@ const ButtonContent = ({
     loading,
     loadingStyle,
     loadingProps,
-    textTextProps,
+    textProps,
     color
 }: {
     children: string | React.ReactNode,
     icon: React.ReactNode,
     loading: boolean,
-    textTextProps?: TextProps,
+    textProps?: TextProps,
     textStyle: TextProps["style"],
     loadingProps?: ActivityIndicatorProps,
     loadingStyle: ActivityIndicatorProps["style"],
@@ -204,7 +204,7 @@ const ButtonContent = ({
         return <>
             {icon ? icon : <></>}
             <Text
-                {...textTextProps}
+                {...textProps}
                 numberOfLines={1}
                 style={[{
                     color: color,
