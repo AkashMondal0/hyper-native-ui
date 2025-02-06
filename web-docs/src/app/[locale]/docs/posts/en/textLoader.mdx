@@ -1,0 +1,98 @@
+---
+title: "TextLoader"
+publishedAt: "2025-02-06"
+# image: "/images/gallery/img-02.jpg"
+summary: "A React Native animated text loading component with typing effect."
+tag: "Android IOS Web"
+---
+
+`TextLoader` is a React Native component that animates text as if it is being typed out, with a pulsing ellipsis at the end. It supports different text variants, colors, and speed adjustments.
+
+### Step 1: Install [`Hyper-Native-Ui`](https://www.npmjs.com/package/hyper-native-ui)
+
+* Open a Terminal in your project's folder and run: `hyper-native-ui`
+
+## Import Component
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import { TextLoader } from 'hyper-native-ui';`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+## Usage
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `<TextLoader
+  text="Finalizing..."
+  onComplete={() => console.log('Typing finished!')}
+/>`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+### Custom Text variants
+
+<CodeBlock className="my-24"
+    compact
+    codeInstances={[
+        {
+            code: `import React from 'react';
+import { View } from 'react-native';
+import TextLoader from 'hyper-native-ui';
+
+export default function Example() {
+  return (
+    <View style={{ padding: 20 }}>
+      <TextLoader text="Loading data..." speed={50} variant="H4" variantColor="primary" />
+    </View>
+  );
+}`,
+            label: 'React Native',
+            language: 'jsx'
+        },
+    ]}
+    copyButton
+/>
+
+
+---
+### **Expo Example Usage:**
+<div 
+data-snack-id="@akashmondal0/textloader-hyper-native-ui" 
+data-snack-platform="web" 
+data-snack-preview="true" 
+data-snack-theme="dark" 
+style={{
+  "overflow":"hidden",
+  "background":"#0C0D0E",
+  "border":"1px solid var(--color-border)",
+  "borderRadius":"4px",
+  "height":"505px",
+  "width":"100%"
+}}></div>
+<script async src="https://snack.expo.dev/embed.js"></script>
+
+### Props
+- `text`: `string` - The text to be animated. Default is `"Generating response..."`.
+- `speed`: `number` - Speed of the typing effect in milliseconds per character. Default is `30`.
+- `onComplete`: `() => void` - Callback function when typing is completed. Default is `undefined`.
+- `themeScheme`: `'light' | 'dark'` - Theme scheme for styling. Default is `undefined`.
+- `variantColor`: `'default' | 'primary' | 'secondary' | ThemeName` - Color variant of the text. Default is `'default'`.
+- `variant`: Various text variants (H1, H2, etc.) - Typography variant. Default is `'body1'`.
+- `bold`: `TextStyle['fontWeight']` - Custom font weight. Default is `undefined`.
+- `size`: `TextStyle['fontSize']` - Custom font size. Default is `undefined`.
+- `center`: `boolean` - Whether text is centered. Default is `false`.
+- `containerStyle`: `ViewProps` - Style for the text container. Default is `undefined`.

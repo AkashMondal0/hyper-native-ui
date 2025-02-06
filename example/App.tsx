@@ -22,6 +22,7 @@ import SkeletonExample from './components/example/SkeletonExample';
 import RadioButtonExampleDemo from './components/example/RadioButtonExampleDemo';
 import CollapsibleExample from './components/example/CollapsibleExample';
 import ParallaxScrollViewExample from './components/example/ParallaxImageScrollExample';
+import TextLoaderExample from './components/example/TextLoaderExample';
 
 
 const options = {
@@ -42,6 +43,10 @@ const RootStack = createNativeStackNavigator({
     },
     RadioButtonExample: {
       screen: RadioButtonExampleDemo,
+      options
+    },
+    TextLoaderExample: {
+      screen: TextLoaderExample,
       options
     },
     CollapsibleExample: {

@@ -18,6 +18,7 @@ const routes = [
     "SkeletonExample",
     "RadioButtonExample",
     "CollapsibleExample",
+    "TextLoaderExample",
     "ParallaxScrollViewExample"
 ].sort()
 export default function ComponentList() {
