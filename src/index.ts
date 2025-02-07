@@ -12,6 +12,7 @@ export { themeColors } from "./constants/Colors";
 export { default as Card } from "./components/Card";
 export { default as Carousel } from "./components/Carousel";
 export { default as Collapsible } from "./components/Collapsible";
+
 //
 export { default as Icon } from "./components/Icon";
 export { default as Skeleton } from "./components/Skeleton";
@@ -32,6 +33,7 @@ export { default as Text } from "./components/Text";
 export { default as Dropdown } from "./components/Dropdown";
 export { default as RadioButton } from "./components/RadioButton";
 export { default as ParallaxScrollView } from "./components/ParallaxScrollView";
+export { default as TextLoader } from "./components/TextLoader";
 
 
 export type {
