@@ -34,8 +34,7 @@ export { default as Dropdown } from "./components/Dropdown";
 export { default as RadioButton } from "./components/RadioButton";
 export { default as ParallaxScrollView } from "./components/ParallaxScrollView";
 export { default as TextLoader } from "./components/TextLoader";
-
-
+export { default as DraggableView } from "./components/PanResponder";
 export type {
     Theme as ThemeType,
     ThemeColors as ThemeColorsType,

@@ -23,6 +23,7 @@ import RadioButtonExampleDemo from './components/example/RadioButtonExampleDemo'
 import CollapsibleExample from './components/example/CollapsibleExample';
 import ParallaxScrollViewExample from './components/example/ParallaxImageScrollExample';
 import TextLoaderExample from './components/example/TextLoaderExample';
+import DraggableViewExample from './components/example/DraggableViewExample';
 
 
 const options = {
@@ -35,11 +36,16 @@ const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screenOptions: {
     header: ({ route: { name } }) => <AppHeader title={name} />,
+    // headerShown: false
   },
   screens: {
     Home: {
       screen: ComponentList,
       options: { headerShown: false, ...options }
+    },
+    DraggableViewExample: {
+      screen: DraggableViewExample,
+      options
     },
     RadioButtonExample: {
       screen: RadioButtonExampleDemo,
@@ -142,6 +148,7 @@ const AppHeader = ({ title }: { title: string }) => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
+      top: 0,
       backgroundColor: currentTheme.background
     }]}>
       <View style={{

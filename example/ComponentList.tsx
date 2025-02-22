@@ -19,7 +19,8 @@ const routes = [
     "RadioButtonExample",
     "CollapsibleExample",
     "TextLoaderExample",
-    "ParallaxScrollViewExample"
+    "ParallaxScrollViewExample",
+    "DraggableViewExample"
 ].sort()
 export default function ComponentList() {
     const navigation = useNavigation();
