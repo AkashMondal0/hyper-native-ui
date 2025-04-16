@@ -15,6 +15,8 @@
     <img src="public/e9.gif" height="500px" />
     <img src="public/e10.gif" height="500px" />
     <img src="public/e11.gif" height="500px" />
+    <img src="public/e13.gif" height="500px" />
+    <img src="public/e12.jpg" height="500px" />
 </p>
 
 ### Installation
