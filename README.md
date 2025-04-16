@@ -1,23 +1,8 @@
 # React Native Components Library
 <p align="center">
-     <img src="https://raw.githubusercontent.com/AkashMondal0/hyper-native-ui/refs/heads/main/icon.png" height="250px" style="display:block"/>
+     <img src="https://raw.githubusercontent.com/AkashMondal0/hyper-native-ui/refs/heads/main/public/icon.png" height="250px" style="display:block"/>
 </p>
 <p align="center">Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable.</p>
-<p align="center">
-    <img src="public/e1.gif" height="500px" />
-    <img src="public/e2.gif" height="500px" />
-    <img src="public/e3.gif" height="500px" />
-    <img src="public/e4.gif" height="500px" />
-    <img src="public/e5.gif" height="500px" />
-    <img src="public/e6.gif" height="500px" />
-    <img src="public/e7.gif" height="500px" />
-    <img src="public/e8.gif" height="500px" />
-    <img src="public/e9.gif" height="500px" />
-    <img src="public/e10.gif" height="500px" />
-    <img src="public/e11.gif" height="500px" />
-    <img src="public/e13.gif" height="500px" />
-    <img src="public/e12.jpg" height="500px" />
-</p>
 
 ### Installation
 ```sh
@@ -57,7 +42,6 @@ function ButtonExample() {
   );
 }
 ```
-
 ## Features
 - Support `React Navigation` Integration, [read more]().
 - Compatible with `Expo`.
@@ -68,6 +52,23 @@ function ButtonExample() {
 ## Getting Started
 
 Check out [the documentation website](https://hyper-native-ui.vercel.app).
+
+## Examples
+<p align="center">
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e1.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e2.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e3.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e4.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e5.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e6.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e7.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e8.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e9.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e10.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e11.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e13.gif?raw=true" height="500px" />
+    <img src="https://github.com/AkashMondal0/hyper-native-ui/blob/main/public/e12.jpg?raw=true" height="500px" />
+</p>
 
 ## Author
 
