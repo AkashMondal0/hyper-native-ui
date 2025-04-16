@@ -3,7 +3,7 @@ export { default as Input } from "./components/Input";
 export { default as Avatar } from "./components/Avatar";
 export { default as CheckBox } from "./components/CheckBox";
 export { default as Image } from "./components/Image";
-export { default as StatusBar } from "./components/StatusBar";
+export { default as StatusBar, StatusBarHeight } from "./components/StatusBar";
 export { default as useTheme } from "./hooks/useTheme";
 export { default as ThemeContext } from "./context/themeContext";
 export { default as ThemeProvider } from "./provider/themeProvider";
@@ -34,7 +34,8 @@ export { default as Dropdown } from "./components/Dropdown";
 export { default as RadioButton } from "./components/RadioButton";
 export { default as ParallaxScrollView } from "./components/ParallaxScrollView";
 export { default as TextLoader } from "./components/TextLoader";
-
+export { default as DraggableView } from "./components/PanResponder";
+export { default as ZoomableImage } from "./components/ImageZoom";
 
 export type {
     Theme as ThemeType,

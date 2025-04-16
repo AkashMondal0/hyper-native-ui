@@ -30,7 +30,7 @@ export default function StatusBarExampleDemo() {
                 }}>
                 Themes Example Demo
             </Text>
-            <StatusBar />
+            <StatusBar translucent={false} />
             <View
                 style={{
                     display: 'flex',

@@ -4,7 +4,19 @@
 </p>
 <p align="center">Beautifully designed components that you can copy and paste into your apps. Accessible. Customizable.</p>
 <p align="center">
-     <img src="https://raw.githubusercontent.com/AkashMondal0/hyper-native-ui/refs/heads/main/img.jpg"/>
+    <img src="public/e1.gif" height="500px" />
+    <img src="public/e2.gif" height="500px" />
+    <img src="public/e3.gif" height="500px" />
+    <img src="public/e4.gif" height="500px" />
+    <img src="public/e5.gif" height="500px" />
+    <img src="public/e6.gif" height="500px" />
+    <img src="public/e7.gif" height="500px" />
+    <img src="public/e8.gif" height="500px" />
+    <img src="public/e9.gif" height="500px" />
+    <img src="public/e10.gif" height="500px" />
+    <img src="public/e11.gif" height="500px" />
+    <img src="public/e13.gif" height="500px" />
+    <img src="public/e12.jpg" height="500px" />
 </p>
 
 ### Installation

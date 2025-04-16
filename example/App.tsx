@@ -1,9 +1,9 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import { createStaticNavigation, useNavigation } from "@react-navigation/native";
+import { createStaticNavigation, DefaultTheme, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar, ThemeProvider, useTheme, Text, Button } from 'hyper-native-ui';
-import { useSafeAreaInsets, SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar, ThemeProvider, useTheme, StatusBarHeight, Text, Button } from 'hyper-native-ui';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // pages
 import SwitchExampleDemo from './components/example/SwitchExample';
@@ -23,6 +23,7 @@ import RadioButtonExampleDemo from './components/example/RadioButtonExampleDemo'
 import CollapsibleExample from './components/example/CollapsibleExample';
 import ParallaxScrollViewExample from './components/example/ParallaxImageScrollExample';
 import TextLoaderExample from './components/example/TextLoaderExample';
+import DraggableViewExample from './components/example/DraggableViewExample';
 
 
 const options = {
@@ -35,10 +36,15 @@ const RootStack = createNativeStackNavigator({
   initialRouteName: 'Home',
   screenOptions: {
     header: ({ route: { name } }) => <AppHeader title={name} />,
+    // headerShown: false
   },
   screens: {
     Home: {
       screen: ComponentList,
+      options: { headerShown: false, ...options }
+    },
+    DraggableViewExample: {
+      screen: DraggableViewExample,
       options: { headerShown: false, ...options }
     },
     RadioButtonExample: {
@@ -107,14 +113,29 @@ const RootStack = createNativeStackNavigator({
     },
   },
 });
+
 const Navigation = createStaticNavigation(RootStack);
 
 const App = () => {
-  const paddingTop = useSafeAreaInsets();
+  const { currentTheme } = useTheme();
+
+  const background = currentTheme.background;
+  const theme: any = {
+    ...DefaultTheme,
+    colors: {
+      background: background,
+      border: currentTheme.border,
+      card: currentTheme.card,
+      notification: currentTheme.destructive,
+      primary: currentTheme.primary,
+      text: currentTheme.foreground
+    }
+  };
 
   return <>
-    <StatusBar topPadding={paddingTop.top} />
-    <Navigation />
+    <StatusBar translucent />
+    <StatusBarHeight />
+    <Navigation theme={theme} />
   </>
 };
 
@@ -142,6 +163,7 @@ const AppHeader = ({ title }: { title: string }) => {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
+      top: 0,
       backgroundColor: currentTheme.background
     }]}>
       <View style={{

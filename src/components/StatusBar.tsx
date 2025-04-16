@@ -7,12 +7,14 @@ type Props = StatusBarProps & {
     viewProps?: ViewProps
     topPadding?: number
     themeScheme?: "light" | "dark";
+    translucent?: boolean
 };
 
 const Statusbar = ({
     viewProps,
     topPadding = 0,
     themeScheme,
+    translucent = true,
     ...otherProps }: Props) => {
     const systemTheme = Appearance.getColorScheme() === "dark";
     const {
@@ -65,6 +67,13 @@ const Statusbar = ({
         };
     }, [currentTheme, themeScheme, defaultThemeScheme, variant]);
 
+
+    if (translucent) {
+        return (<StatusBar translucent barStyle={themeScheme === "dark" ? "light-content" : "dark-content"}
+            backgroundColor={"transparent"} />)
+    };
+
+
     if (currentTheme?.background) {
         return (<>
             <View style={{ paddingTop: topPadding }} {...viewProps} />
@@ -87,3 +96,12 @@ const Statusbar = ({
 }
 
 export default Statusbar;
+
+export const StatusBarHeight = () => {
+    const { currentTheme } = useTheme();
+
+    return <View style={{
+        height: StatusBar.currentHeight,
+        backgroundColor: currentTheme.background,
+    }} />;
+};
