@@ -1,9 +1,9 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import { createStaticNavigation, useNavigation } from "@react-navigation/native";
+import { createStaticNavigation, DefaultTheme, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar, ThemeProvider, useTheme, Text, Button } from 'hyper-native-ui';
-import { useSafeAreaInsets, SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar, ThemeProvider, useTheme, StatusBarHeight, Text, Button } from 'hyper-native-ui';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // pages
 import SwitchExampleDemo from './components/example/SwitchExample';
@@ -45,7 +45,7 @@ const RootStack = createNativeStackNavigator({
     },
     DraggableViewExample: {
       screen: DraggableViewExample,
-      options
+      options: { headerShown: false, ...options }
     },
     RadioButtonExample: {
       screen: RadioButtonExampleDemo,
@@ -113,14 +113,29 @@ const RootStack = createNativeStackNavigator({
     },
   },
 });
+
 const Navigation = createStaticNavigation(RootStack);
 
 const App = () => {
-  const paddingTop = useSafeAreaInsets();
+  const { currentTheme } = useTheme();
+
+  const background = currentTheme.background;
+  const theme: any = {
+    ...DefaultTheme,
+    colors: {
+      background: background,
+      border: currentTheme.border,
+      card: currentTheme.card,
+      notification: currentTheme.destructive,
+      primary: currentTheme.primary,
+      text: currentTheme.foreground
+    }
+  };
 
   return <>
-    <StatusBar topPadding={paddingTop.top} />
-    <Navigation />
+    <StatusBar translucent />
+    <StatusBarHeight />
+    <Navigation theme={theme} />
   </>
 };
 

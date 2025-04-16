@@ -4,6 +4,10 @@ import ThemeContext, { ThemeHook } from "../context/themeContext";
 const useTheme = (): ThemeHook => {
     const themeContext = useContext(ThemeContext);
 
+    if (!themeContext) {
+        throw new Error('ThemeProvider Not Found')
+    };
+
     return {
         themeScheme: themeContext!.themeScheme,
         currentTheme: themeContext!.currentTheme,

@@ -9,7 +9,7 @@ const VIDEO_WIDTH = SCREEN_WIDTH * 0.4; // 40% of screen width
 const VIDEO_HEIGHT = (VIDEO_WIDTH * 9) / 16; // 16:9 Aspect Ratio
 const PADDING = 20; // Space from edges
 const SNAP_BOTTOM = SCREEN_HEIGHT - VIDEO_HEIGHT - PADDING; // Bottom snap position
-const DraggableVideo = ({ position = "topRight", children }: { position: "topRight" | "topLeft" | "bottomRight" | "bottomLeft", children: ReactNode }) => {
+const DraggableVideo = ({ position = "topRight", children }: { position?: "topRight" | "topLeft" | "bottomRight" | "bottomLeft", children: ReactNode }) => {
 	// Determine initial position based on prop
 	const initialX = position.includes("Left") ? PADDING : SCREEN_WIDTH - VIDEO_WIDTH - PADDING;
 	const initialY = position.includes("top") ? PADDING : SNAP_BOTTOM;
