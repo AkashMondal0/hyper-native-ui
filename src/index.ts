@@ -36,6 +36,10 @@ export { default as ParallaxScrollView } from "./components/ParallaxScrollView";
 export { default as TextLoader } from "./components/TextLoader";
 export { default as DraggableView } from "./components/PanResponder";
 export { default as ZoomableImage } from "./components/ImageZoom";
+export { default as PressableButton } from "./components/PressbleButton";
+export { default as PressableView } from "./components/PressbleButton";
+
+
 
 export type {
     Theme as ThemeType,

@@ -1,12 +1,21 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Avatar, Button, themeColors, useTheme } from 'hyper-native-ui';
 
 export default function AvatarExampleDemo() {
   const { currentTheme, toggleTheme, themeScheme } = useTheme();
-  const [touchable, setTouchable] = useState(false)
-  const url = 'https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/08/ciri-the-witcher-season-3.jpg'
+  const [touchable, setTouchable] = useState(false);
+  const [url, setUrl] = useState("");
+
+  const changeUrl = () => {
+    setUrl(`https://picsum.photos/300/300?random=${Date.now()}`);
+  };
+
+  useEffect(() => {
+    changeUrl();
+  }, []);
+
   return (
     <ScrollView style={{
       flex: 1,
@@ -18,6 +27,9 @@ export default function AvatarExampleDemo() {
       </Button>
       <Button onPress={() => { setTouchable(!touchable) }} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>
         Touchable {`${touchable}`}
+      </Button>
+      <Button onPress={() => changeUrl()} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>
+        Change Avatar
       </Button>
       <View style={{
         justifyContent: "center",

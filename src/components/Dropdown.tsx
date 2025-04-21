@@ -10,7 +10,7 @@ import {
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
-    withTiming
+    withSpring
 } from 'react-native-reanimated';
 import useTheme from '../hooks/useTheme';
 import TouchableOpacity from './TouchableOpacity';
@@ -28,8 +28,7 @@ interface AnimatedDropdownProps {
     dropdownStyle?: ViewStyle;
     itemStyle?: ViewStyle;
     itemTextStyle?: TextStyle;
-    dropdownAnimationDuration?: number,
-    itemHeight?: number
+    itemHeight?: number;
 }
 
 const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
@@ -39,7 +38,6 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
     dropdownStyle = {},
     itemStyle = {},
     itemTextStyle,
-    dropdownAnimationDuration = 300,
     itemHeight = 51,
 }) => {
     const [selectedValue, setSelectedValue] = useState<DropdownItem | null>(null);
@@ -49,9 +47,16 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
     const dropdownHeight = useSharedValue(0);
 
     const toggleDropdown = () => {
+        const targetHeight = isVisible ? 0 : Math.min(data.length * itemHeight, 200);
+        dropdownHeight.value = withSpring(targetHeight, {
+            damping: 15,
+            stiffness: 150,
+            mass: 0.8,
+            overshootClamping: false,
+            restDisplacementThreshold: 0.01,
+            restSpeedThreshold: 0.01,
+        });
         setIsVisible(!isVisible);
-        const targetHeight = isVisible ? 0 : Math.min(data.length * itemHeight, 200); // Adjust the max height as needed
-        dropdownHeight.value = withTiming(targetHeight, { duration: dropdownAnimationDuration });
     };
 
     const handleSelect = (item: DropdownItem) => {
@@ -66,11 +71,8 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
     }));
 
     return (
-        <View style={{
-            width: '100%',
-            alignItems: 'center',
-        }}>
-            {/* Dropdown trigger button */}
+        <View style={{ width: '100%', alignItems: 'center' }}>
+            {/* Dropdown Trigger */}
             <RNTouchableOpacity
                 activeOpacity={0.8}
                 style={[{
@@ -86,14 +88,13 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
                     numberOfLines={1}
                     style={{
                         fontSize: 16,
-                        borderBottomColor: currentTheme.popover,
                         color: currentTheme.accent_foreground,
                     }}>
                     {selectedValue ? selectedValue.label : placeholder}
                 </Text>
             </RNTouchableOpacity>
 
-            {/* Animated dropdown list */}
+            {/* Animated Dropdown */}
             <Animated.View style={[{
                 width: "auto",
                 minWidth: "40%",
@@ -104,8 +105,7 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
                 borderRadius: 18,
                 overflow: 'hidden',
                 zIndex: 1000,
-            }, animatedStyle,
-                dropdownStyle]}>
+            }, animatedStyle, dropdownStyle]}>
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                     bounces={false}>
@@ -118,13 +118,13 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
                                 borderBottomWidth: index + 1 === data.length ? 0 : 0.6,
                                 borderBottomColor: currentTheme.muted_foreground,
                                 backgroundColor: currentTheme.muted,
-                                height: itemHeight, // Set the item height
+                                height: itemHeight,
                             }, itemStyle]}
                             onPress={() => handleSelect(item)}>
                             <Text
                                 numberOfLines={1}
                                 style={[{
-                                    fontSize: 16,
+                                    fontSize: 14,
                                     color: currentTheme.accent_foreground,
                                     fontWeight: "500",
                                     textAlign: "center"

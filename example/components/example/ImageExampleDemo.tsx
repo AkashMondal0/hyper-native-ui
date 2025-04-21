@@ -1,12 +1,20 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Button, Image, useTheme } from 'hyper-native-ui';
 
 export default function ImageExampleDemo() {
   const { currentTheme, toggleTheme, themeScheme } = useTheme();
   const [touchable, setTouchable] = useState(false)
-  const url = 'https://4kwallpapers.com/images/walls/thumbs_3t/19763.jpg'
+  const [url, setUrl] = useState("");
+
+  const changeUrl = () => {
+    setUrl(`https://picsum.photos/300/300?random=${Date.now()}`);
+  };
+
+  useEffect(() => {
+    changeUrl();
+  }, []);
 
   return (
     <ScrollView style={{
@@ -18,6 +26,9 @@ export default function ImageExampleDemo() {
       </Button>
       <Button onPress={() => { setTouchable(!touchable) }} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>
         Touchable {`${touchable}`}
+      </Button>
+      <Button onPress={() => changeUrl()} style={{ width: "80%", marginHorizontal: "auto", marginVertical: 10 }}>
+        Change Image
       </Button>
       <View style={{
         justifyContent: "center",

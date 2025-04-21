@@ -1,9 +1,9 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import { createStaticNavigation, DefaultTheme, useNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar, ThemeProvider, useTheme, StatusBarHeight, Text, Button } from 'hyper-native-ui';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStaticNavigation, DefaultTheme, useNavigation } from "@react-navigation/native";
+import { StatusBar, ThemeProvider, useTheme, StatusBarHeight, Text, Button } from 'hyper-native-ui';
 
 // pages
 import SwitchExampleDemo from './components/example/SwitchExample';
@@ -24,7 +24,7 @@ import CollapsibleExample from './components/example/CollapsibleExample';
 import ParallaxScrollViewExample from './components/example/ParallaxImageScrollExample';
 import TextLoaderExample from './components/example/TextLoaderExample';
 import DraggableViewExample from './components/example/DraggableViewExample';
-
+import PressableButtonExample from './components/example/PressableButtonExample';
 
 const options = {
   contentStyle: {
@@ -45,6 +45,10 @@ const RootStack = createNativeStackNavigator({
     },
     DraggableViewExample: {
       screen: DraggableViewExample,
+      options: { headerShown: false, ...options }
+    },
+    PressableButtonExample: {
+      screen: PressableButtonExample,
       options: { headerShown: false, ...options }
     },
     RadioButtonExample: {
