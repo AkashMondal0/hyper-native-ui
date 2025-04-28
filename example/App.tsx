@@ -25,6 +25,7 @@ import ParallaxScrollViewExample from './components/example/ParallaxImageScrollE
 import TextLoaderExample from './components/example/TextLoaderExample';
 import DraggableViewExample from './components/example/DraggableViewExample';
 import PressableButtonExample from './components/example/PressableButtonExample';
+import SliderComponent from './components/dev/slider';
 
 const options = {
   contentStyle: {
@@ -40,7 +41,7 @@ const RootStack = createNativeStackNavigator({
   },
   screens: {
     Home: {
-      screen: ComponentList,
+      screen: SliderComponent,
       options: { headerShown: false, ...options }
     },
     DraggableViewExample: {

@@ -42,7 +42,6 @@ export default function ComponentList() {
                     <View key={i}>
                         <PressableButton
                             variant="outline"
-                            activeOpacity={0.8}
                             onPress={() => navigation.navigate(route)}
                             style={{
                                 height: 50,
