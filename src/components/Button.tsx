@@ -151,7 +151,7 @@ const Button = memo(function Button({
     if (!currentTheme) return <></>;
 
     return (
-        <Animated.View style={[animatedStyle]}>
+        <Animated.View style={[animatedStyle, style]}>
             <TouchableOpacity
                 activeOpacity={0.9}
                 disabled={disabled}
@@ -215,7 +215,7 @@ const ButtonContent = ({
 }) => {
 
     if (typeof children === "string") {
-        return <View>
+        return <>
             {icon ? icon : <></>}
             <Text
                 {...textProps}
@@ -224,6 +224,7 @@ const ButtonContent = ({
                     color: color,
                     textAlign: 'center',
                     textAlignVertical: 'center',
+                    marginHorizontal: "auto",
                     fontSize: 16,
                     fontWeight: "700",
                     opacity: loading ? 0 : 1,
@@ -244,18 +245,19 @@ const ButtonContent = ({
                         ]
                     }
                 ]} {...loadingProps} />
-        </View>
+        </>
     }
 
     else if (typeof children === "object") {
         //@ts-ignore
         return children.map((child, index) => {
             if (typeof child === "string") {
-                return <View>
+                return <>
                     <Text key={index} style={[{
                         color: color,
                         textAlign: 'center',
                         textAlignVertical: 'center',
+                        marginHorizontal: "auto",
                         fontSize: 16,
                         fontWeight: "700",
                         opacity: loading ? 0 : 1,
@@ -274,7 +276,7 @@ const ButtonContent = ({
                                 { translateY: -10 }
                             ]
                         }]} {...loadingProps} />
-                </View>
+                </>
             }
             else {
                 return child

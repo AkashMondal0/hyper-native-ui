@@ -41,8 +41,12 @@ const RootStack = createNativeStackNavigator({
   },
   screens: {
     Home: {
-      screen: SliderComponent,
+      screen: ComponentList,
       options: { headerShown: false, ...options }
+    },
+    SliderExample: {
+      screen: SliderComponent,
+      options: { headerShown: true, ...options }
     },
     DraggableViewExample: {
       screen: DraggableViewExample,

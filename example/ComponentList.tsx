@@ -21,7 +21,8 @@ const routes = [
     "TextLoaderExample",
     "ParallaxScrollViewExample",
     "DraggableViewExample",
-    'PressableButtonExample'
+    'PressableButtonExample',
+    'SliderExample'
 ].sort()
 export default function ComponentList() {
     const navigation = useNavigation();
