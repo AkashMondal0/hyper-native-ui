@@ -6,7 +6,6 @@ import {
     type TouchableOpacityProps,
     type ActivityIndicatorProps,
     ViewStyle,
-    View,
 } from 'react-native';
 import React, { memo, useMemo } from 'react';
 import useTheme from '../hooks/useTheme';
@@ -151,7 +150,7 @@ const Button = memo(function Button({
     if (!currentTheme) return <></>;
 
     return (
-        <Animated.View style={[animatedStyle, style]}>
+        <Animated.View style={[animatedStyle, style, { borderWidth: 0 }]}>
             <TouchableOpacity
                 activeOpacity={0.9}
                 disabled={disabled}

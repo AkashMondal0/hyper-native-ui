@@ -10,7 +10,7 @@ import {
 import Animated, {
     useSharedValue,
     useAnimatedStyle,
-    withSpring
+    withTiming,
 } from 'react-native-reanimated';
 import useTheme from '../hooks/useTheme';
 import TouchableOpacity from './TouchableOpacity';
@@ -18,7 +18,7 @@ import TouchableOpacity from './TouchableOpacity';
 interface DropdownItem {
     label: string;
     value: string | number;
-    onPres?: () => void
+    onPres?: () => void;
 }
 
 interface AnimatedDropdownProps {
@@ -48,14 +48,7 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
 
     const toggleDropdown = () => {
         const targetHeight = isVisible ? 0 : Math.min(data.length * itemHeight, 200);
-        dropdownHeight.value = withSpring(targetHeight, {
-            damping: 15,
-            stiffness: 150,
-            mass: 0.8,
-            overshootClamping: false,
-            restDisplacementThreshold: 0.01,
-            restSpeedThreshold: 0.01,
-        });
+        dropdownHeight.value = withTiming(targetHeight, { duration: 200 });
         setIsVisible(!isVisible);
     };
 
@@ -81,13 +74,14 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
                     borderColor: isVisible ? currentTheme.ring : currentTheme.border,
                     borderRadius: 18,
                     backgroundColor: currentTheme.muted,
-                    width: "auto"
+                    width: 'auto',
                 }, dropdownStyle]}
                 onPress={toggleDropdown}>
                 <Text
                     numberOfLines={1}
                     style={{
                         fontSize: 16,
+                        textAlign: "center",
                         color: currentTheme.accent_foreground,
                     }}>
                     {selectedValue ? selectedValue.label : placeholder}
@@ -96,9 +90,9 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
 
             {/* Animated Dropdown */}
             <Animated.View style={[{
-                width: "auto",
-                minWidth: "40%",
-                maxWidth: "90%",
+                width: 'auto',
+                minWidth: '40%',
+                maxWidth: '90%',
                 position: 'absolute',
                 top: 60,
                 backgroundColor: currentTheme.muted,
@@ -126,8 +120,8 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
                                 style={[{
                                     fontSize: 14,
                                     color: currentTheme.accent_foreground,
-                                    fontWeight: "500",
-                                    textAlign: "center"
+                                    fontWeight: '500',
+                                    textAlign: 'center',
                                 }, itemTextStyle]}>
                                 {item.label}
                             </Text>
